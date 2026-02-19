@@ -31,7 +31,7 @@ export function ListingCard({
 
   return (
     <Link href={`/listings/${listing.slug}`}>
-      <Card className="h-full hover:shadow-md transition-shadow cursor-pointer group">
+      <Card className="h-full hover:shadow-xl hover:shadow-indigo-100/60 dark:hover:shadow-indigo-950/50 transition-all duration-300 cursor-pointer group hover:border-indigo-200/70 dark:hover:border-indigo-800/50">
         {imageUrl ? (
           <div className="aspect-video overflow-hidden rounded-t-lg bg-muted">
             <img
@@ -41,8 +41,9 @@ export function ListingCard({
             />
           </div>
         ) : (
-          <div className="aspect-video rounded-t-lg bg-muted flex items-center justify-center">
-            <span className="text-3xl text-muted-foreground/30">🌐</span>
+          <div className="aspect-video rounded-t-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.12)_0%,_transparent_70%)]" />
+            <span className="text-4xl opacity-20 relative select-none">🌐</span>
           </div>
         )}
 
@@ -65,7 +66,9 @@ export function ListingCard({
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div>
               <p className="text-muted-foreground text-xs">Asking Price</p>
-              <p className="font-semibold">{formatCurrency(listing.askingPrice)}</p>
+              <p className="font-bold bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+                {formatCurrency(listing.askingPrice)}
+              </p>
             </div>
             {listing.monthlyRevenue ? (
               <div>
