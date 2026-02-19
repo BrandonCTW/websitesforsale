@@ -219,9 +219,9 @@ export default async function ListingPage({
 
 function MetricBox({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className={`rounded-lg border p-4 ${highlight ? "border-primary bg-primary/5" : ""}`}>
+    <div className={`rounded-lg border p-4 ${highlight ? "border-indigo-200 dark:border-indigo-800/60 bg-gradient-to-br from-indigo-50/70 to-emerald-50/50 dark:from-indigo-950/30 dark:to-emerald-950/20" : ""}`}>
       <p className="text-xs text-muted-foreground mb-1">{label}</p>
-      <p className={`font-semibold text-lg ${highlight ? "text-primary" : ""}`}>{value}</p>
+      <p className={`font-semibold text-lg ${highlight ? "bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent" : ""}`}>{value}</p>
     </div>
   )
 }
