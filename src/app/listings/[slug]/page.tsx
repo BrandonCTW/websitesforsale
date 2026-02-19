@@ -174,6 +174,24 @@ export default async function ListingPage({
         </div>
       ) : null}
 
+      {/* FAQs */}
+      {listing.faqs && listing.faqs.length > 0 && (
+        <>
+          <Separator />
+          <div>
+            <h2 className="text-xl font-semibold mb-4">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {listing.faqs.map((faq, i) => (
+                <div key={i} className="rounded-lg border p-4">
+                  <p className="font-medium mb-1">{faq.q}</p>
+                  <p className="text-muted-foreground text-sm whitespace-pre-wrap">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
       <Separator />
 
       {/* Contact form */}
@@ -187,24 +205,42 @@ export default async function ListingPage({
               buyerEmail={session.user.email}
             />
           ) : (
-            <div className="rounded-lg border p-6 text-center space-y-3 max-w-lg">
-              <p className="font-medium">Sign in to contact this seller</p>
-              <p className="text-sm text-muted-foreground">
-                Create a free account to send a message and get a reply directly to your inbox.
-              </p>
-              <div className="flex gap-3 justify-center pt-1">
-                <Link
-                  href={`/register?next=/listings/${listing.slug}`}
-                  className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-                >
-                  Create free account
-                </Link>
-                <Link
-                  href={`/login?next=/listings/${listing.slug}`}
-                  className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted"
-                >
-                  Log in
-                </Link>
+            <div className="relative max-w-lg rounded-2xl overflow-hidden border border-indigo-100 dark:border-indigo-900/50 shadow-lg">
+              {/* Gradient header strip */}
+              <div className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500 px-6 py-4">
+                <p className="font-semibold text-white text-base">Contact this seller — it&apos;s free</p>
+                <p className="text-indigo-100 text-sm mt-0.5">No broker fees. No commissions. Direct contact.</p>
+              </div>
+              {/* Body */}
+              <div className="bg-card px-6 py-5 space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-sm font-bold">✓</div>
+                  <div>
+                    <p className="text-sm font-medium">Reply goes straight to your inbox</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">The seller emails you directly — no middleman reads your messages.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white text-sm font-bold">✓</div>
+                  <div>
+                    <p className="text-sm font-medium">Your email stays private</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">We never share your address publicly or sell it to third parties.</p>
+                  </div>
+                </div>
+                <div className="flex gap-3 pt-1">
+                  <Link
+                    href={`/register?next=/listings/${listing.slug}`}
+                    className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
+                  >
+                    Create free account
+                  </Link>
+                  <Link
+                    href={`/login?next=/listings/${listing.slug}`}
+                    className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted transition-colors"
+                  >
+                    Log in
+                  </Link>
+                </div>
               </div>
             </div>
           )}

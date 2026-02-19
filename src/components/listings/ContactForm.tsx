@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -42,11 +41,16 @@ export function ContactForm({
 
   if (status === "success") {
     return (
-      <div className="rounded-lg border border-green-200 bg-green-50 p-6 text-center">
-        <p className="font-semibold text-green-800">Message sent!</p>
-        <p className="text-green-700 text-sm mt-1">
-          The seller will reply directly to your email.
-        </p>
+      <div className="relative max-w-lg rounded-2xl overflow-hidden border border-emerald-200 dark:border-emerald-800/50 shadow-sm">
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4">
+          <p className="font-semibold text-white">Message sent!</p>
+        </div>
+        <div className="bg-card px-6 py-4 flex items-center gap-3">
+          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">✓</div>
+          <p className="text-sm text-muted-foreground">
+            The seller will reply directly to your email. Keep an eye on your inbox.
+          </p>
+        </div>
       </div>
     )
   }
@@ -96,9 +100,13 @@ export function ContactForm({
         <p className="text-sm text-destructive">{errorMsg}</p>
       )}
 
-      <Button type="submit" disabled={status === "loading"}>
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 disabled:opacity-60 disabled:cursor-not-allowed px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
+      >
         {status === "loading" ? "Sending..." : "Send Message"}
-      </Button>
+      </button>
 
       <p className="text-xs text-muted-foreground">
         The seller will reply to your email directly. Your email is not shared publicly.
