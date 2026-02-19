@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 
@@ -13,6 +12,17 @@ const CATEGORY_LABELS: Record<string, string> = {
   "community": "Community",
   "service-business": "Service Business",
   "other": "Other",
+}
+
+const CATEGORY_STYLES: Record<string, string> = {
+  "content-site": "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300",
+  "saas": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
+  "ecommerce": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
+  "tool-or-app": "bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
+  "newsletter": "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
+  "community": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
+  "service-business": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
+  "other": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
 }
 
 export function ListingCard({
@@ -52,9 +62,9 @@ export function ListingCard({
             <h2 className="font-semibold leading-snug group-hover:underline line-clamp-2">
               {listing.title}
             </h2>
-            <Badge variant="secondary" className="shrink-0 text-xs">
+            <span className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${CATEGORY_STYLES[listing.category] ?? CATEGORY_STYLES["other"]}`}>
               {CATEGORY_LABELS[listing.category] ?? listing.category}
-            </Badge>
+            </span>
           </div>
         </CardHeader>
 
