@@ -30,10 +30,15 @@ export function Navbar() {
   }
 
   return (
-    <nav className="border-b">
+    <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg tracking-tight">
-          WebsitesForSale
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-xs font-bold shrink-0">
+            W
+          </span>
+          <span className="bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+            WebsitesForSale
+          </span>
         </Link>
 
         <div className="flex items-center gap-3">
