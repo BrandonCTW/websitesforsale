@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 import { ContactForm } from "@/components/listings/ContactForm"
+import { getSession } from "@/lib/auth"
 import Link from "next/link"
 
 export const dynamic = "force-dynamic"
@@ -27,6 +28,8 @@ export default async function ListingPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+
+  const session = await getSession()
 
   const [row] = await db
     .select({ listing: listings, seller: { username: users.username, createdAt: users.createdAt } })
@@ -176,7 +179,34 @@ export default async function ListingPage({
       {listing.status === "active" ? (
         <div>
           <h2 className="text-xl font-semibold mb-4">Contact the Seller</h2>
-          <ContactForm listingId={listing.id} listingTitle={listing.title} />
+          {session ? (
+            <ContactForm
+              listingId={listing.id}
+              listingTitle={listing.title}
+              buyerEmail={session.user.email}
+            />
+          ) : (
+            <div className="rounded-lg border p-6 text-center space-y-3 max-w-lg">
+              <p className="font-medium">Sign in to contact this seller</p>
+              <p className="text-sm text-muted-foreground">
+                Create a free account to send a message and get a reply directly to your inbox.
+              </p>
+              <div className="flex gap-3 justify-center pt-1">
+                <Link
+                  href={`/register?next=/listings/${listing.slug}`}
+                  className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                >
+                  Create free account
+                </Link>
+                <Link
+                  href={`/login?next=/listings/${listing.slug}`}
+                  className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted"
+                >
+                  Log in
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <p className="text-muted-foreground text-center py-4">

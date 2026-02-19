@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { Suspense, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,7 +9,13 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function LoginPage() {
+  return <Suspense><LoginForm /></Suspense>
+}
+
+function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const next = searchParams.get("next") ?? "/dashboard/listings"
   const [email, setEmail] = useState("")
   const [pw, setPw] = useState("")
   const [error, setError] = useState("")
@@ -27,7 +33,7 @@ export default function LoginPage() {
     })
 
     if (res.ok) {
-      router.push("/dashboard/listings")
+      router.push(next)
       router.refresh()
     } else {
       const data = await res.json()
@@ -78,7 +84,7 @@ export default function LoginPage() {
             <p className="text-muted-foreground">
               No account?{" "}
               <Link href="/register" className="underline">
-                Register as a seller
+                Create an account
               </Link>
             </p>
           </div>

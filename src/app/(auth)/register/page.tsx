@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { Suspense, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -9,7 +9,13 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function RegisterPage() {
+  return <Suspense><RegisterForm /></Suspense>
+}
+
+function RegisterForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const next = searchParams.get("next") ?? "/dashboard/listings"
   const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
   const [pw, setPw] = useState("")
@@ -28,7 +34,7 @@ export default function RegisterPage() {
     })
 
     if (res.ok) {
-      router.push("/dashboard/listings")
+      router.push(next)
       router.refresh()
     } else {
       const data = await res.json()
@@ -41,8 +47,8 @@ export default function RegisterPage() {
     <div className="flex min-h-[calc(100vh-56px)] items-center justify-center px-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Create a seller account</CardTitle>
-          <CardDescription>List your websites for free</CardDescription>
+          <CardTitle>Create an account</CardTitle>
+          <CardDescription>Free to join — list sites for sale or contact sellers</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={submit} className="space-y-4">

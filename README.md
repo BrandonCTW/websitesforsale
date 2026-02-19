@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Websites For Sale
+
+A self-hosted website marketplace where sellers list websites for sale and buyers browse and contact them directly — no fees, no commissions.
+
+**Stack:** Next.js 16, React 19, Drizzle ORM, Neon Postgres, shadcn/ui, Tailwind CSS, Resend email, Vercel Blob
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Agents
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Autonomous Claude-powered agents for development and QA. Requires the shared ENGINE at `~/Projects/claude-lab/ENGINE/run.sh`.
 
-## Learn More
+### Visual Enhancement Agent
 
-To learn more about Next.js, take a look at the following resources:
+Screenshots each page, identifies visual/UI issues, and fixes them directly in the source code.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Start the dev server first:**
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Run the agent (in a separate terminal):**
+```bash
+cd agents && ./run-agent.sh visual
+```
 
-## Deploy on Vercel
+**Options:**
+```bash
+./run-agent.sh visual                  # Default: opus model, 15 loops
+./run-agent.sh visual opus 15          # Explicit: opus model, 15 loops
+./run-agent.sh visual sonnet 10        # Faster: sonnet model, 10 loops
+./run-agent.sh visual haiku 20         # Quickest: haiku model, 20 loops
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Or run directly via ENGINE:**
+```bash
+WORK=/Users/brandonhopkins/Projects/websitesforsale/agents/visual-enhancement-agent \
+  MODEL="opus" \
+  MAX_LOOPS=15 \
+  bash ~/Projects/claude-lab/ENGINE/run.sh
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Watch logs:**
+```bash
+tail -f agents/visual-enhancement-agent/output/agent-log.md
+```
+
+**Stop the agent:**
+```bash
+touch agents/visual-enhancement-agent/output/STOP
+```
+
+**Output:** `agents/visual-enhancement-agent/output/agent-log.md`
+
+### Models
+
+| Model | Quality | Speed | Use when |
+|-------|---------|-------|----------|
+| `opus` | Best | Slowest | Full visual pass, production quality (default) |
+| `sonnet` | Good | Medium | Quick iteration or targeted fixes |
+| `haiku` | Basic | Fastest | Rapid scan, low-cost runs |
+
+### Loops
+
+Each loop is one full agent run (screenshot → analyze → fix → log). More loops = more pages audited and more fixes applied.
+
+- `10` — Quick pass, main pages only
+- `15` — Standard full audit (default)
+- `20+` — Deep pass, catches edge cases and revisits pages

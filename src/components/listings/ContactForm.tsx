@@ -6,9 +6,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
-export function ContactForm({ listingId, listingTitle }: { listingId: number; listingTitle: string }) {
+export function ContactForm({
+  listingId,
+  listingTitle,
+  buyerEmail,
+}: {
+  listingId: number
+  listingTitle: string
+  buyerEmail: string
+}) {
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [honeypot, setHoneypot] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
@@ -21,7 +28,7 @@ export function ContactForm({ listingId, listingTitle }: { listingId: number; li
     const res = await fetch("/api/inquiries", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ listingId, buyerName: name, buyerEmail: email, message, honeypot }),
+      body: JSON.stringify({ listingId, buyerName: name, buyerEmail, message, honeypot }),
     })
 
     if (res.ok) {
@@ -69,15 +76,8 @@ export function ContactForm({ listingId, listingTitle }: { listingId: number; li
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="email">Your email</Label>
-        <Input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder="jane@example.com"
-        />
+        <Label>Replies will go to</Label>
+        <p className="text-sm border rounded-md px-3 py-2 bg-muted text-muted-foreground">{buyerEmail}</p>
       </div>
 
       <div className="space-y-1">
