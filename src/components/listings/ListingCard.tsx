@@ -39,21 +39,36 @@ export function ListingCard({
       ? `${Math.floor(listing.ageMonths / 12)}y ${listing.ageMonths % 12}mo`
       : `${listing.ageMonths}mo`
 
+  const multiple =
+    listing.monthlyRevenue && listing.monthlyRevenue > 0
+      ? (listing.askingPrice / listing.monthlyRevenue).toFixed(1)
+      : null
+
   return (
     <Link href={`/listings/${listing.slug}`}>
       <Card className="h-full hover:shadow-xl hover:shadow-indigo-100/60 dark:hover:shadow-indigo-950/50 transition-all duration-300 cursor-pointer group hover:border-indigo-200/70 dark:hover:border-indigo-800/50">
         {imageUrl ? (
-          <div className="aspect-video overflow-hidden rounded-t-lg bg-muted">
+          <div className="aspect-video overflow-hidden rounded-t-lg bg-muted relative">
             <img
               src={imageUrl}
               alt={listing.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
+            {multiple && (
+              <span className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-full bg-emerald-500/90 text-white backdrop-blur-sm shadow-sm">
+                {multiple}x rev
+              </span>
+            )}
           </div>
         ) : (
           <div className="aspect-video rounded-t-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.12)_0%,_transparent_70%)]" />
             <span className="text-4xl opacity-20 relative select-none">🌐</span>
+            {multiple && (
+              <span className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-full bg-emerald-500/90 text-white shadow-sm">
+                {multiple}x rev
+              </span>
+            )}
           </div>
         )}
 
