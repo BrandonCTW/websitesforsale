@@ -4,7 +4,7 @@ import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
-import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight } from "lucide-react"
+import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -85,6 +85,41 @@ export default async function HomePage({
                 No commissions
               </span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div className="mb-10">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">How it works</span>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-indigo-900/60 dark:to-indigo-950/30 border border-indigo-200/60 dark:border-indigo-800/40 flex items-center justify-center mb-3 shadow-sm">
+              <Search className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            </div>
+            <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1">Step 1</p>
+            <h3 className="font-semibold text-sm mb-1.5">Browse listings</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">Filter by category, price, revenue, and traffic to find your next acquisition.</p>
+          </div>
+          <div className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-indigo-900/60 dark:to-indigo-950/30 border border-indigo-200/60 dark:border-indigo-800/40 flex items-center justify-center mb-3 shadow-sm">
+              <MessageCircle className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            </div>
+            <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1">Step 2</p>
+            <h3 className="font-semibold text-sm mb-1.5">Contact the seller</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">Reach out directly — no broker fees, no commissions, no middlemen.</p>
+          </div>
+          <div className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/60 dark:to-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 flex items-center justify-center mb-3 shadow-sm">
+              <Handshake className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <p className="text-[10px] font-bold text-emerald-500 dark:text-emerald-400 uppercase tracking-widest mb-1">Step 3</p>
+            <h3 className="font-semibold text-sm mb-1.5">Close the deal</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">Negotiate and complete the transaction entirely on your own terms.</p>
           </div>
         </div>
       </div>
