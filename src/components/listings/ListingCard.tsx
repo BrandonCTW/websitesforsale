@@ -325,15 +325,17 @@ export function ListingCard({
               {listing.techStack.slice(0, 3).map((t) => {
                 const pillStyle = TECH_PILL_COLORS[t.toLowerCase().trim()] ?? TECH_PILL_DEFAULT
                 return (
-                  <span key={t} className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${pillStyle}`}>
-                    <span className="w-1 h-1 rounded-full bg-current opacity-50 shrink-0" />
-                    {t}
+                  <span key={t} className={`relative overflow-hidden inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium transition-all duration-150 hover:scale-105 hover:shadow-sm ${pillStyle}`}>
+                    <span className="card-shine absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.35] to-transparent pointer-events-none" />
+                    <span className="w-1 h-1 rounded-full bg-current opacity-50 shrink-0 relative z-10" />
+                    <span className="relative z-10">{t}</span>
                   </span>
                 )
               })}
               {listing.techStack.length > 3 && (
-                <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium ${TECH_PILL_DEFAULT}`}>
-                  +{listing.techStack.length - 3}
+                <span className={`relative overflow-hidden inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium transition-all duration-150 hover:scale-105 hover:shadow-sm ${TECH_PILL_DEFAULT}`}>
+                  <span className="card-shine absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.25] to-transparent pointer-events-none" />
+                  <span className="relative z-10">+{listing.techStack.length - 3}</span>
                 </span>
               )}
             </div>
