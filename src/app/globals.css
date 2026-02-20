@@ -672,3 +672,30 @@
 .animate-gallery-thumb-glow {
   animation: gallery-thumb-glow 2s ease-in-out infinite;
 }
+
+@keyframes skeleton-shimmer-bg {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.93 0 0) 0%,
+    oklch(0.98 0 0) 50%,
+    oklch(0.93 0 0) 100%
+  );
+  background-size: 300% 100%;
+  animation: skeleton-shimmer-bg 1.6s ease-in-out infinite;
+}
+
+.dark .animate-skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.21 0 0) 0%,
+    oklch(0.30 0 0) 50%,
+    oklch(0.21 0 0) 100%
+  );
+  background-size: 300% 100%;
+  animation: skeleton-shimmer-bg 1.6s ease-in-out infinite;
+}

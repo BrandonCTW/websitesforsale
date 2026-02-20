@@ -44,20 +44,20 @@ export default function HomeLoading() {
           {[80, 56, 88, 72, 88, 96, 120, 64].map((w, i) => (
             <div
               key={i}
-              className="h-7 bg-muted animate-pulse rounded-full"
-              style={{ width: `${w}px` }}
+              className="h-7 animate-skeleton-shimmer rounded-full"
+              style={{ width: `${w}px`, animationDelay: `${i * 0.1}s` }}
             />
           ))}
         </div>
         <div className="flex gap-3">
-          <div className="h-9 bg-muted animate-pulse rounded-md flex-1 max-w-xs" />
-          <div className="h-9 w-16 bg-muted animate-pulse rounded-md" />
-          <div className="h-9 w-40 bg-muted animate-pulse rounded-md" />
+          <div className="h-9 animate-skeleton-shimmer rounded-md flex-1 max-w-xs" />
+          <div className="h-9 w-16 animate-skeleton-shimmer rounded-md" />
+          <div className="h-9 w-40 animate-skeleton-shimmer rounded-md" />
         </div>
       </div>
 
       {/* Count skeleton */}
-      <div className="mt-6 mb-2 h-4 w-28 bg-muted animate-pulse rounded" />
+      <div className="mt-6 mb-2 h-4 w-28 animate-skeleton-shimmer rounded" />
 
       {/* Listing grid skeleton */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
