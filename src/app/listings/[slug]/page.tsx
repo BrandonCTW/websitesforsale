@@ -13,6 +13,7 @@ import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Ey
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 import { ScrollProgress } from "@/components/listings/ScrollProgress"
 import { DealMeter } from "@/components/listings/DealMeter"
+import { ReturnsCalculator } from "@/components/listings/ReturnsCalculator"
 
 export const dynamic = "force-dynamic"
 
@@ -264,6 +265,15 @@ export default async function ListingPage({
       {/* Deal Meter */}
       {listing.monthlyRevenue != null && listing.monthlyRevenue > 0 && (
         <DealMeter multiple={listing.askingPrice / listing.monthlyRevenue} />
+      )}
+
+      {/* Returns Calculator */}
+      {listing.monthlyRevenue != null && listing.monthlyRevenue > 0 && (
+        <ReturnsCalculator
+          askingPrice={listing.askingPrice}
+          monthlyRevenue={listing.monthlyRevenue}
+          monthlyProfit={listing.monthlyProfit}
+        />
       )}
 
       <Separator />
