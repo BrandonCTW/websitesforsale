@@ -325,7 +325,7 @@ export default async function HomePage({
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           {/* WebsitesForSale card */}
-          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+          <div className="animate-comparison-card-glow relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 to-emerald-500" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.2)_0%,_transparent_60%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.12)_0%,_transparent_60%)]" />
@@ -344,8 +344,8 @@ export default async function HomePage({
                     { label: "AI listing generation", value: true },
                     { label: "Time to list", value: "30 seconds" },
                   ] as { label: string; value: string | boolean }[]
-                ).map(({ label, value }) => (
-                  <div key={label} className="flex items-center justify-between gap-3">
+                ).map(({ label, value }, i) => (
+                  <div key={label} className="flex items-center justify-between gap-3 animate-fade-in-up" style={{ animationDelay: `${i * 0.08}s` }}>
                     <span className="text-sm text-slate-300">{label}</span>
                     {typeof value === "boolean" ? (
                       <span className="inline-flex items-center gap-1 text-emerald-400 text-sm font-semibold shrink-0">
@@ -378,8 +378,8 @@ export default async function HomePage({
                   { label: "AI listing generation", value: false },
                   { label: "Time to list", value: "Days to weeks" },
                 ] as { label: string; value: string | boolean }[]
-              ).map(({ label, value }) => (
-                <div key={label} className="flex items-center justify-between gap-3">
+              ).map(({ label, value }, i) => (
+                <div key={label} className="flex items-center justify-between gap-3 animate-fade-in-up" style={{ animationDelay: `${i * 0.08 + 0.1}s` }}>
                   <span className="text-sm text-muted-foreground">{label}</span>
                   {typeof value === "boolean" ? (
                     <span className="inline-flex items-center gap-1 text-muted-foreground/60 text-sm font-medium shrink-0">

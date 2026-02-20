@@ -229,3 +229,12 @@
 .animate-icon-float {
   animation: icon-float 3s ease-in-out infinite;
 }
+
+@keyframes comparison-card-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(99,102,241,0.18), 0 8px 32px rgba(99,102,241,0.14), 0 4px 16px rgba(16,185,129,0.07); }
+  50% { box-shadow: 0 0 0 1px rgba(99,102,241,0.35), 0 14px 52px rgba(99,102,241,0.26), 0 8px 28px rgba(16,185,129,0.14); }
+}
+
+.animate-comparison-card-glow {
+  animation: comparison-card-glow 4s ease-in-out infinite;
+}
