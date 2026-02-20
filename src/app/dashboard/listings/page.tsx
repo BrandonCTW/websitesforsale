@@ -170,7 +170,7 @@ export default async function DashboardListingsPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {rows.map(({ listing }) => {
+          {rows.map(({ listing }, index) => {
             const s = STATUS_CONFIG[listing.status] ?? STATUS_CONFIG.unpublished
             const inquiryCount = inquiryMap[listing.id] ?? 0
             const thumbnailUrl = imageMap[listing.id]
@@ -183,7 +183,8 @@ export default async function DashboardListingsPage() {
             return (
               <div
                 key={listing.id}
-                className={`group rounded-xl border border-l-4 ${s.borderColor} bg-card p-4 transition-all duration-200 ${s.bgGradient} hover:shadow-md`}
+                className={`group rounded-xl border border-l-4 ${s.borderColor} bg-card p-4 transition-all duration-200 ${s.bgGradient} hover:shadow-md animate-fade-in-up`}
+                style={{ animationDelay: `${index * 0.07}s` }}
               >
                 <div className="flex items-center gap-4">
                   {/* Thumbnail */}
@@ -200,7 +201,12 @@ export default async function DashboardListingsPage() {
                   )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-2">
-                      <span className={`inline-block h-2 w-2 rounded-full ${s.dotColor} shrink-0`} />
+                      <span className="relative inline-flex shrink-0 h-2 w-2">
+                        {listing.status === "active" && (
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        )}
+                        <span className={`relative inline-flex rounded-full h-2 w-2 ${s.dotColor}`} />
+                      </span>
                       <Link
                         href={`/listings/${listing.slug}`}
                         className="font-semibold hover:underline truncate text-base leading-tight"
