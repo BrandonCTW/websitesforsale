@@ -121,7 +121,7 @@ export default async function HomePage({
           <div className="relative">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
               Websites for sale.{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+              <span className="animate-hero-gradient">
                 No middleman.
               </span>
             </h1>

@@ -238,3 +238,17 @@
 .animate-comparison-card-glow {
   animation: comparison-card-glow 4s ease-in-out infinite;
 }
+
+@keyframes text-gradient-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-hero-gradient {
+  background-image: linear-gradient(to right, #818cf8, #34d399, #818cf8);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-gradient-flow 5s linear infinite;
+}
