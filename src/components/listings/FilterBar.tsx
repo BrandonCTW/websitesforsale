@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
 
 const CATEGORY_LABELS: Record<string, string> = {
   "content-site": "Content Site",
@@ -15,6 +16,17 @@ const CATEGORY_LABELS: Record<string, string> = {
   "community": "Community",
   "service-business": "Service Business",
   "other": "Other",
+}
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  "content-site": FileText,
+  "saas": Code2,
+  "ecommerce": ShoppingCart,
+  "tool-or-app": Wrench,
+  "newsletter": Mail,
+  "community": Users,
+  "service-business": Briefcase,
+  "other": LayoutGrid,
 }
 
 const CATEGORY_CHIP_STYLES: Record<string, { active: string; inactive: string; dot: string }> = {
@@ -103,6 +115,7 @@ export function FilterBar({ categories }: { categories: string[] }) {
         {categories.map((c) => {
           const styles = CATEGORY_CHIP_STYLES[c] ?? CATEGORY_CHIP_STYLES["other"]
           const isActive = activeCategory === c
+          const Icon = CATEGORY_ICONS[c] ?? LayoutGrid
           return (
             <button
               key={c}
@@ -111,7 +124,7 @@ export function FilterBar({ categories }: { categories: string[] }) {
                 isActive ? styles.active : styles.inactive
               }`}
             >
-              <span className={`h-1.5 w-1.5 rounded-full ${styles.dot} shrink-0`} />
+              <Icon className="h-3 w-3 shrink-0" />
               {CATEGORY_LABELS[c] ?? c}
             </button>
           )
