@@ -80,8 +80,8 @@ export function EditListingForm({
     description: listing.description,
     reasonForSelling: listing.reasonForSelling,
     includedAssets: listing.includedAssets ?? "",
-    techStack: (listing.techStack ?? []).join(", "),
-    monetization: (listing.monetization ?? []).join(", "),
+    techStack: Array.isArray(listing.techStack) ? listing.techStack.join(", ") : (listing.techStack ?? ""),
+    monetization: Array.isArray(listing.monetization) ? listing.monetization.join(", ") : (listing.monetization ?? ""),
   })
 
   function set(key: string, value: string) {

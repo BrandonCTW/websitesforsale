@@ -141,7 +141,25 @@ export default async function ListingPage({
 
   if (!row) notFound()
 
-  const { listing, seller } = row
+  const { listing: rawListing, seller } = row
+
+  // Normalize JSON array fields — guard against legacy rows where values were
+  // stored as plain strings (e.g. "React, Next.js") instead of JSON arrays.
+  function normalizeArray<T>(val: unknown): T[] {
+    if (!val) return []
+    if (Array.isArray(val)) return val as T[]
+    if (typeof val === "string") {
+      try { return JSON.parse(val) as T[] } catch { return [] }
+    }
+    return []
+  }
+
+  const listing = {
+    ...rawListing,
+    techStack: normalizeArray<string>(rawListing.techStack),
+    monetization: normalizeArray<string>(rawListing.monetization),
+    faqs: normalizeArray<{ q: string; a: string }>(rawListing.faqs),
+  }
 
   const images = await db
     .select()
