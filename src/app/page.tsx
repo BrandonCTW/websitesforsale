@@ -216,9 +216,9 @@ export default async function HomePage({
             <p className="text-xs text-muted-foreground leading-relaxed">Filter by category, price, revenue, and traffic to find your next acquisition.</p>
           </div>
           <div className="hidden sm:flex items-center justify-center">
-            <div className="flex items-center gap-0.5">
-              <div className="h-px w-5 bg-gradient-to-r from-indigo-300 to-indigo-200 dark:from-indigo-700 dark:to-indigo-800" />
-              <ArrowRight className="w-4 h-4 text-indigo-300 dark:text-indigo-700" />
+            <div className="flex items-center gap-0.5 animate-step-arrow">
+              <div className="h-px w-5 animate-step-line" />
+              <ArrowRight className="w-4 h-4 text-indigo-400 dark:text-indigo-600" />
             </div>
           </div>
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
@@ -231,9 +231,9 @@ export default async function HomePage({
             <p className="text-xs text-muted-foreground leading-relaxed">Reach out directly — no broker fees, no commissions, no middlemen.</p>
           </div>
           <div className="hidden sm:flex items-center justify-center">
-            <div className="flex items-center gap-0.5">
-              <div className="h-px w-5 bg-gradient-to-r from-indigo-200 to-emerald-200 dark:from-indigo-800 dark:to-emerald-800" />
-              <ArrowRight className="w-4 h-4 text-emerald-300 dark:text-emerald-700" />
+            <div className="flex items-center gap-0.5 animate-step-arrow" style={{ animationDelay: "0.3s" }}>
+              <div className="h-px w-5 animate-step-line" style={{ animationDelay: "0.3s" }} />
+              <ArrowRight className="w-4 h-4 text-emerald-400 dark:text-emerald-600" />
             </div>
           </div>
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-emerald-50/60 to-slate-50 dark:from-emerald-950/30 dark:to-slate-900/50 border border-emerald-100 dark:border-emerald-900/40 overflow-hidden">
