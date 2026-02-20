@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ImageUploader } from "@/components/dashboard/ImageUploader"
-import { Sparkles, Loader2 } from "lucide-react"
+import { Sparkles, Loader2, Check, Rocket } from "lucide-react"
 
 const CATEGORIES = [
   { value: "content-site", label: "Content Site" },
@@ -132,17 +132,46 @@ export function NewListingForm() {
   return (
     <div className="space-y-8">
       {/* Step indicator */}
-      <div className="flex gap-2 flex-wrap">
-        {STEPS.map((s, i) => (
-          <div key={s} className="flex items-center gap-2">
-            <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold
-              ${i < step ? "bg-primary text-primary-foreground" : i === step ? "border-2 border-primary text-primary" : "border text-muted-foreground"}`}>
-              {i < step ? "✓" : i + 1}
-            </div>
-            <span className={`text-sm ${i === step ? "font-medium" : "text-muted-foreground"}`}>{s}</span>
-            {i < STEPS.length - 1 && <span className="text-muted-foreground">→</span>}
-          </div>
-        ))}
+      <div className="space-y-3">
+        {/* Progress bar */}
+        <div className="relative h-1 bg-border/50 rounded-full overflow-hidden">
+          <div
+            className="absolute inset-y-0 left-0 bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-full transition-all duration-500 ease-out"
+            style={{ width: `${(step / (STEPS.length - 1)) * 100}%` }}
+          />
+        </div>
+        {/* Step circles */}
+        <div className="flex items-start justify-between">
+          {STEPS.map((s, i) => {
+            const done = i < step
+            const active = i === step
+            return (
+              <div key={s} className="flex flex-col items-center gap-1.5 min-w-0">
+                <div className="relative">
+                  {active && (
+                    <span className="absolute inset-0 rounded-full border-2 border-indigo-400/50 animate-ping" />
+                  )}
+                  <div className={`relative w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                    done
+                      ? "bg-gradient-to-br from-indigo-500 to-emerald-500 text-white shadow-sm shadow-indigo-200/60 dark:shadow-indigo-900/60"
+                      : active
+                        ? "border-2 border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-950 shadow-sm shadow-indigo-200/50"
+                        : "border border-border bg-background text-muted-foreground"
+                  }`}>
+                    {done ? <Check className="w-3.5 h-3.5" /> : i + 1}
+                  </div>
+                </div>
+                <span className={`text-[10px] font-medium text-center leading-tight transition-colors ${
+                  done
+                    ? "text-indigo-600 dark:text-indigo-400"
+                    : active
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground"
+                }`}>{s}</span>
+              </div>
+            )
+          })}
+        </div>
       </div>
 
       {/* Step 0: AI Generate */}
@@ -333,30 +362,57 @@ export function NewListingForm() {
       {/* Step 4: Review & Publish */}
       {step === 4 && (
         <div className="space-y-6">
-          <div className="rounded-lg border p-5 space-y-3 text-sm">
-            <h3 className="font-semibold text-base">Review your listing</h3>
-            <Row label="Title" value={form.title} />
-            <Row label="URL" value={form.url} />
-            <Row label="Category" value={form.category} />
-            <Row label="Asking price" value={`$${parseInt(form.askingPrice).toLocaleString()}`} />
-            {form.monthlyRevenue && <Row label="Monthly revenue" value={`$${parseInt(form.monthlyRevenue).toLocaleString()}`} />}
-            {form.monthlyProfit && <Row label="Monthly profit" value={`$${parseInt(form.monthlyProfit).toLocaleString()}`} />}
-            {form.monthlyTraffic && <Row label="Monthly traffic" value={`${parseInt(form.monthlyTraffic).toLocaleString()} views`} />}
-            <Row label="Age" value={`${form.ageMonths} months`} />
-            {form.techStack && <Row label="Tech stack" value={form.techStack} />}
-            {form.monetization && <Row label="Monetization" value={form.monetization} />}
+          <div className="rounded-xl border border-border/60 overflow-hidden shadow-sm">
+            {/* Gradient card header */}
+            <div className="relative px-5 py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 to-emerald-500" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.2)_0%,_transparent_60%)]" />
+              <div className="relative flex items-center gap-2">
+                <span className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center shrink-0">
+                  <Rocket className="w-3.5 h-3.5 text-white" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-white">Review your listing</p>
+                  <p className="text-[11px] text-slate-400">Looks good? Hit publish to go live.</p>
+                </div>
+              </div>
+            </div>
+            {/* Data rows */}
+            <div className="divide-y divide-border/50 text-sm bg-card">
+              <Row label="Title" value={form.title} />
+              <Row label="URL" value={form.url} />
+              <Row label="Category" value={form.category} />
+              <Row label="Asking price" value={`$${parseInt(form.askingPrice).toLocaleString()}`} highlight />
+              {form.monthlyRevenue && <Row label="Monthly revenue" value={`$${parseInt(form.monthlyRevenue).toLocaleString()}`} />}
+              {form.monthlyProfit && <Row label="Monthly profit" value={`$${parseInt(form.monthlyProfit).toLocaleString()}`} />}
+              {form.monthlyTraffic && <Row label="Monthly traffic" value={`${parseInt(form.monthlyTraffic).toLocaleString()} views`} />}
+              <Row label="Age" value={`${form.ageMonths} months`} />
+              {form.techStack && <Row label="Tech stack" value={form.techStack} />}
+              {form.monetization && <Row label="Monetization" value={form.monetization} />}
+              {imageUrls.length > 0 && <Row label="Images" value={`${imageUrls.length} attached`} />}
+            </div>
           </div>
 
           {error && <p className="text-sm text-destructive">{error}</p>}
 
-          {imageUrls.length > 0 && (
-            <p className="text-sm text-muted-foreground">{imageUrls.length} image{imageUrls.length !== 1 ? "s" : ""} attached</p>
-          )}
-
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => setStep(3)}>← Back</Button>
-            <Button onClick={publish} disabled={loading}>
-              {loading ? "Publishing..." : "Publish listing"}
+            <Button
+              onClick={publish}
+              disabled={loading}
+              className="bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 text-white border-0 gap-2 shadow-sm hover:shadow-indigo-500/20 hover:shadow-md transition-all"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Publishing...
+                </>
+              ) : (
+                <>
+                  <Rocket className="h-4 w-4" />
+                  Publish listing
+                </>
+              )}
             </Button>
           </div>
         </div>
@@ -385,11 +441,11 @@ function Field({ label, required, hint, children }: {
   )
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function Row({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className="flex gap-2">
-      <span className="text-muted-foreground w-32 shrink-0">{label}</span>
-      <span className="font-medium">{value}</span>
+    <div className="flex items-center gap-3 px-5 py-2.5">
+      <span className="text-muted-foreground text-xs w-28 shrink-0">{label}</span>
+      <span className={`font-medium text-sm min-w-0 break-words ${highlight ? "bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent font-bold" : ""}`}>{value}</span>
     </div>
   )
 }
