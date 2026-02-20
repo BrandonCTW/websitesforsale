@@ -143,14 +143,28 @@ export default async function SellerProfilePage({
       </div>
 
       {sellerListings.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
-            <LayoutGrid className="w-7 h-7 text-indigo-400 dark:text-indigo-500" />
+        <div className="relative flex flex-col items-center justify-center py-20 text-center rounded-2xl border border-border/40 bg-gradient-to-br from-slate-50 to-indigo-50/30 dark:from-slate-950/50 dark:to-indigo-950/20 overflow-hidden">
+          {/* Ambient orb blobs */}
+          <div className="animate-orb-1 absolute -top-10 -right-10 w-52 h-52 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+          <div className="animate-orb-2 absolute -bottom-10 -left-10 w-44 h-44 rounded-full bg-emerald-500/8 blur-3xl pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/65 blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '8%', animationDuration: '3.2s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-violet-200/70 pointer-events-none" style={{ top: '72%', left: '6%', animationDuration: '2.7s', animationDelay: '1.3s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/60 blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '10%', animationDuration: '3.8s', animationDelay: '0.6s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '65%', right: '8%', animationDuration: '2.5s', animationDelay: '1.9s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/30 blur-sm pointer-events-none" style={{ top: '42%', left: '78%', animationDuration: '4.2s', animationDelay: '0.9s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/65 pointer-events-none" style={{ top: '30%', left: '20%', animationDuration: '3.1s', animationDelay: '2.4s' }} />
+          <div className="relative">
+            {/* Floating animated icon */}
+            <div className="animate-icon-float relative w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-indigo-200/50 dark:shadow-indigo-900/50">
+              <div className="animate-shimmer absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+              <LayoutGrid className="w-7 h-7 text-white relative z-10" />
+            </div>
+            <h3 className="animate-fade-in-up font-semibold text-lg mb-2" style={{ animationDelay: '0.1s' }}>No active listings</h3>
+            <p className="animate-fade-in-up text-muted-foreground text-sm max-w-xs mx-auto" style={{ animationDelay: '0.2s' }}>
+              This seller doesn&apos;t have any active listings right now.
+            </p>
           </div>
-          <h3 className="font-semibold text-lg mb-2">No active listings</h3>
-          <p className="text-muted-foreground text-sm max-w-xs">
-            This seller doesn&apos;t have any active listings right now.
-          </p>
         </div>
       ) : (
         <>
