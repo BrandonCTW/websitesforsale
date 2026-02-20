@@ -523,33 +523,49 @@ export default async function ListingPage({
           ) : (
             <div className="relative max-w-lg rounded-2xl overflow-hidden border border-indigo-100 dark:border-indigo-900/50 shadow-lg">
               {/* Gradient header strip */}
-              <div className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500 px-6 py-4">
-                <p className="font-semibold text-white text-base">Contact this seller — it&apos;s free</p>
-                <p className="text-indigo-100 text-sm mt-0.5">No broker fees. No commissions. Direct contact.</p>
+              <div className="relative bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500 px-6 py-4 overflow-hidden">
+                {/* Ambient orb */}
+                <div className="animate-orb-1 absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+                {/* Shimmer sweep */}
+                <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+                {/* Sparkle particles */}
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-white/70 blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '6%', animationDuration: '3.1s', animationDelay: '0s' }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/80 pointer-events-none" style={{ top: '70%', left: '4%', animationDuration: '2.5s', animationDelay: '1.2s' }} />
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-200/70 blur-[0.5px] pointer-events-none" style={{ top: '22%', right: '10%', animationDuration: '3.7s', animationDelay: '0.5s' }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '65%', right: '7%', animationDuration: '2.8s', animationDelay: '1.9s' }} />
+                <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/25 blur-sm pointer-events-none" style={{ top: '44%', left: '50%', animationDuration: '4.2s', animationDelay: '0.8s' }} />
+                <div className="relative">
+                  <p className="font-semibold text-white text-base">Contact this seller — it&apos;s free</p>
+                  <p className="text-indigo-100 text-sm mt-0.5">No broker fees. No commissions. Direct contact.</p>
+                </div>
               </div>
               {/* Body */}
               <div className="bg-card px-6 py-5 space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-sm font-bold">✓</div>
+                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-sm font-bold shadow-sm shadow-emerald-200/50 dark:shadow-emerald-900/50">✓</div>
                   <div>
                     <p className="text-sm font-medium">Reply goes straight to your inbox</p>
                     <p className="text-xs text-muted-foreground mt-0.5">The seller emails you directly — no middleman reads your messages.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white text-sm font-bold">✓</div>
+                  <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white text-sm font-bold shadow-sm shadow-indigo-200/50 dark:shadow-indigo-900/50">✓</div>
                   <div>
                     <p className="text-sm font-medium">Your email stays private</p>
                     <p className="text-xs text-muted-foreground mt-0.5">We never share your address publicly or sell it to third parties.</p>
                   </div>
                 </div>
                 <div className="flex gap-3 pt-1">
-                  <Link
-                    href={`/register?next=/listings/${listing.slug}`}
-                    className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
-                  >
-                    Create free account
-                  </Link>
+                  <div className="relative inline-block">
+                    <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+                    <Link
+                      href={`/register?next=/listings/${listing.slug}`}
+                      className="relative overflow-hidden inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
+                    >
+                      <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                      <span className="relative z-10">Create free account</span>
+                    </Link>
+                  </div>
                   <Link
                     href={`/login?next=/listings/${listing.slug}`}
                     className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium hover:bg-muted transition-colors"
