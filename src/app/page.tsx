@@ -276,13 +276,17 @@ export default async function HomePage({
             <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
               Enter your URL and asking price. Our AI scrapes your site and generates a polished, buyer-ready listing — title, description, tech stack, and more. Edit anything before publishing.
             </p>
-            <Link
-              href="/dashboard/listings/new"
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all w-fit"
-            >
-              List Your Site
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="relative inline-block w-fit">
+              <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+              <Link
+                href="/dashboard/listings/new"
+                className="relative overflow-hidden inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
+              >
+                <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                <span className="relative z-10">List Your Site</span>
+                <ArrowRight className="h-4 w-4 relative z-10" />
+              </Link>
+            </div>
           </div>
 
           {/* Right: mock AI-generated listing card */}
