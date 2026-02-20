@@ -157,7 +157,7 @@ export function ListingCard({
   return (
     <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up block relative" style={{ animationDelay: `${index * 0.08}s` }}>
       <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl z-10 bg-gradient-to-r ${CATEGORY_ACCENT[listing.category] ?? CATEGORY_ACCENT["other"]}`} />
-      <Card className={`h-full hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 overflow-hidden relative ${CARD_HOVER_STYLES[listing.category] ?? CARD_HOVER_STYLES["other"]}`}>
+      <Card className={`h-full hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 overflow-hidden relative ${CARD_HOVER_STYLES[listing.category] ?? CARD_HOVER_STYLES["other"]}${dealTier?.label === "Great Deal" ? " animate-deal-glow" : ""}`}>
         {/* Shine sweep overlay */}
         <div className="card-shine absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white/[0.09] to-transparent pointer-events-none z-20" />
         {imageUrl ? (
