@@ -72,6 +72,17 @@ const CATEGORY_ACCENT: Record<string, string> = {
   other: "from-slate-400 to-slate-500",
 }
 
+const CATEGORY_SPARKLE_COLORS: Record<string, [string, string, string]> = {
+  "content-site":     ["rgba(56,189,248,0.85)",  "rgba(255,255,255,0.70)", "rgba(14,165,233,0.75)"],
+  "saas":             ["rgba(167,139,250,0.85)",  "rgba(255,255,255,0.70)", "rgba(139,92,246,0.75)"],
+  "ecommerce":        ["rgba(251,146,60,0.85)",   "rgba(255,255,255,0.70)", "rgba(249,115,22,0.75)"],
+  "tool-or-app":      ["rgba(45,212,191,0.85)",   "rgba(255,255,255,0.70)", "rgba(20,184,166,0.75)"],
+  "newsletter":       ["rgba(251,113,133,0.85)",  "rgba(255,255,255,0.70)", "rgba(244,63,94,0.75)"],
+  "community":        ["rgba(52,211,153,0.85)",   "rgba(255,255,255,0.70)", "rgba(16,185,129,0.75)"],
+  "service-business": ["rgba(251,191,36,0.85)",   "rgba(255,255,255,0.70)", "rgba(245,158,11,0.75)"],
+  "other":            ["rgba(129,140,248,0.85)",  "rgba(255,255,255,0.70)", "rgba(52,211,153,0.75)"],
+}
+
 const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: string }> = {
   "content-site": {
     bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",
@@ -173,6 +184,7 @@ export function FeaturedListingCard({
   const dealTier = multiple ? getDealTier(parseFloat(multiple)) : null
   const placeholder = CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]
   const accent = CATEGORY_ACCENT[listing.category] ?? CATEGORY_ACCENT["other"]
+  const sparkleColors = CATEGORY_SPARKLE_COLORS[listing.category] ?? CATEGORY_SPARKLE_COLORS["other"]
 
   return (
     <Link href={`/listings/${listing.slug}`} className="block group animate-fade-in-up">
@@ -256,6 +268,13 @@ export function FeaturedListingCard({
                 <div className="absolute bottom-5 right-5 opacity-15 select-none pointer-events-none">
                   <CategoryIcon className={`w-10 h-10 ${placeholder.icon}`} />
                 </div>
+                {/* Category-tinted sparkle particles */}
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '10%', animationDuration: '3.3s', animationDelay: '0s', backgroundColor: sparkleColors[0] }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '70%', left: '7%', animationDuration: '2.6s', animationDelay: '1.2s', backgroundColor: sparkleColors[1] }} />
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '22%', right: '12%', animationDuration: '3.9s', animationDelay: '0.5s', backgroundColor: sparkleColors[2] }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '58%', right: '9%', animationDuration: '2.9s', animationDelay: '1.8s', backgroundColor: sparkleColors[1] }} />
+                <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full blur-sm pointer-events-none" style={{ top: '80%', left: '65%', animationDuration: '4.2s', animationDelay: '0.9s', backgroundColor: sparkleColors[0], opacity: 0.35 }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '40%', left: '50%', animationDuration: '3.1s', animationDelay: '2.3s', backgroundColor: sparkleColors[2] }} />
               </>
             )}
           </div>
