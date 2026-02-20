@@ -311,32 +311,32 @@ export function FeaturedListingCard({
               {/* Metrics */}
               <div className="flex flex-wrap gap-2">
                 {listing.monthlyRevenue && (
-                  <div className="rounded-lg bg-muted/50 px-3 py-2">
-                    <p className="text-[10px] text-muted-foreground flex items-center gap-1 mb-0.5">
+                  <div className="rounded-lg bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 px-3 py-2">
+                    <p className="text-[10px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mb-0.5 font-medium">
                       <TrendingUp className="h-3 w-3" /> Revenue
                     </p>
-                    <p className="text-sm font-semibold">
+                    <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
                       {formatCurrency(listing.monthlyRevenue)}
-                      <span className="text-xs font-normal text-muted-foreground">/mo</span>
+                      <span className="text-xs font-normal text-emerald-600/70 dark:text-emerald-400/70">/mo</span>
                     </p>
                   </div>
                 )}
                 {listing.monthlyTraffic && (
-                  <div className="rounded-lg bg-muted/50 px-3 py-2">
-                    <p className="text-[10px] text-muted-foreground flex items-center gap-1 mb-0.5">
+                  <div className="rounded-lg bg-sky-50/80 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/40 px-3 py-2">
+                    <p className="text-[10px] text-sky-600 dark:text-sky-400 flex items-center gap-1 mb-0.5 font-medium">
                       <Eye className="h-3 w-3" /> Traffic
                     </p>
-                    <p className="text-sm font-semibold">
+                    <p className="text-sm font-semibold text-sky-700 dark:text-sky-300">
                       {formatNumber(listing.monthlyTraffic)}
-                      <span className="text-xs font-normal text-muted-foreground">/mo</span>
+                      <span className="text-xs font-normal text-sky-600/70 dark:text-sky-400/70">/mo</span>
                     </p>
                   </div>
                 )}
-                <div className="rounded-lg bg-muted/50 px-3 py-2">
-                  <p className="text-[10px] text-muted-foreground flex items-center gap-1 mb-0.5">
+                <div className="rounded-lg bg-amber-50/80 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/40 px-3 py-2">
+                  <p className="text-[10px] text-amber-600 dark:text-amber-400 flex items-center gap-1 mb-0.5 font-medium">
                     <Clock className="h-3 w-3" /> Age
                   </p>
-                  <p className="text-sm font-semibold">{age}</p>
+                  <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">{age}</p>
                 </div>
               </div>
             </div>
