@@ -1,15 +1,16 @@
 import { notFound } from "next/navigation"
 import { db } from "@/db"
 import { listings, listingImages, users } from "@/db/schema"
-import { eq } from "drizzle-orm"
+import { eq, ne, and } from "drizzle-orm"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 import { ContactForm } from "@/components/listings/ContactForm"
 import { ImageGallery } from "@/components/listings/ImageGallery"
+import { ListingCard } from "@/components/listings/ListingCard"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
-import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, type LucideIcon } from "lucide-react"
+import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, type LucideIcon } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -49,6 +50,25 @@ export default async function ListingPage({
     .from(listingImages)
     .where(eq(listingImages.listingId, listing.id))
     .orderBy(listingImages.displayOrder)
+
+  const relatedRows = await db
+    .select({
+      listing: listings,
+      seller: { username: users.username },
+    })
+    .from(listings)
+    .innerJoin(users, eq(listings.sellerId, users.id))
+    .where(and(
+      eq(listings.status, "active"),
+      eq(listings.category, listing.category),
+      ne(listings.id, listing.id),
+    ))
+    .limit(3)
+
+  const relatedImages = relatedRows.length
+    ? await db.select().from(listingImages).where(eq(listingImages.displayOrder, 0))
+    : []
+  const relatedImageMap = Object.fromEntries(relatedImages.map((img) => [img.listingId, img.url]))
 
   const age =
     listing.ageMonths >= 12
@@ -239,6 +259,38 @@ export default async function ListingPage({
       )}
 
       <Separator />
+
+      {/* Related listings */}
+      {relatedRows.length > 0 && (
+        <>
+          <div>
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <h2 className="text-xl font-semibold">More {CATEGORY_LABELS[listing.category] ?? "Listings"} for Sale</h2>
+                <p className="text-sm text-muted-foreground mt-0.5">Similar listings you might be interested in</p>
+              </div>
+              <Link
+                href={`/?category=${listing.category}`}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+              >
+                View all
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {relatedRows.map(({ listing: related, seller: relatedSeller }, i) => (
+                <ListingCard
+                  key={related.id}
+                  listing={related}
+                  sellerUsername={relatedSeller.username}
+                  imageUrl={relatedImageMap[related.id]}
+                  index={i}
+                />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Contact form */}
       {listing.status === "active" ? (
