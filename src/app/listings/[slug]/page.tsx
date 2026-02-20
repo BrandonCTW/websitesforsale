@@ -84,6 +84,28 @@ const MONETIZATION_BADGE_COLORS: Record<string, string> = {
 
 const DEFAULT_BADGE_STYLE = "bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"
 
+const CATEGORY_HEADER_RADIAL: Record<string, { top: string; bottom: string }> = {
+  "content-site":     { top: "rgba(14,165,233,0.28)",  bottom: "rgba(2,132,199,0.14)" },
+  "saas":             { top: "rgba(139,92,246,0.28)",  bottom: "rgba(109,40,217,0.14)" },
+  "ecommerce":        { top: "rgba(249,115,22,0.28)",  bottom: "rgba(234,88,12,0.14)" },
+  "tool-or-app":      { top: "rgba(20,184,166,0.28)",  bottom: "rgba(15,118,110,0.14)" },
+  "newsletter":       { top: "rgba(244,63,94,0.28)",   bottom: "rgba(225,29,72,0.14)" },
+  "community":        { top: "rgba(16,185,129,0.28)",  bottom: "rgba(5,150,105,0.14)" },
+  "service-business": { top: "rgba(245,158,11,0.28)",  bottom: "rgba(217,119,6,0.14)" },
+  "other":            { top: "rgba(99,102,241,0.22)",  bottom: "rgba(16,185,129,0.13)" },
+}
+
+const CATEGORY_ACCENT_BAR: Record<string, string> = {
+  "content-site":     "from-sky-400 to-sky-500",
+  "saas":             "from-violet-400 to-violet-500",
+  "ecommerce":        "from-orange-400 to-orange-500",
+  "tool-or-app":      "from-teal-400 to-teal-500",
+  "newsletter":       "from-rose-400 to-rose-500",
+  "community":        "from-emerald-400 to-emerald-500",
+  "service-business": "from-amber-400 to-amber-500",
+  "other":            "from-slate-400 to-slate-500",
+}
+
 function getTagStyle(value: string, colorMap: Record<string, string>): string {
   return colorMap[value.toLowerCase().trim()] ?? DEFAULT_BADGE_STYLE
 }
@@ -155,13 +177,19 @@ export default async function ListingPage({
   const daysDiff = Math.floor((now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24))
   const listedAgo = daysDiff === 0 ? "today" : daysDiff === 1 ? "yesterday" : `${daysDiff}d ago`
 
+  const headerRadial = CATEGORY_HEADER_RADIAL[listing.category] ?? CATEGORY_HEADER_RADIAL["other"]
+  const accentBar = CATEGORY_ACCENT_BAR[listing.category] ?? CATEGORY_ACCENT_BAR["other"]
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-8">
       <ScrollProgress />
       {/* Header Banner */}
       <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.22)_0%,_transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.13)_0%,_transparent_60%)]" />
+        {/* Category accent top bar */}
+        <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${accentBar}`} />
+        {/* Category-tinted radial gradients */}
+        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top right, ${headerRadial.top} 0%, transparent 60%)` }} />
+        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at bottom left, ${headerRadial.bottom} 0%, transparent 60%)` }} />
         <div className="relative space-y-4">
           {/* Badges row */}
           <div className="flex items-center gap-2 flex-wrap">
