@@ -4,7 +4,7 @@ import { users, listings } from "@/db/schema"
 import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { formatCurrency } from "@/lib/slug"
-import { LayoutGrid, ShieldCheck, Package, Layers } from "lucide-react"
+import { LayoutGrid, ShieldCheck, Package, Layers, DollarSign, BarChart3 } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -97,31 +97,46 @@ export default async function SellerProfilePage({
             </div>
           </div>
 
-          {/* Stats row */}
-          <div className="flex flex-wrap gap-6 sm:gap-10 text-sm border-t border-border/40 pt-4 mt-2">
-            <div>
-              <p className="font-semibold text-lg">{sellerListings.length}</p>
-              <p className="text-muted-foreground text-xs">Active listing{sellerListings.length !== 1 ? "s" : ""}</p>
+          {/* Stats grid — animated metric cards */}
+          <div className={`mt-4 grid gap-3 ${sellerListings.length > 1 ? "grid-cols-1 sm:grid-cols-3" : sellerListings.length === 1 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-1 max-w-[180px]"}`}>
+            {/* Active listings card */}
+            <div className="animate-fade-in-up relative overflow-hidden rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-gradient-to-br from-indigo-50/70 to-violet-50/50 dark:from-indigo-950/30 dark:to-violet-950/20 p-4 group hover:-translate-y-0.5 hover:shadow-md hover:shadow-indigo-100/70 dark:hover:shadow-indigo-950/60 transition-all duration-200" style={{ animationDelay: "0ms" }}>
+              <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.12] to-transparent pointer-events-none" />
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '12%', right: '10%', animationDuration: '3.3s', animationDelay: '0s', backgroundColor: 'rgba(99,102,241,0.60)' }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ bottom: '18%', left: '8%', animationDuration: '2.6s', animationDelay: '1.3s', backgroundColor: 'rgba(165,180,252,0.55)' }} />
+              <div className="w-7 h-7 rounded-md bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform duration-200">
+                <Package className="h-3.5 w-3.5" />
+              </div>
+              <p className="text-xs text-muted-foreground mb-0.5">Active listings</p>
+              <p className="font-bold text-xl animate-price-gradient">{sellerListings.length}</p>
             </div>
+
+            {/* Total portfolio value card */}
             {sellerListings.length > 0 && (
-              <>
-                <div className="w-px bg-border/60 self-stretch hidden sm:block" />
-                <div>
-                  <p className="font-semibold text-lg bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
-                    {formatCurrency(totalValue)}
-                  </p>
-                  <p className="text-muted-foreground text-xs">Total portfolio value</p>
+              <div className="animate-fade-in-up relative overflow-hidden rounded-xl border border-emerald-200 dark:border-emerald-800/60 bg-gradient-to-br from-emerald-50/70 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/20 p-4 group hover:-translate-y-0.5 hover:shadow-md hover:shadow-emerald-100/70 dark:hover:shadow-emerald-950/60 transition-all duration-200" style={{ animationDelay: "60ms" }}>
+                <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.12] to-transparent pointer-events-none" />
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '12%', right: '10%', animationDuration: '3.6s', animationDelay: '0.4s', backgroundColor: 'rgba(16,185,129,0.60)' }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ bottom: '18%', left: '8%', animationDuration: '2.9s', animationDelay: '1.7s', backgroundColor: 'rgba(52,211,153,0.55)' }} />
+                <div className="w-7 h-7 rounded-md bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform duration-200">
+                  <DollarSign className="h-3.5 w-3.5" />
                 </div>
-                {sellerListings.length > 1 && (
-                  <>
-                    <div className="w-px bg-border/60 self-stretch hidden sm:block" />
-                    <div>
-                      <p className="font-semibold text-lg">{formatCurrency(avgPrice)}</p>
-                      <p className="text-muted-foreground text-xs">Avg. listing price</p>
-                    </div>
-                  </>
-                )}
-              </>
+                <p className="text-xs text-muted-foreground mb-0.5">Portfolio value</p>
+                <p className="font-bold text-xl animate-revenue-gradient">{formatCurrency(totalValue)}</p>
+              </div>
+            )}
+
+            {/* Avg price card */}
+            {sellerListings.length > 1 && (
+              <div className="animate-fade-in-up relative overflow-hidden rounded-xl border border-amber-200 dark:border-amber-800/60 bg-gradient-to-br from-amber-50/70 to-orange-50/50 dark:from-amber-950/30 dark:to-orange-950/20 p-4 group hover:-translate-y-0.5 hover:shadow-md hover:shadow-amber-100/70 dark:hover:shadow-amber-950/60 transition-all duration-200" style={{ animationDelay: "120ms" }}>
+                <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/[0.12] to-transparent pointer-events-none" />
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '12%', right: '10%', animationDuration: '3.4s', animationDelay: '0.8s', backgroundColor: 'rgba(245,158,11,0.60)' }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ bottom: '18%', left: '8%', animationDuration: '2.7s', animationDelay: '2.1s', backgroundColor: 'rgba(251,191,36,0.55)' }} />
+                <div className="w-7 h-7 rounded-md bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform duration-200">
+                  <BarChart3 className="h-3.5 w-3.5" />
+                </div>
+                <p className="text-xs text-muted-foreground mb-0.5">Avg. listing price</p>
+                <p className="font-bold text-xl animate-age-gradient">{formatCurrency(avgPrice)}</p>
+              </div>
             )}
           </div>
         </div>
