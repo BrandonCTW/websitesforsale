@@ -55,26 +55,58 @@ export default async function ListingPage({
 
   const memberSince = new Date(seller.createdAt).getFullYear()
 
+  const now = new Date()
+  const createdAt = new Date(listing.createdAt)
+  const daysDiff = Math.floor((now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24))
+  const listedAgo = daysDiff === 0 ? "today" : daysDiff === 1 ? "yesterday" : `${daysDiff}d ago`
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-8">
-      {/* Header */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="secondary">{CATEGORY_LABELS[listing.category] ?? listing.category}</Badge>
-          {listing.status !== "active" && (
-            <Badge variant={listing.status === "sold" ? "destructive" : "outline"}>
-              {listing.status === "under_offer" ? "Under Offer" : "Sold"}
-            </Badge>
-          )}
+      {/* Header Banner */}
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.22)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.13)_0%,_transparent_60%)]" />
+        <div className="relative space-y-4">
+          {/* Badges row */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-slate-200 backdrop-blur-sm">
+              {CATEGORY_LABELS[listing.category] ?? listing.category}
+            </span>
+            {listing.status !== "active" && (
+              <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                listing.status === "sold"
+                  ? "bg-red-500/20 border border-red-500/30 text-red-300"
+                  : "bg-amber-500/20 border border-amber-500/30 text-amber-300"
+              }`}>
+                {listing.status === "under_offer" ? "Under Offer" : "Sold"}
+              </span>
+            )}
+            <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-slate-400">
+              Listed {listedAgo}
+            </span>
+          </div>
+          {/* Title */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-white leading-snug">{listing.title}</h1>
+          {/* Price row */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+              {formatCurrency(listing.askingPrice)}
+            </span>
+            {listing.monthlyRevenue && listing.monthlyRevenue > 0 && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm font-medium">
+                {(listing.askingPrice / listing.monthlyRevenue).toFixed(1)}x revenue
+              </span>
+            )}
+          </div>
+          {/* Seller */}
+          <p className="text-slate-400 text-sm">
+            Listed by{" "}
+            <Link href={`/seller/${seller.username}`} className="text-slate-300 hover:text-white transition-colors hover:underline underline-offset-2">
+              {seller.username}
+            </Link>
+            {" "}· Member since {memberSince}
+          </p>
         </div>
-        <h1 className="text-3xl font-bold">{listing.title}</h1>
-        <p className="text-muted-foreground">
-          Listed by{" "}
-          <Link href={`/seller/${seller.username}`} className="underline">
-            {seller.username}
-          </Link>{" "}
-          · Member since {memberSince}
-        </p>
       </div>
 
       {/* Images */}
