@@ -350,3 +350,21 @@
 .animate-deal-glow {
   animation: deal-card-glow 3.5s ease-in-out infinite;
 }
+
+@keyframes section-divider-sweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.animate-section-divider {
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(148, 163, 184, 0.2) 25%,
+    rgba(99, 102, 241, 0.5) 50%,
+    rgba(148, 163, 184, 0.2) 75%,
+    transparent 100%
+  );
+  background-size: 300% 100%;
+  animation: section-divider-sweep 7s ease-in-out infinite;
+}

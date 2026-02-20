@@ -201,9 +201,9 @@ export default async function HomePage({
       {/* How it works */}
       <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-6">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="h-px flex-1 animate-section-divider" />
           <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">How it works</span>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "3.5s" }} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 sm:gap-2">
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
@@ -325,9 +325,9 @@ export default async function HomePage({
       {/* Broker vs Direct comparison */}
       <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-6">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "1.2s" }} />
           <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">vs. traditional brokers</span>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "4.7s" }} />
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           {/* WebsitesForSale card */}
@@ -407,9 +407,9 @@ export default async function HomePage({
       {/* Browse by Category */}
       <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-5">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "2.4s" }} />
           <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Browse by category</span>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "5.9s" }} />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder, hoverShadow }, i) => {
