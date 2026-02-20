@@ -145,13 +145,41 @@ export function ListingCard({
             )}
           </div>
         ) : (
-          <div className={`aspect-video rounded-t-lg bg-gradient-to-br ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).bg} flex items-center justify-center relative overflow-hidden`}>
-            <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).radial} 0%, transparent 70%)` }} />
-            <div className="relative flex flex-col items-center gap-2 select-none">
-              <CategoryIcon className={`w-10 h-10 ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon}`} />
-              <span className={`text-[10px] font-semibold uppercase tracking-widest ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon} opacity-70`}>
-                {CATEGORY_LABELS[listing.category] ?? listing.category}
-              </span>
+          <div className={`aspect-video rounded-t-lg bg-gradient-to-br ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).bg} relative overflow-hidden`}>
+            <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top right, ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).radial} 0%, transparent 65%)` }} />
+            {/* Website mockup frame */}
+            <div className="absolute inset-3 rounded-lg bg-white/60 dark:bg-slate-900/50 shadow-sm border border-white/70 dark:border-white/10 flex flex-col overflow-hidden backdrop-blur-sm">
+              {/* Browser chrome bar */}
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-white/70 dark:bg-slate-800/60 border-b border-black/5 dark:border-white/5 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-red-300/80 dark:bg-red-500/50" />
+                <span className="w-2 h-2 rounded-full bg-amber-300/80 dark:bg-amber-500/50" />
+                <span className="w-2 h-2 rounded-full bg-emerald-300/80 dark:bg-emerald-500/50" />
+                <div className="flex-1 mx-1.5 h-2.5 rounded-full bg-black/6 dark:bg-white/8 flex items-center px-1.5 gap-1">
+                  <CategoryIcon className={`w-1.5 h-1.5 shrink-0 ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon} opacity-60`} />
+                  <div className="h-1 w-10 rounded-full bg-black/10 dark:bg-white/10" />
+                </div>
+              </div>
+              {/* Page content mockup */}
+              <div className="flex-1 p-2 space-y-1.5">
+                {/* Hero block */}
+                <div className={`h-5 rounded-md bg-gradient-to-r ${CATEGORY_ACCENT[listing.category] ?? CATEGORY_ACCENT["other"]} opacity-30`} />
+                {/* Content rows */}
+                <div className="flex gap-1.5">
+                  <div className="h-3 rounded flex-1 bg-black/8 dark:bg-white/8" />
+                  <div className="h-3 rounded w-12 bg-black/5 dark:bg-white/5" />
+                </div>
+                <div className="h-3 rounded w-4/5 bg-black/6 dark:bg-white/6" />
+                {/* Card row */}
+                <div className="flex gap-1 pt-0.5">
+                  <div className="h-6 rounded flex-1 bg-black/5 dark:bg-white/5" />
+                  <div className="h-6 rounded flex-1 bg-black/5 dark:bg-white/5" />
+                  <div className="h-6 rounded flex-1 bg-black/5 dark:bg-white/5" />
+                </div>
+              </div>
+            </div>
+            {/* Category icon watermark */}
+            <div className="absolute bottom-4 right-4 opacity-20 select-none pointer-events-none">
+              <CategoryIcon className={`w-6 h-6 ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon}`} />
             </div>
             {showNewBadge && (
               <span className="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-md">
