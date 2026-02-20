@@ -280,3 +280,28 @@
     animation-range: entry 0% entry 28%;
   }
 }
+
+@property --featured-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes featured-border-spin {
+  to { --featured-angle: 360deg; }
+}
+
+.animate-featured-border {
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    conic-gradient(
+      from var(--featured-angle),
+      #6366f1 0deg,
+      #34d399 90deg,
+      rgba(99, 102, 241, 0.18) 180deg,
+      rgba(52, 211, 153, 0.18) 270deg,
+      #6366f1 360deg
+    ) border-box;
+  animation: featured-border-spin 6s linear infinite;
+}

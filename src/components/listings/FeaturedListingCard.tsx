@@ -176,7 +176,7 @@ export function FeaturedListingCard({
 
   return (
     <Link href={`/listings/${listing.slug}`} className="block group animate-fade-in-up">
-      <div className="group relative rounded-2xl border border-border/60 overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-card animate-spotlight-glow">
+      <div className="group relative rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 animate-featured-border">
         {/* Shine sweep overlay */}
         <div className="card-shine absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent pointer-events-none z-30" />
         {/* Top category accent bar */}
