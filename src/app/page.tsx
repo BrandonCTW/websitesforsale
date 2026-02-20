@@ -2,6 +2,7 @@ import { db } from "@/db"
 import { listings, listingImages, users } from "@/db/schema"
 import { eq, and, count } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
+import { FeaturedListingCard } from "@/components/listings/FeaturedListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
 import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
@@ -442,17 +443,41 @@ export default async function HomePage({
               })}
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sorted.map(({ listing, seller }, i) => (
-              <ListingCard
-                key={listing.id}
-                listing={listing}
-                sellerUsername={seller.username}
-                imageUrl={imageMap[listing.id]}
-                index={i}
-              />
-            ))}
-          </div>
+          {(() => {
+            const showSpotlight =
+              sortParam === "newest" &&
+              !category &&
+              !minPrice &&
+              !maxPrice &&
+              !q &&
+              sorted.length >= 3
+            const spotlightItem = showSpotlight ? sorted[0] : null
+            const gridItems = showSpotlight ? sorted.slice(1) : sorted
+            return (
+              <>
+                {spotlightItem && (
+                  <div className="mb-6">
+                    <FeaturedListingCard
+                      listing={spotlightItem.listing}
+                      sellerUsername={spotlightItem.seller.username}
+                      imageUrl={imageMap[spotlightItem.listing.id]}
+                    />
+                  </div>
+                )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {gridItems.map(({ listing, seller }, i) => (
+                    <ListingCard
+                      key={listing.id}
+                      listing={listing}
+                      sellerUsername={seller.username}
+                      imageUrl={imageMap[listing.id]}
+                      index={i}
+                    />
+                  ))}
+                </div>
+              </>
+            )
+          })()}
         </>
       )}
     </div>
