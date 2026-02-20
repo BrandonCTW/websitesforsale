@@ -5,6 +5,7 @@ import { db } from "@/db"
 import { inquiries, listings } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { timeAgo } from "@/lib/slug"
+import { MessageCircle } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -67,20 +68,34 @@ export default async function InquiriesPage() {
       </div>
 
       {rows.length === 0 ? (
-        <div className="text-center py-24 rounded-2xl border border-dashed bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950/50 dark:to-slate-900/50">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-100 to-violet-200 dark:from-indigo-900 dark:to-violet-800 flex items-center justify-center mx-auto mb-4 text-2xl">
-            💬
+        <div className="relative text-center py-20 rounded-2xl border border-border/40 bg-gradient-to-br from-slate-50 to-indigo-50/30 dark:from-slate-950/50 dark:to-indigo-950/20 overflow-hidden">
+          {/* Ambient orb blobs */}
+          <div className="animate-orb-1 absolute -top-10 -right-10 w-52 h-52 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+          <div className="animate-orb-2 absolute -bottom-10 -left-10 w-44 h-44 rounded-full bg-violet-500/8 blur-3xl pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/65 blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '8%', animationDuration: '3.3s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-violet-200/70 pointer-events-none" style={{ top: '70%', left: '6%', animationDuration: '2.6s', animationDelay: '1.3s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-300/60 blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '10%', animationDuration: '3.9s', animationDelay: '0.7s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '65%', right: '8%', animationDuration: '2.5s', animationDelay: '2.0s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/25 blur-sm pointer-events-none" style={{ top: '40%', left: '76%', animationDuration: '4.1s', animationDelay: '0.9s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-violet-200/65 pointer-events-none" style={{ top: '28%', left: '18%', animationDuration: '3.0s', animationDelay: '2.4s' }} />
+          <div className="relative">
+            {/* Floating animated icon */}
+            <div className="animate-icon-float relative w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-indigo-200/50 dark:shadow-indigo-900/50">
+              <div className="animate-shimmer absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+              <MessageCircle className="h-7 w-7 text-white relative z-10" />
+            </div>
+            <p className="animate-fade-in-up font-semibold text-lg mb-2" style={{ animationDelay: '0.1s' }}>No inquiries yet</p>
+            <p className="animate-fade-in-up text-muted-foreground text-sm mb-2 max-w-xs mx-auto" style={{ animationDelay: '0.2s' }}>
+              When buyers contact you through your listings, their messages will appear here.
+            </p>
+            <p className="animate-fade-in-up text-muted-foreground text-sm" style={{ animationDelay: '0.28s' }}>
+              <Link href="/dashboard/listings" className="underline hover:text-foreground">
+                Make sure your listings are active
+              </Link>{" "}
+              to start receiving inquiries.
+            </p>
           </div>
-          <p className="font-semibold text-lg mb-1">No inquiries yet</p>
-          <p className="text-muted-foreground text-sm mb-2">
-            When buyers contact you through your listings, their messages will appear here.
-          </p>
-          <p className="text-muted-foreground text-sm">
-            <Link href="/dashboard/listings" className="underline hover:text-foreground">
-              Make sure your listings are active
-            </Link>{" "}
-            to start receiving inquiries.
-          </p>
         </div>
       ) : (
         <div className="space-y-3">
