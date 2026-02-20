@@ -540,20 +540,38 @@ export default async function HomePage({
 
       <div id="listings" />
       {filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
-            <Search className="w-7 h-7 text-indigo-400 dark:text-indigo-500" />
+        <div className="relative flex flex-col items-center justify-center py-20 text-center rounded-2xl border border-border/40 bg-gradient-to-br from-slate-50 to-indigo-50/30 dark:from-slate-950/50 dark:to-indigo-950/20 overflow-hidden mt-6">
+          {/* Ambient orb blobs */}
+          <div className="animate-orb-1 absolute -top-10 -right-10 w-52 h-52 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+          <div className="animate-orb-2 absolute -bottom-10 -left-10 w-44 h-44 rounded-full bg-emerald-500/8 blur-3xl pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/65 blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '8%', animationDuration: '3.2s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-violet-200/70 pointer-events-none" style={{ top: '72%', left: '6%', animationDuration: '2.7s', animationDelay: '1.3s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/60 blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '10%', animationDuration: '3.8s', animationDelay: '0.6s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '65%', right: '8%', animationDuration: '2.5s', animationDelay: '1.9s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/30 blur-sm pointer-events-none" style={{ top: '42%', left: '78%', animationDuration: '4.2s', animationDelay: '0.9s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/65 pointer-events-none" style={{ top: '30%', left: '20%', animationDuration: '3.1s', animationDelay: '2.4s' }} />
+          <div className="relative">
+            {/* Floating animated icon */}
+            <div className="animate-icon-float relative w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center mx-auto mb-5 shadow-lg shadow-indigo-200/50 dark:shadow-indigo-900/50">
+              <div className="animate-shimmer absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+              <Search className="w-7 h-7 text-white relative z-10" />
+            </div>
+            <h3 className="animate-fade-in-up font-semibold text-lg mb-2" style={{ animationDelay: '0.1s' }}>No listings found</h3>
+            <p className="animate-fade-in-up text-muted-foreground text-sm max-w-xs mb-7 mx-auto" style={{ animationDelay: '0.2s' }}>
+              Try adjusting your filters or search terms to find what you&apos;re looking for.
+            </p>
+            <div className="animate-fade-in-up relative inline-block" style={{ animationDelay: '0.3s' }}>
+              <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+              <Link
+                href="/"
+                className="relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
+              >
+                <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                <span className="relative z-10">Browse all listings</span>
+              </Link>
+            </div>
           </div>
-          <h3 className="font-semibold text-lg mb-2">No listings found</h3>
-          <p className="text-muted-foreground text-sm max-w-xs mb-6">
-            Try adjusting your filters or search terms to find what you&apos;re looking for.
-          </p>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 transition-opacity"
-          >
-            Browse all listings
-          </Link>
         </div>
       ) : (
         <>
