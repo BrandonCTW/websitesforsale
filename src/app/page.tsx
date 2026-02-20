@@ -119,16 +119,16 @@ export default async function HomePage({
           <div className="animate-orb-1 absolute -top-10 -right-10 w-72 h-72 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
           <div className="animate-orb-2 absolute -bottom-10 -left-10 w-64 h-64 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
           <div className="relative">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
+            <h1 className="animate-fade-in-up text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
               Websites for sale.{" "}
               <span className="animate-hero-gradient">
                 No middleman.
               </span>
             </h1>
-            <p className="text-slate-300 text-lg max-w-xl mx-auto mb-6">
+            <p className="animate-fade-in-up text-slate-300 text-lg max-w-xl mx-auto mb-6" style={{ animationDelay: "0.15s" }}>
               Browse profitable websites and apps. Contact sellers directly — no fees, no commissions.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="animate-fade-in-up flex flex-wrap justify-center gap-3" style={{ animationDelay: "0.28s" }}>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-4 py-1.5 text-sm text-slate-200 backdrop-blur-sm">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                 Zero broker fees
@@ -142,7 +142,7 @@ export default async function HomePage({
                 No commissions
               </span>
             </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <div className="animate-fade-in-up mt-6 flex flex-wrap justify-center gap-3" style={{ animationDelay: "0.40s" }}>
               <Link
                 href="#listings"
                 className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
@@ -158,7 +158,7 @@ export default async function HomePage({
                 List Your Site Free
               </Link>
             </div>
-            <div className="mt-5 flex items-center justify-center gap-4 text-xs text-slate-400 flex-wrap">
+            <div className="animate-fade-in-up mt-5 flex items-center justify-center gap-4 text-xs text-slate-400 flex-wrap" style={{ animationDelay: "0.52s" }}>
               <span className="flex items-center gap-2">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -174,7 +174,7 @@ export default async function HomePage({
 
             {/* Live listings ticker */}
             {rows.length >= 3 && (
-              <div className="mt-5 relative overflow-hidden rounded-lg bg-white/5 border border-white/10 py-2.5">
+              <div className="animate-fade-in-up mt-5 relative overflow-hidden rounded-lg bg-white/5 border border-white/10 py-2.5" style={{ animationDelay: "0.62s" }}>
                 <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-900/90 to-transparent z-10 pointer-events-none" />
                 <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-900/90 to-transparent z-10 pointer-events-none" />
                 <div className="animate-marquee flex gap-8 w-max hover:[animation-play-state:paused]">
