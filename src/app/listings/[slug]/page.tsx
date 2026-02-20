@@ -241,23 +241,24 @@ export default async function ListingPage({
 
       {/* Key metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <MetricBox label="Asking Price" value={formatCurrency(listing.askingPrice)} color="indigo" icon={DollarSign} />
+        <MetricBox label="Asking Price" value={formatCurrency(listing.askingPrice)} color="indigo" icon={DollarSign} index={0} />
         {listing.monthlyRevenue != null && (
-          <MetricBox label="Monthly Revenue" value={formatCurrency(listing.monthlyRevenue)} color="emerald" icon={TrendingUp} />
+          <MetricBox label="Monthly Revenue" value={formatCurrency(listing.monthlyRevenue)} color="emerald" icon={TrendingUp} index={1} />
         )}
         {listing.monthlyProfit != null && (
-          <MetricBox label="Monthly Profit" value={formatCurrency(listing.monthlyProfit)} color="teal" icon={Wallet} />
+          <MetricBox label="Monthly Profit" value={formatCurrency(listing.monthlyProfit)} color="teal" icon={Wallet} index={2} />
         )}
         {listing.monthlyTraffic != null && (
-          <MetricBox label="Monthly Traffic" value={formatNumber(listing.monthlyTraffic) + " views"} color="sky" icon={Eye} />
+          <MetricBox label="Monthly Traffic" value={formatNumber(listing.monthlyTraffic) + " views"} color="sky" icon={Eye} index={3} />
         )}
-        <MetricBox label="Age" value={age} color="amber" icon={Clock} />
+        <MetricBox label="Age" value={age} color="amber" icon={Clock} index={4} />
         {listing.monthlyRevenue && listing.askingPrice ? (
           <MetricBox
             label="Multiple"
             value={`${(listing.askingPrice / listing.monthlyRevenue).toFixed(1)}x monthly`}
             color="violet"
             icon={Layers}
+            index={5}
           />
         ) : null}
       </div>
@@ -571,10 +572,13 @@ const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; val
   },
 }
 
-function MetricBox({ label, value, color = "indigo", icon: Icon }: { label: string; value: string; color?: MetricColor; icon?: LucideIcon }) {
+function MetricBox({ label, value, color = "indigo", icon: Icon, index = 0 }: { label: string; value: string; color?: MetricColor; icon?: LucideIcon; index?: number }) {
   const styles = METRIC_COLOR_STYLES[color]
   return (
-    <div className={`rounded-lg border p-4 ${styles.border} ${styles.bg}`}>
+    <div
+      className={`rounded-lg border p-4 animate-fade-in-up ${styles.border} ${styles.bg}`}
+      style={{ animationDelay: `${index * 80}ms` }}
+    >
       {Icon && (
         <div className={`w-7 h-7 rounded-md flex items-center justify-center mb-2.5 ${styles.icon}`}>
           <Icon className="h-3.5 w-3.5" />
