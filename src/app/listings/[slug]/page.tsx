@@ -9,7 +9,7 @@ import { ImageGallery } from "@/components/listings/ImageGallery"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
-import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, Mail } from "lucide-react"
+import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, Mail, Lock, Search } from "lucide-react"
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 import { ScrollProgress } from "@/components/listings/ScrollProgress"
 import { DealMeter } from "@/components/listings/DealMeter"
@@ -617,9 +617,59 @@ export default async function ListingPage({
           )}
         </div>
       ) : (
-        <p className="text-muted-foreground text-center py-4">
-          This listing is no longer accepting inquiries.
-        </p>
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-12 text-center">
+          {/* Category accent top bar */}
+          <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${accentBar}`} />
+          {/* Category-tinted radial gradients */}
+          <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top right, ${headerRadial.top} 0%, transparent 60%)` }} />
+          <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at bottom left, ${headerRadial.bottom} 0%, transparent 60%)` }} />
+          {/* Animated orbs */}
+          <div className="animate-orb-1 absolute -top-10 -right-10 w-52 h-52 rounded-full bg-slate-600/20 blur-3xl pointer-events-none" />
+          <div className="animate-orb-2 absolute -bottom-10 -left-10 w-44 h-44 rounded-full bg-slate-500/15 blur-3xl pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '7%', animationDuration: '3.2s', animationDelay: '0s', backgroundColor: sparkleColors[0] }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '65%', left: '5%', animationDuration: '2.5s', animationDelay: '1.1s', backgroundColor: sparkleColors[1] }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '20%', right: '9%', animationDuration: '3.8s', animationDelay: '0.4s', backgroundColor: sparkleColors[2] }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '62%', right: '7%', animationDuration: '2.8s', animationDelay: '1.8s', backgroundColor: sparkleColors[1] }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full blur-sm pointer-events-none" style={{ top: '40%', left: '48%', animationDuration: '4.1s', animationDelay: '0.8s', backgroundColor: sparkleColors[0], opacity: 0.35 }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '75%', left: '28%', animationDuration: '3.0s', animationDelay: '2.2s', backgroundColor: sparkleColors[2] }} />
+          <div className="relative">
+            {/* Status icon */}
+            <div className="animate-fade-in-up inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-600 border border-white/10 shadow-lg mb-4">
+              <Lock className="h-6 w-6 text-slate-300" />
+            </div>
+            {/* Status heading */}
+            <h2 className="animate-fade-in-up text-xl font-bold text-white mb-2" style={{ animationDelay: '0.1s' }}>
+              {listing.status === "sold"
+                ? "This site has been sold"
+                : listing.status === "under_offer"
+                ? "This site is under offer"
+                : "Inquiries are closed"}
+            </h2>
+            {/* Status description */}
+            <p className="animate-fade-in-up text-slate-400 text-sm mb-6 max-w-sm mx-auto leading-relaxed" style={{ animationDelay: '0.2s' }}>
+              {listing.status === "sold"
+                ? "This website has found a new owner. Browse other listings to find your next acquisition."
+                : listing.status === "under_offer"
+                ? "This website is currently under negotiation. Browse other listings in the meantime."
+                : "This listing is no longer accepting inquiries. Explore other available websites below."}
+            </p>
+            {/* CTA button */}
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <div className="relative inline-block">
+                <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+                <Link
+                  href={`/?category=${listing.category}`}
+                  className="relative overflow-hidden inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:-translate-y-0.5"
+                >
+                  <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                  <Search className="h-4 w-4 relative z-10" />
+                  <span className="relative z-10">Browse {CATEGORY_LABELS[listing.category] ?? "Listings"}</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )
