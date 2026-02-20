@@ -491,6 +491,24 @@
   animation: price-gradient-flow 6s linear infinite;
 }
 
+@keyframes step-icon-glow-indigo {
+  0%, 100% { filter: drop-shadow(0 0 0px rgba(99, 102, 241, 0)); }
+  50% { filter: drop-shadow(0 0 9px rgba(99, 102, 241, 0.55)); }
+}
+
+@keyframes step-icon-glow-emerald {
+  0%, 100% { filter: drop-shadow(0 0 0px rgba(16, 185, 129, 0)); }
+  50% { filter: drop-shadow(0 0 9px rgba(16, 185, 129, 0.55)); }
+}
+
+.animate-step-icon-indigo {
+  animation: icon-float 3s ease-in-out infinite, step-icon-glow-indigo 3.5s ease-in-out infinite;
+}
+
+.animate-step-icon-emerald {
+  animation: icon-float 3s ease-in-out infinite, step-icon-glow-emerald 3.5s ease-in-out infinite;
+}
+
 .chip-glow-emerald { --chip-glow: rgba(16, 185, 129, 0.28); }
 .chip-glow-sky     { --chip-glow: rgba(14, 165, 233, 0.28); }
 .chip-glow-amber   { --chip-glow: rgba(245, 158, 11, 0.28); }
