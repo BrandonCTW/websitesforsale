@@ -5,7 +5,7 @@ import { ListingCard } from "@/components/listings/ListingCard"
 import { FeaturedListingCard } from "@/components/listings/FeaturedListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
-import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, Check, X, type LucideIcon } from "lucide-react"
+import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, Check, X, Wallet, type LucideIcon } from "lucide-react"
 import { formatCurrency } from "@/lib/slug"
 import { CountUp } from "@/components/CountUp"
 
@@ -503,39 +503,54 @@ export default async function HomePage({
       <FilterBar categories={CATEGORIES} />
 
       {/* Budget range quick-filters */}
-      <div className="mt-5 flex flex-wrap items-center gap-2">
-        <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider shrink-0">Budget:</span>
-        {(
-          [
-            { label: "Any",        min: undefined,  max: undefined  },
-            { label: "Under $1k",  min: undefined,  max: "1000"     },
-            { label: "$1k – $5k",  min: "1000",     max: "5000"     },
-            { label: "$5k – $25k", min: "5000",     max: "25000"    },
-            { label: "$25k+",      min: "25000",    max: undefined  },
-          ] as { label: string; min?: string; max?: string }[]
-        ).map(({ label, min, max }) => {
-          const isActive =
-            (min ?? "") === (minPrice ?? "") && (max ?? "") === (maxPrice ?? "")
-          const urlParams = new URLSearchParams()
-          if (category) urlParams.set("category", category)
-          if (min)       urlParams.set("minPrice", min)
-          if (max)       urlParams.set("maxPrice", max)
-          if (q)         urlParams.set("q", q)
-          const href = urlParams.size > 0 ? `/?${urlParams}` : "/"
-          return (
-            <Link
-              key={label}
-              href={href}
-              className={`rounded-full text-xs font-medium px-3.5 py-1.5 border transition-all duration-200 ${
-                isActive
-                  ? "bg-gradient-to-r from-indigo-600 to-emerald-600 text-white border-transparent shadow-sm"
-                  : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 bg-white dark:bg-slate-900/50"
-              }`}
-            >
-              {label}
-            </Link>
-          )
-        })}
+      <div className="mt-5 relative overflow-hidden rounded-xl border border-border/50 bg-background/80 backdrop-blur-sm px-4 py-3 shadow-sm">
+        {/* Shimmer sweep */}
+        <div className="animate-shimmer absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400/[0.04] to-transparent pointer-events-none" />
+        {/* Sparkle particles */}
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-300/60 pointer-events-none" style={{ top: '25%', left: '1.5%', animationDuration: '3.4s', animationDelay: '0s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/55 pointer-events-none" style={{ top: '70%', right: '1.5%', animationDuration: '2.8s', animationDelay: '1.6s' }} />
+        <div className="relative flex flex-wrap items-center gap-2">
+          <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider shrink-0 flex items-center gap-1.5">
+            <span className="inline-flex items-center justify-center w-4 h-4 rounded bg-indigo-100 dark:bg-indigo-900/40">
+              <Wallet className="h-2.5 w-2.5 text-indigo-500 dark:text-indigo-400" />
+            </span>
+            Budget:
+          </span>
+          {(
+            [
+              { label: "Any",        min: undefined,  max: undefined  },
+              { label: "Under $1k",  min: undefined,  max: "1000"     },
+              { label: "$1k – $5k",  min: "1000",     max: "5000"     },
+              { label: "$5k – $25k", min: "5000",     max: "25000"    },
+              { label: "$25k+",      min: "25000",    max: undefined  },
+            ] as { label: string; min?: string; max?: string }[]
+          ).map(({ label, min, max }) => {
+            const isActive =
+              (min ?? "") === (minPrice ?? "") && (max ?? "") === (maxPrice ?? "")
+            const urlParams = new URLSearchParams()
+            if (category) urlParams.set("category", category)
+            if (min)       urlParams.set("minPrice", min)
+            if (max)       urlParams.set("maxPrice", max)
+            if (q)         urlParams.set("q", q)
+            const href = urlParams.size > 0 ? `/?${urlParams}` : "/"
+            return (
+              <Link
+                key={label}
+                href={href}
+                className={`relative overflow-hidden rounded-full text-xs font-medium px-3.5 py-1.5 border transition-all duration-200 ${
+                  isActive
+                    ? "bg-gradient-to-r from-indigo-600 to-emerald-600 text-white border-transparent shadow-sm"
+                    : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 bg-white dark:bg-slate-900/50"
+                }`}
+              >
+                {isActive && (
+                  <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" aria-hidden="true" />
+                )}
+                <span className="relative z-10">{label}</span>
+              </Link>
+            )
+          })}
+        </div>
       </div>
 
       <div id="listings" />
@@ -575,11 +590,23 @@ export default async function HomePage({
         </div>
       ) : (
         <>
-          <div className="mt-6 mb-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm text-muted-foreground">
-              {sorted.length} listing{sorted.length !== 1 ? "s" : ""} found
-            </p>
-            <div className="flex items-center gap-1">
+          <div className="mt-6 mb-4 relative overflow-hidden rounded-xl border border-border/50 bg-background/80 backdrop-blur-sm px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+            {/* Shimmer sweep */}
+            <div className="animate-shimmer absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400/[0.04] to-transparent pointer-events-none" />
+            {/* Sparkle particles */}
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-300/60 pointer-events-none" style={{ top: '30%', left: '1.5%', animationDuration: '3.1s', animationDelay: '0.5s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/55 pointer-events-none" style={{ top: '65%', right: '1.5%', animationDuration: '2.6s', animationDelay: '1.9s' }} />
+            <div className="relative flex items-center gap-2">
+              <span className="relative flex h-1.5 w-1.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+              </span>
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">{sorted.length}</span>{" "}
+                listing{sorted.length !== 1 ? "s" : ""} found
+              </p>
+            </div>
+            <div className="relative flex items-center gap-1">
               <span className="text-xs text-muted-foreground mr-1.5">Sort:</span>
               {SORT_OPTIONS.map(({ label, value }) => {
                 const p = new URLSearchParams()
@@ -593,13 +620,16 @@ export default async function HomePage({
                   <Link
                     key={value}
                     href={p.size > 0 ? `/?${p}` : "/"}
-                    className={`rounded-md text-xs font-medium px-2.5 py-1.5 border transition-all duration-200 ${
+                    className={`relative overflow-hidden rounded-md text-xs font-medium px-2.5 py-1.5 border transition-all duration-200 ${
                       isActive
-                        ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300"
+                        ? "bg-gradient-to-r from-indigo-600 to-indigo-500 text-white border-transparent shadow-sm"
                         : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                   >
-                    {label}
+                    {isActive && (
+                      <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                    )}
+                    <span className="relative z-10">{label}</span>
                   </Link>
                 )
               })}
