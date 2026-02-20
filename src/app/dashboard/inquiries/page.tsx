@@ -31,9 +31,15 @@ export default async function InquiriesPage() {
         {/* Radial gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.25)_0%,_transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
-        {/* Subtle orbs */}
-        <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+        {/* Animated orbs */}
+        <div className="animate-orb-1 absolute -top-8 -right-8 w-48 h-48 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
+        <div className="animate-orb-2 absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+        {/* Sparkle particles */}
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/70 blur-[0.5px] pointer-events-none" style={{ top: '16%', left: '6%', animationDuration: '3.4s', animationDelay: '0.3s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/60 pointer-events-none" style={{ top: '68%', left: '4%', animationDuration: '2.5s', animationDelay: '1.5s' }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-300/65 blur-[0.5px] pointer-events-none" style={{ top: '20%', right: '7%', animationDuration: '3.7s', animationDelay: '0.6s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '62%', right: '5%', animationDuration: '2.9s', animationDelay: '2.0s' }} />
+        <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/20 blur-sm pointer-events-none" style={{ top: '45%', left: '52%', animationDuration: '4.3s', animationDelay: '1.1s' }} />
 
         <div className="relative flex items-start justify-between gap-4 flex-wrap mb-5">
           <div>
