@@ -187,3 +187,21 @@
   animation: marquee 40s linear infinite;
   will-change: transform;
 }
+
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  70%, 100% { transform: translateX(350%); }
+}
+
+.animate-shimmer {
+  animation: shimmer-sweep 4s ease-in-out infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor {
+  animation: cursor-blink 0.9s step-end infinite;
+}

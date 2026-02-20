@@ -270,29 +270,45 @@ export default async function HomePage({
 
           {/* Right: mock AI-generated listing card */}
           <div className="p-6 flex items-center justify-center bg-white/60 dark:bg-slate-900/40 border-t md:border-t-0 md:border-l border-indigo-100 dark:border-indigo-900/30">
-            <div className="w-full max-w-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm p-4 space-y-3">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <p className="text-[10px] font-medium text-indigo-500 uppercase tracking-wide mb-1 flex items-center gap-1">
-                    <Sparkles className="h-2.5 w-2.5" /> AI Generated
-                  </p>
-                  <h3 className="font-semibold text-sm leading-snug">Profitable Recipe Blog for Sale</h3>
+            <div className="w-full max-w-sm space-y-2.5">
+              {/* AI status indicator */}
+              <div className="flex items-center gap-2 text-xs text-indigo-600 dark:text-indigo-400 pl-0.5">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
+                </span>
+                AI is analyzing your site&hellip;
+              </div>
+              {/* Card with shimmer */}
+              <div className="relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm p-4 space-y-3 overflow-hidden">
+                {/* Shimmer sweep overlay */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-indigo-400/[0.07] to-transparent animate-shimmer" />
                 </div>
-                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 shrink-0">$12,000</span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
-                A well-established food & recipe content site with 45k monthly readers. Monetized through display ads and Amazon affiliates with consistent passive income. Built on WordPress with a clean, fast theme. Ready for a new owner to grow.
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">Content Site</span>
-                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">WordPress</span>
-                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">Display Ads</span>
-                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">Affiliates</span>
-              </div>
-              <div className="border-t border-slate-100 dark:border-slate-800 pt-2 flex gap-4 text-[10px] text-muted-foreground">
-                <span><span className="font-medium text-foreground">$420</span>/mo revenue</span>
-                <span><span className="font-medium text-foreground">45k</span> pageviews</span>
-                <span><span className="font-medium text-foreground">3 yrs</span> old</span>
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="text-[10px] font-medium text-indigo-500 uppercase tracking-wide mb-1 flex items-center gap-1">
+                      <Sparkles className="h-2.5 w-2.5" /> AI Generated
+                      <span className="animate-cursor inline-block w-[1.5px] h-3 bg-indigo-400 ml-0.5 align-middle" />
+                    </p>
+                    <h3 className="font-semibold text-sm leading-snug">Profitable Recipe Blog for Sale</h3>
+                  </div>
+                  <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 shrink-0">$12,000</span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                  A well-established food & recipe content site with 45k monthly readers. Monetized through display ads and Amazon affiliates with consistent passive income. Built on WordPress with a clean, fast theme. Ready for a new owner to grow.
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="inline-flex items-center rounded-full bg-sky-100 dark:bg-sky-900/40 px-2.5 py-0.5 text-[10px] font-medium text-sky-700 dark:text-sky-300">Content Site</span>
+                  <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-2.5 py-0.5 text-[10px] font-medium text-blue-700 dark:text-blue-300">WordPress</span>
+                  <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900/30 px-2.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-300">Display Ads</span>
+                  <span className="inline-flex items-center rounded-full bg-orange-100 dark:bg-orange-900/30 px-2.5 py-0.5 text-[10px] font-medium text-orange-700 dark:text-orange-300">Affiliates</span>
+                </div>
+                <div className="border-t border-slate-100 dark:border-slate-800 pt-2 flex gap-4 text-[10px] text-muted-foreground">
+                  <span><span className="font-medium text-foreground">$420</span>/mo revenue</span>
+                  <span><span className="font-medium text-foreground">45k</span> pageviews</span>
+                  <span><span className="font-medium text-foreground">3 yrs</span> old</span>
+                </div>
               </div>
             </div>
           </div>
