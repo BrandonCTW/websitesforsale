@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
-import { DollarSign, TrendingUp, Eye, Clock } from "lucide-react"
+import { DollarSign, TrendingUp, Eye, Clock, Globe } from "lucide-react"
 
 function isNewListing(createdAt: Date | string): boolean {
   const created = new Date(createdAt)
@@ -79,7 +79,9 @@ export function ListingCard({
         ) : (
           <div className="aspect-video rounded-t-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.12)_0%,_transparent_70%)]" />
-            <span className="text-4xl opacity-20 relative select-none">🌐</span>
+            <div className="relative flex flex-col items-center gap-2 select-none">
+              <Globe className="w-10 h-10 text-indigo-300 dark:text-indigo-700" />
+            </div>
             {showNewBadge && (
               <span className="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-md">
                 New
