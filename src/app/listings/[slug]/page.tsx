@@ -108,6 +108,17 @@ const CATEGORY_ACCENT_BAR: Record<string, string> = {
   "other":            "from-slate-400 to-slate-500",
 }
 
+const CATEGORY_SPARKLE_COLORS: Record<string, [string, string, string]> = {
+  "content-site":     ["rgba(56,189,248,0.85)",  "rgba(255,255,255,0.70)", "rgba(14,165,233,0.75)"],
+  "saas":             ["rgba(167,139,250,0.85)",  "rgba(255,255,255,0.70)", "rgba(139,92,246,0.75)"],
+  "ecommerce":        ["rgba(251,146,60,0.85)",   "rgba(255,255,255,0.70)", "rgba(249,115,22,0.75)"],
+  "tool-or-app":      ["rgba(45,212,191,0.85)",   "rgba(255,255,255,0.70)", "rgba(20,184,166,0.75)"],
+  "newsletter":       ["rgba(251,113,133,0.85)",  "rgba(255,255,255,0.70)", "rgba(244,63,94,0.75)"],
+  "community":        ["rgba(52,211,153,0.85)",   "rgba(255,255,255,0.70)", "rgba(16,185,129,0.75)"],
+  "service-business": ["rgba(251,191,36,0.85)",   "rgba(255,255,255,0.70)", "rgba(245,158,11,0.75)"],
+  "other":            ["rgba(129,140,248,0.85)",  "rgba(255,255,255,0.70)", "rgba(52,211,153,0.75)"],
+}
+
 function getTagStyle(value: string, colorMap: Record<string, string>): string {
   return colorMap[value.toLowerCase().trim()] ?? DEFAULT_BADGE_STYLE
 }
@@ -181,6 +192,7 @@ export default async function ListingPage({
 
   const headerRadial = CATEGORY_HEADER_RADIAL[listing.category] ?? CATEGORY_HEADER_RADIAL["other"]
   const accentBar = CATEGORY_ACCENT_BAR[listing.category] ?? CATEGORY_ACCENT_BAR["other"]
+  const sparkleColors = CATEGORY_SPARKLE_COLORS[listing.category] ?? CATEGORY_SPARKLE_COLORS["other"]
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-8">
@@ -195,6 +207,15 @@ export default async function ListingPage({
         {/* Animated floating orbs */}
         <div className="animate-orb-1 absolute -top-10 -right-10 w-64 h-64 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
         <div className="animate-orb-2 absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+        {/* Category-tinted sparkle particles */}
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '16%', left: '7%', animationDuration: '3.1s', animationDelay: '0s', backgroundColor: sparkleColors[0] }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '65%', left: '5%', animationDuration: '2.4s', animationDelay: '1.0s', backgroundColor: sparkleColors[1] }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '22%', right: '10%', animationDuration: '3.7s', animationDelay: '0.5s', backgroundColor: sparkleColors[2] }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '55%', right: '8%', animationDuration: '2.7s', animationDelay: '1.7s', backgroundColor: sparkleColors[1] }} />
+        <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full blur-sm pointer-events-none" style={{ top: '78%', left: '72%', animationDuration: '4.0s', animationDelay: '0.8s', backgroundColor: sparkleColors[0], opacity: 0.4 }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '40%', left: '52%', animationDuration: '2.9s', animationDelay: '2.1s', backgroundColor: sparkleColors[2] }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '10%', left: '40%', animationDuration: '3.4s', animationDelay: '1.4s', backgroundColor: sparkleColors[0] }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '28%', left: '86%', animationDuration: '2.5s', animationDelay: '2.7s', backgroundColor: sparkleColors[1] }} />
         <div className="relative space-y-4">
           {/* Badges row */}
           <div className="animate-fade-in-up flex items-center gap-2 flex-wrap" style={{ animationDelay: "0.05s" }}>
