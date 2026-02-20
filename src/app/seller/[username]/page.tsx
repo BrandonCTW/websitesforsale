@@ -4,7 +4,7 @@ import { users, listings } from "@/db/schema"
 import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { formatCurrency } from "@/lib/slug"
-import { LayoutGrid, ShieldCheck, Package } from "lucide-react"
+import { LayoutGrid, ShieldCheck, Package, Layers } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -53,6 +53,15 @@ export default async function SellerProfilePage({
           {/* Animated orbs */}
           <div className="animate-orb-1 absolute -top-8 -right-8 w-52 h-52 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
           <div className="animate-orb-2 absolute -bottom-8 -left-8 w-44 h-44 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/70 blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '7%', animationDuration: '3.2s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '62%', left: '5%', animationDuration: '2.5s', animationDelay: '1.1s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/65 blur-[0.5px] pointer-events-none" style={{ top: '20%', right: '9%', animationDuration: '3.8s', animationDelay: '0.4s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '58%', right: '7%', animationDuration: '2.8s', animationDelay: '1.8s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/20 blur-sm pointer-events-none" style={{ top: '75%', left: '68%', animationDuration: '4.1s', animationDelay: '0.9s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/65 pointer-events-none" style={{ top: '35%', left: '50%', animationDuration: '3.0s', animationDelay: '2.3s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-300/55 blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '38%', animationDuration: '3.5s', animationDelay: '1.5s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/55 pointer-events-none" style={{ top: '80%', right: '22%', animationDuration: '2.6s', animationDelay: '2.8s' }} />
           {/* Dot-grid texture */}
           <div
             className="absolute inset-0 opacity-[0.06]"
@@ -131,11 +140,12 @@ export default async function SellerProfilePage({
       ) : (
         <>
           <div className="flex items-center gap-4 mb-6">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-            <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
+            <div className="h-px flex-1 animate-section-divider" />
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest animate-section-label">
+              <Layers className="h-3 w-3 opacity-70" />
               {sellerListings.length} Active Listing{sellerListings.length !== 1 ? "s" : ""}
             </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "3.5s" }} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {sellerListings.map((listing, i) => (
