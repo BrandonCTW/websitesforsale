@@ -122,7 +122,13 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(circle, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
+}
+
+.dark body {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
 @keyframes orb-float-1 {
