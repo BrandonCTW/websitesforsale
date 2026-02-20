@@ -14,6 +14,13 @@ const CATEGORIES = [
   "newsletter", "community", "service-business", "other",
 ]
 
+const SORT_OPTIONS = [
+  { label: "Newest", value: "newest" },
+  { label: "Price ↑", value: "price-asc" },
+  { label: "Price ↓", value: "price-desc" },
+  { label: "Revenue ↓", value: "revenue-desc" },
+] as const
+
 const CATEGORY_DISPLAY: {
   key: string
   label: string
@@ -39,7 +46,8 @@ export default async function HomePage({
   searchParams: Promise<Record<string, string>>
 }) {
   const params = await searchParams
-  const { category, minPrice, maxPrice, q } = params
+  const { category, minPrice, maxPrice, q, sort } = params
+  const sortParam = sort ?? "newest"
 
   const conditions: Parameters<typeof and>[0][] = [eq(listings.status, "active")]
   if (category) conditions.push(eq(listings.category, category))
@@ -81,6 +89,19 @@ export default async function HomePage({
   const categoryCountMap = Object.fromEntries(
     categoryCountRows.map(({ category, total }) => [category, total])
   )
+
+  const sorted = [...filtered].sort((a, b) => {
+    switch (sortParam) {
+      case "price-asc":
+        return a.listing.askingPrice - b.listing.askingPrice
+      case "price-desc":
+        return b.listing.askingPrice - a.listing.askingPrice
+      case "revenue-desc":
+        return (b.listing.monthlyRevenue ?? 0) - (a.listing.monthlyRevenue ?? 0)
+      default: // newest
+        return new Date(b.listing.createdAt).getTime() - new Date(a.listing.createdAt).getTime()
+    }
+  })
 
   const images = filtered.length
     ? await db.select().from(listingImages).where(eq(listingImages.displayOrder, 0))
@@ -375,11 +396,38 @@ export default async function HomePage({
         </div>
       ) : (
         <>
-          <p className="text-sm text-muted-foreground mt-6 mb-2">
-            {filtered.length} listing{filtered.length !== 1 ? "s" : ""} found
-          </p>
+          <div className="mt-6 mb-4 flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              {sorted.length} listing{sorted.length !== 1 ? "s" : ""} found
+            </p>
+            <div className="flex items-center gap-1">
+              <span className="text-xs text-muted-foreground mr-1.5">Sort:</span>
+              {SORT_OPTIONS.map(({ label, value }) => {
+                const p = new URLSearchParams()
+                if (category) p.set("category", category)
+                if (minPrice) p.set("minPrice", minPrice)
+                if (maxPrice) p.set("maxPrice", maxPrice)
+                if (q) p.set("q", q)
+                if (value !== "newest") p.set("sort", value)
+                const isActive = sortParam === value
+                return (
+                  <Link
+                    key={value}
+                    href={p.size > 0 ? `/?${p}` : "/"}
+                    className={`rounded-md text-xs font-medium px-2.5 py-1.5 border transition-all duration-200 ${
+                      isActive
+                        ? "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300"
+                        : "border-transparent text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(({ listing, seller }, i) => (
+            {sorted.map(({ listing, seller }, i) => (
               <ListingCard
                 key={listing.id}
                 listing={listing}
