@@ -64,7 +64,12 @@ export function Navbar() {
               <Link href="/login" className="relative text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group">
                 <Button size="sm" variant="ghost">Log in</Button>
               </Link>
-              <Link href="/register" className="group">
+              <Link href="/register" className="group relative inline-block">
+                <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+                {/* Sparkle particles around the CTA */}
+                <span className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/80 blur-[0.5px] pointer-events-none" style={{ top: '-4px', left: '-6px', animationDuration: '3.1s', animationDelay: '0s' }} aria-hidden="true" />
+                <span className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/75 pointer-events-none" style={{ bottom: '-3px', right: '-5px', animationDuration: '2.6s', animationDelay: '1.2s' }} aria-hidden="true" />
+                <span className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '50%', right: '-8px', animationDuration: '3.4s', animationDelay: '0.7s' }} aria-hidden="true" />
                 <Button size="sm" className="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 border-0 text-white shadow-sm transition-shadow duration-200 hover:shadow-indigo-500/30 hover:shadow-md">
                   <span className="relative z-10">List your site</span>
                   <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
