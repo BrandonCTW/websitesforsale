@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { db } from "@/db"
 import { listings, listingImages, users } from "@/db/schema"
 import { eq, ne, and, count } from "drizzle-orm"
-import { Separator } from "@/components/ui/separator"
+
 import { formatCurrency, formatNumber } from "@/lib/slug"
 import { ContactForm } from "@/components/listings/ContactForm"
 import { ImageGallery } from "@/components/listings/ImageGallery"
@@ -302,7 +302,16 @@ export default async function ListingPage({
         />
       )}
 
-      <Separator />
+      {/* Animated gradient section divider */}
+      <div className="relative flex items-center gap-3 py-1">
+        <div className="h-px flex-1 rounded-full opacity-[0.35]" style={{ background: `linear-gradient(to right, transparent, ${sparkleColors[0]}, transparent)` }} />
+        <div className="flex items-center gap-1.5 shrink-0">
+          <div className="animate-sparkle w-1 h-1 rounded-full pointer-events-none" style={{ backgroundColor: sparkleColors[2], animationDuration: '3.2s', animationDelay: '0s', opacity: 0.6 }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: sparkleColors[0], opacity: 0.75 }} />
+          <div className="animate-sparkle w-1 h-1 rounded-full pointer-events-none" style={{ backgroundColor: sparkleColors[2], animationDuration: '2.8s', animationDelay: '0.9s', opacity: 0.6 }} />
+        </div>
+        <div className="h-px flex-1 rounded-full opacity-[0.35]" style={{ background: `linear-gradient(to right, transparent, ${sparkleColors[0]}, transparent)` }} />
+      </div>
 
       {/* Live URL */}
       <div className="animate-on-scroll relative overflow-hidden rounded-xl border border-border/60 bg-muted/30 px-5 py-4 flex items-center gap-3 hover:border-sky-200 dark:hover:border-sky-800/60 hover:shadow-sm transition-all duration-200">
@@ -416,7 +425,16 @@ export default async function ListingPage({
       {/* FAQs */}
       {listing.faqs && listing.faqs.length > 0 && (
         <>
-          <Separator />
+          {/* Animated gradient section divider */}
+          <div className="relative flex items-center gap-3 py-1">
+            <div className="h-px flex-1 rounded-full opacity-[0.35]" style={{ background: `linear-gradient(to right, transparent, ${sparkleColors[0]}, transparent)` }} />
+            <div className="flex items-center gap-1.5 shrink-0">
+              <div className="animate-sparkle w-1 h-1 rounded-full pointer-events-none" style={{ backgroundColor: sparkleColors[2], animationDuration: '3.4s', animationDelay: '0.3s', opacity: 0.6 }} />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: sparkleColors[0], opacity: 0.75 }} />
+              <div className="animate-sparkle w-1 h-1 rounded-full pointer-events-none" style={{ backgroundColor: sparkleColors[2], animationDuration: '2.6s', animationDelay: '1.2s', opacity: 0.6 }} />
+            </div>
+            <div className="h-px flex-1 rounded-full opacity-[0.35]" style={{ background: `linear-gradient(to right, transparent, ${sparkleColors[0]}, transparent)` }} />
+          </div>
           <div className="relative">
             {/* Sparkle particles near FAQ heading */}
             <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/65 blur-[0.5px] pointer-events-none" style={{ top: '6px', left: '2%', animationDuration: '3.3s', animationDelay: '0s' }} />
@@ -450,7 +468,16 @@ export default async function ListingPage({
         </>
       )}
 
-      <Separator />
+      {/* Animated gradient section divider */}
+      <div className="relative flex items-center gap-3 py-1">
+        <div className="h-px flex-1 rounded-full opacity-[0.35]" style={{ background: `linear-gradient(to right, transparent, ${sparkleColors[0]}, transparent)` }} />
+        <div className="flex items-center gap-1.5 shrink-0">
+          <div className="animate-sparkle w-1 h-1 rounded-full pointer-events-none" style={{ backgroundColor: sparkleColors[2], animationDuration: '3.0s', animationDelay: '0.5s', opacity: 0.6 }} />
+          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: sparkleColors[0], opacity: 0.75 }} />
+          <div className="animate-sparkle w-1 h-1 rounded-full pointer-events-none" style={{ backgroundColor: sparkleColors[2], animationDuration: '3.6s', animationDelay: '1.5s', opacity: 0.6 }} />
+        </div>
+        <div className="h-px flex-1 rounded-full opacity-[0.35]" style={{ background: `linear-gradient(to right, transparent, ${sparkleColors[0]}, transparent)` }} />
+      </div>
 
       {/* Related listings */}
       {relatedRows.length > 0 && (
