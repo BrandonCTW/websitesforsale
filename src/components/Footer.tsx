@@ -7,9 +7,9 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 pt-10 pb-12">
 
         {/* Trust stats band */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 pb-10 border-b border-white/[0.06]">
-          <div className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.05] transition-colors">
-            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+        <div className="animate-on-scroll grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 pb-10 border-b border-white/[0.06]">
+          <div className="group flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 hover:border-white/[0.12] transition-all duration-200 cursor-default">
+            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-200">
               <DollarSign className="h-4 w-4 text-emerald-400" />
             </div>
             <div>
@@ -17,8 +17,8 @@ export function Footer() {
               <p className="text-xs text-slate-500 mt-0.5">in broker fees, ever</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.05] transition-colors">
-            <div className="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0">
+          <div className="group flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 hover:border-white/[0.12] transition-all duration-200 cursor-default">
+            <div className="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-indigo-500/20 transition-all duration-200">
               <LayoutGrid className="h-4 w-4 text-indigo-400" />
             </div>
             <div>
@@ -26,8 +26,8 @@ export function Footer() {
               <p className="text-xs text-slate-500 mt-0.5">website categories</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.05] transition-colors">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500/10 to-emerald-500/10 flex items-center justify-center shrink-0">
+          <div className="group flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.06] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 hover:border-white/[0.12] transition-all duration-200 cursor-default">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500/10 to-emerald-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:from-indigo-500/20 group-hover:to-emerald-500/20 transition-all duration-200">
               <ArrowRightLeft className="h-4 w-4 text-indigo-400" />
             </div>
             <div>
@@ -37,11 +37,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+        <div className="animate-on-scroll grid grid-cols-1 sm:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="space-y-3">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-xs font-bold shrink-0">
+            <Link href="/" className="group flex items-center gap-2 font-bold text-lg tracking-tight">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-xs font-bold shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3">
                 W
               </span>
               <span className="bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
@@ -58,23 +58,27 @@ export function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500">Buyers</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <Link href="/" className="group relative inline-block hover:text-white transition-colors duration-200">
                   Browse Listings
+                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-400 to-emerald-400 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
               <li>
-                <Link href="/?category=saas" className="hover:text-white transition-colors">
+                <Link href="/?category=saas" className="group relative inline-block hover:text-white transition-colors duration-200">
                   SaaS &amp; Apps
+                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-400 to-emerald-400 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
               <li>
-                <Link href="/?category=content-site" className="hover:text-white transition-colors">
+                <Link href="/?category=content-site" className="group relative inline-block hover:text-white transition-colors duration-200">
                   Content Sites
+                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-400 to-emerald-400 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
               <li>
-                <Link href="/?category=ecommerce" className="hover:text-white transition-colors">
+                <Link href="/?category=ecommerce" className="group relative inline-block hover:text-white transition-colors duration-200">
                   eCommerce
+                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-400 to-emerald-400 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
             </ul>
@@ -85,13 +89,15 @@ export function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-500">Sellers</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/register" className="hover:text-white transition-colors">
+                <Link href="/register" className="group relative inline-block hover:text-white transition-colors duration-200">
                   List Your Site
+                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-400 to-emerald-400 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="hover:text-white transition-colors">
+                <Link href="/login" className="group relative inline-block hover:text-white transition-colors duration-200">
                   Seller Dashboard
+                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-400 to-emerald-400 transition-all duration-300 group-hover:w-full" />
                 </Link>
               </li>
             </ul>
