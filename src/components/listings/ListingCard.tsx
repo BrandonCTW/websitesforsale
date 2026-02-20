@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
-import { DollarSign, TrendingUp, Eye, Clock, Globe } from "lucide-react"
+import { DollarSign, TrendingUp, Eye, Clock, Globe, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
 
 function isNewListing(createdAt: Date | string): boolean {
   const created = new Date(createdAt)
@@ -19,6 +19,17 @@ const CATEGORY_LABELS: Record<string, string> = {
   "community": "Community",
   "service-business": "Service Business",
   "other": "Other",
+}
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  "content-site": FileText,
+  "saas": Code2,
+  "ecommerce": ShoppingCart,
+  "tool-or-app": Wrench,
+  "newsletter": Mail,
+  "community": Users,
+  "service-business": Briefcase,
+  "other": LayoutGrid,
 }
 
 const CATEGORY_STYLES: Record<string, string> = {
@@ -54,6 +65,7 @@ export function ListingCard({
       : null
 
   const showNewBadge = isNewListing(listing.createdAt)
+  const CategoryIcon = CATEGORY_ICONS[listing.category] ?? LayoutGrid
 
   return (
     <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.08}s` }}>
@@ -100,7 +112,8 @@ export function ListingCard({
             <h2 className="font-semibold leading-snug group-hover:underline line-clamp-2">
               {listing.title}
             </h2>
-            <span className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${CATEGORY_STYLES[listing.category] ?? CATEGORY_STYLES["other"]}`}>
+            <span className={`shrink-0 inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full ${CATEGORY_STYLES[listing.category] ?? CATEGORY_STYLES["other"]}`}>
+              <CategoryIcon className="h-3 w-3 shrink-0" />
               {CATEGORY_LABELS[listing.category] ?? listing.category}
             </span>
           </div>
