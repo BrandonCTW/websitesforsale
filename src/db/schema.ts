@@ -44,6 +44,7 @@ export const listings = pgTable("listings", {
   reasonForSelling: text("reason_for_selling").notNull(),
   includedAssets: text("included_assets"),
   status: text("status").notNull().default("active"), // active | under_offer | sold | unpublished
+  faqs: json("faqs").$type<Array<{ q: string; a: string }>>().default([]),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 })

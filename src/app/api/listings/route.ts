@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
   const {
     title, url, description, category, askingPrice,
     monthlyRevenue, monthlyProfit, monthlyTraffic, ageMonths,
-    monetization, techStack, reasonForSelling, includedAssets,
+    monetization, techStack, reasonForSelling, includedAssets, faqs,
   } = body
 
   if (!title || !url || !description || !category || !askingPrice || !ageMonths || !reasonForSelling) {
@@ -71,6 +71,7 @@ export async function POST(req: NextRequest) {
       techStack: techStack ?? [],
       reasonForSelling,
       includedAssets: includedAssets ?? null,
+      faqs: faqs ?? [],
       status: "active",
     })
     .returning()
