@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { db } from "@/db"
 import { listings, listingImages, users } from "@/db/schema"
-import { eq, ne, and } from "drizzle-orm"
+import { eq, ne, and, count } from "drizzle-orm"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency, formatNumber } from "@/lib/slug"
@@ -69,6 +69,16 @@ export default async function ListingPage({
     ? await db.select().from(listingImages).where(eq(listingImages.displayOrder, 0))
     : []
   const relatedImageMap = Object.fromEntries(relatedImages.map((img) => [img.listingId, img.url]))
+
+  const [{ sellerListingCount }] = await db
+    .select({ sellerListingCount: count() })
+    .from(listings)
+    .where(and(eq(listings.sellerId, listing.sellerId), eq(listings.status, "active")))
+
+  const sellerJoinDate = new Date(seller.createdAt).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  })
 
   const age =
     listing.ageMonths >= 12
@@ -291,6 +301,42 @@ export default async function ListingPage({
           </div>
         </>
       )}
+
+      {/* Seller card */}
+      <div className="rounded-xl border border-border/60 bg-card overflow-hidden">
+        <div className="relative h-12 bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.15)_0%,_transparent_60%)]" />
+        </div>
+        <div className="px-5 pb-5">
+          <div className="flex items-end gap-3 -mt-6 mb-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white text-lg font-bold ring-2 ring-background shrink-0">
+              {seller.username[0].toUpperCase()}
+            </div>
+            <div className="pb-0.5">
+              <Link
+                href={`/seller/${seller.username}`}
+                className="font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              >
+                {seller.username}
+              </Link>
+              <p className="text-xs text-muted-foreground">Member since {sellerJoinDate}</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              <span className="font-medium text-foreground">{sellerListingCount}</span>{" "}
+              active listing{sellerListingCount !== 1 ? "s" : ""}
+            </p>
+            <Link
+              href={`/seller/${seller.username}`}
+              className="inline-flex items-center gap-1 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+            >
+              View profile
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Contact form */}
       {listing.status === "active" ? (
