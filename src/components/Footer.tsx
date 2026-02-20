@@ -1,10 +1,42 @@
 import Link from "next/link"
-import { ShieldCheck, MessageCircle } from "lucide-react"
+import { ShieldCheck, MessageCircle, DollarSign, LayoutGrid, ArrowRightLeft } from "lucide-react"
 
 export function Footer() {
   return (
     <footer className="mt-20 border-t border-border/40 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-300">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 pt-10 pb-12">
+
+        {/* Trust stats band */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 pb-10 border-b border-white/[0.06]">
+          <div className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.05] transition-colors">
+            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+              <DollarSign className="h-4 w-4 text-emerald-400" />
+            </div>
+            <div>
+              <p className="text-xl font-bold text-white leading-none">$0</p>
+              <p className="text-xs text-slate-500 mt-0.5">in broker fees, ever</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.05] transition-colors">
+            <div className="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center shrink-0">
+              <LayoutGrid className="h-4 w-4 text-indigo-400" />
+            </div>
+            <div>
+              <p className="text-xl font-bold text-white leading-none">8</p>
+              <p className="text-xs text-slate-500 mt-0.5">website categories</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3.5 p-4 rounded-xl bg-white/[0.03] border border-white/[0.07] hover:bg-white/[0.05] transition-colors">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500/10 to-emerald-500/10 flex items-center justify-center shrink-0">
+              <ArrowRightLeft className="h-4 w-4 text-indigo-400" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white leading-snug">100% Direct</p>
+              <p className="text-xs text-slate-500 mt-0.5">buyer meets seller</p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
           {/* Brand */}
           <div className="space-y-3">
