@@ -280,7 +280,7 @@ export function ListingCard({
                 <Clock className="h-3 w-3 shrink-0" />
                 Age
               </p>
-              <p className="font-semibold">{age}</p>
+              <p className="font-semibold animate-age-gradient">{age}</p>
             </div>
           </div>
 
