@@ -84,7 +84,7 @@ export default async function InquiriesPage() {
         </div>
       ) : (
         <div className="space-y-3">
-          {rows.map(({ inquiry, listing }) => {
+          {rows.map(({ inquiry, listing }, index) => {
             const initials = inquiry.buyerName
               .split(" ")
               .map((n) => n[0])
@@ -95,11 +95,14 @@ export default async function InquiriesPage() {
             return (
               <div
                 key={inquiry.id}
-                className="group rounded-xl border border-l-4 border-l-indigo-400 bg-card p-5 transition-all duration-200 hover:bg-indigo-50/30 dark:hover:bg-indigo-950/20 hover:shadow-md"
+                className="group relative rounded-xl border border-l-4 border-l-indigo-400 bg-card p-5 transition-all duration-200 hover:bg-indigo-50/30 dark:hover:bg-indigo-950/20 hover:shadow-md animate-fade-in-up overflow-hidden"
+                style={{ animationDelay: `${index * 0.07}s` }}
               >
+                {/* Shine sweep on hover */}
+                <div className="card-shine absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none z-10" />
                 <div className="flex items-start gap-4 flex-wrap">
                   {/* Avatar */}
-                  <div className="shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white text-sm font-semibold shadow-sm">
+                  <div className="shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white text-sm font-semibold shadow-sm transition-transform duration-200 group-hover:scale-110">
                     {initials}
                   </div>
 
