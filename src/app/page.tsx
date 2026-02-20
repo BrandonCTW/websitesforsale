@@ -212,7 +212,7 @@ export default async function HomePage({
       <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-6">
           <div className="h-px flex-1 animate-section-divider" />
-          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">How it works</span>
+          <span className="text-[11px] font-bold uppercase tracking-widest animate-section-label">How it works</span>
           <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "3.5s" }} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 sm:gap-2">
@@ -340,7 +340,7 @@ export default async function HomePage({
       <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-6">
           <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "1.2s" }} />
-          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">vs. traditional brokers</span>
+          <span className="text-[11px] font-bold uppercase tracking-widest animate-section-label">vs. traditional brokers</span>
           <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "4.7s" }} />
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -422,7 +422,7 @@ export default async function HomePage({
       <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-5">
           <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "2.4s" }} />
-          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Browse by category</span>
+          <span className="text-[11px] font-bold uppercase tracking-widest animate-section-label">Browse by category</span>
           <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "5.9s" }} />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

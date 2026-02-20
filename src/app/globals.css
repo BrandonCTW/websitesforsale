@@ -566,3 +566,19 @@
   background-size: 200% 100%;
   animation: nav-border-flow 5s linear infinite;
 }
+
+.animate-section-label {
+  background-image: linear-gradient(
+    to right,
+    rgba(148, 163, 184, 0.85),
+    #818cf8,
+    rgba(52, 211, 153, 0.9),
+    #818cf8,
+    rgba(148, 163, 184, 0.85)
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-gradient-flow 10s linear infinite;
+}
