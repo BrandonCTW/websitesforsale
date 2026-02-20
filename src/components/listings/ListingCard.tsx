@@ -171,6 +171,18 @@ export function ListingCard({
       <Card className={`h-full hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 overflow-hidden relative ${CARD_HOVER_STYLES[listing.category] ?? CARD_HOVER_STYLES["other"]}${dealTier?.label === "Great Deal" ? " animate-deal-glow" : ""}`}>
         {/* Shine sweep overlay */}
         <div className="card-shine absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white/[0.09] to-transparent pointer-events-none z-20" />
+        {/* Card body sparkle particles — category-tinted, always present */}
+        {(() => {
+          const sc = CATEGORY_SPARKLE_COLORS[listing.category] ?? CATEGORY_SPARKLE_COLORS["other"]
+          const d = (index * 0.43) % 2.5
+          return (
+            <>
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none z-10" style={{ top: '62%', right: '5%', animationDuration: '3.3s', animationDelay: `${d}s`, backgroundColor: sc[0] }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none z-10" style={{ top: '78%', left: '4%', animationDuration: '2.8s', animationDelay: `${(d + 1.2) % 3}s`, backgroundColor: sc[2] }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none z-10" style={{ bottom: '8%', right: '18%', animationDuration: '3.7s', animationDelay: `${(d + 0.7) % 2.8}s`, backgroundColor: sc[1] }} />
+            </>
+          )
+        })()}
         {imageUrl ? (
           <div className="aspect-video overflow-hidden rounded-t-lg bg-muted relative">
             <img
