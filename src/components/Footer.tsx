@@ -3,8 +3,20 @@ import { ShieldCheck, MessageCircle, DollarSign, LayoutGrid, ArrowRightLeft } fr
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-border/40 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-300">
-      <div className="max-w-6xl mx-auto px-4 pt-10 pb-12">
+    <footer className="mt-20 border-t border-border/40 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-300 relative overflow-hidden">
+      {/* Ambient orb blobs */}
+      <div className="animate-orb-1 absolute -top-10 -right-10 w-72 h-72 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+      <div className="animate-orb-2 absolute -bottom-10 -left-10 w-64 h-64 rounded-full bg-emerald-500/8 blur-3xl pointer-events-none" />
+      {/* Sparkle particles */}
+      <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/70 blur-[0.5px] pointer-events-none" style={{ top: '12%', left: '6%', animationDuration: '3.4s', animationDelay: '0s' }} />
+      <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/60 pointer-events-none" style={{ top: '60%', left: '4%', animationDuration: '2.7s', animationDelay: '1.3s' }} />
+      <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/65 blur-[0.5px] pointer-events-none" style={{ top: '15%', right: '8%', animationDuration: '3.9s', animationDelay: '0.6s' }} />
+      <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '55%', right: '6%', animationDuration: '2.9s', animationDelay: '1.9s' }} />
+      <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/20 blur-sm pointer-events-none" style={{ top: '75%', left: '70%', animationDuration: '4.3s', animationDelay: '0.8s' }} />
+      <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/65 pointer-events-none" style={{ top: '38%', left: '52%', animationDuration: '3.1s', animationDelay: '2.4s' }} />
+      <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-300/55 blur-[0.5px] pointer-events-none" style={{ top: '88%', left: '38%', animationDuration: '3.6s', animationDelay: '1.6s' }} />
+      <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/55 pointer-events-none" style={{ top: '28%', left: '85%', animationDuration: '2.8s', animationDelay: '3.0s' }} />
+      <div className="max-w-6xl mx-auto px-4 pt-10 pb-12 relative">
 
         {/* Trust stats band */}
         <div className="animate-on-scroll grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 pb-10 border-b border-white/[0.06]">
