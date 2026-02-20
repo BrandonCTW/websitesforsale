@@ -4,13 +4,32 @@ import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
-import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake } from "lucide-react"
+import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
 const CATEGORIES = [
   "content-site", "saas", "ecommerce", "tool-or-app",
   "newsletter", "community", "service-business", "other",
+]
+
+const CATEGORY_DISPLAY: {
+  key: string
+  label: string
+  Icon: LucideIcon
+  bg: string
+  iconCls: string
+  activeBorder: string
+  hoverBorder: string
+}[] = [
+  { key: "content-site",     label: "Content Sites",   Icon: FileText,    bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",           iconCls: "text-sky-500 dark:text-sky-400",      activeBorder: "border-sky-400 dark:border-sky-600",     hoverBorder: "hover:border-sky-200 dark:hover:border-sky-800" },
+  { key: "saas",             label: "SaaS",            Icon: Code2,       bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", iconCls: "text-violet-500 dark:text-violet-400", activeBorder: "border-violet-400 dark:border-violet-600", hoverBorder: "hover:border-violet-200 dark:hover:border-violet-800" },
+  { key: "ecommerce",        label: "eCommerce",       Icon: ShoppingCart, bg: "from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/30", iconCls: "text-orange-500 dark:text-orange-400", activeBorder: "border-orange-400 dark:border-orange-600", hoverBorder: "hover:border-orange-200 dark:hover:border-orange-800" },
+  { key: "tool-or-app",      label: "Tools & Apps",    Icon: Wrench,      bg: "from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/30",         iconCls: "text-teal-500 dark:text-teal-400",     activeBorder: "border-teal-400 dark:border-teal-600",    hoverBorder: "hover:border-teal-200 dark:hover:border-teal-800" },
+  { key: "newsletter",       label: "Newsletters",     Icon: Mail,        bg: "from-rose-50 to-rose-100 dark:from-rose-950/40 dark:to-rose-900/30",         iconCls: "text-rose-500 dark:text-rose-400",     activeBorder: "border-rose-400 dark:border-rose-600",    hoverBorder: "hover:border-rose-200 dark:hover:border-rose-800" },
+  { key: "community",        label: "Community",       Icon: Users,       bg: "from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/30", iconCls: "text-emerald-500 dark:text-emerald-400", activeBorder: "border-emerald-400 dark:border-emerald-600", hoverBorder: "hover:border-emerald-200 dark:hover:border-emerald-800" },
+  { key: "service-business", label: "Service Biz",     Icon: Briefcase,   bg: "from-amber-50 to-amber-100 dark:from-amber-950/40 dark:to-amber-900/30",     iconCls: "text-amber-500 dark:text-amber-400",   activeBorder: "border-amber-400 dark:border-amber-600",  hoverBorder: "hover:border-amber-200 dark:hover:border-amber-800" },
+  { key: "other",            label: "Other",           Icon: LayoutGrid,  bg: "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",     iconCls: "text-slate-500 dark:text-slate-400",   activeBorder: "border-slate-400 dark:border-slate-500",  hoverBorder: "hover:border-slate-200 dark:hover:border-slate-700" },
 ]
 
 export default async function HomePage({
@@ -179,6 +198,36 @@ export default async function HomePage({
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Browse by Category */}
+      <div className="mb-10">
+        <div className="flex items-center gap-4 mb-5">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Browse by category</span>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder }) => {
+            const isActive = category === key
+            return (
+              <Link
+                key={key}
+                href={isActive ? "/" : `/?category=${key}`}
+                className={`group flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
+                  isActive
+                    ? `${activeBorder} shadow-sm ring-1 ring-current ring-opacity-20`
+                    : `border-slate-100 dark:border-slate-800 ${hoverBorder} hover:shadow-sm`
+                }`}
+              >
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/80 dark:bg-white/5 shadow-sm group-hover:scale-110 group-hover:shadow-md transition-all duration-200">
+                  <Icon className={`w-5 h-5 ${iconCls}`} />
+                </div>
+                <span className="text-xs font-semibold text-center leading-tight">{label}</span>
+              </Link>
+            )
+          })}
         </div>
       </div>
 
