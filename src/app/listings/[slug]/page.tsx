@@ -492,13 +492,24 @@ export default async function ListingPage({
       )}
 
       {/* Seller card */}
-      <div className="rounded-xl border border-border/60 bg-card overflow-hidden">
-        <div className="relative h-12 bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500">
+      <div className="animate-on-scroll group rounded-xl border border-border/60 bg-card overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/10 dark:hover:shadow-indigo-900/25 hover:border-indigo-200 dark:hover:border-indigo-800/60 animate-seller-card-glow">
+        <div className="relative h-14 bg-gradient-to-r from-indigo-600 via-indigo-500 to-emerald-500 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.15)_0%,_transparent_60%)]" />
+          {/* Ambient orb */}
+          <div className="animate-orb-1 absolute -top-4 -right-4 w-20 h-20 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+          {/* Shimmer sweep */}
+          <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-white/70 blur-[0.5px] pointer-events-none" style={{ top: '20%', left: '6%', animationDuration: '3.2s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/80 pointer-events-none" style={{ top: '65%', left: '4%', animationDuration: '2.5s', animationDelay: '1.3s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-200/70 blur-[0.5px] pointer-events-none" style={{ top: '22%', right: '10%', animationDuration: '3.8s', animationDelay: '0.6s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '68%', right: '8%', animationDuration: '2.7s', animationDelay: '1.9s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/25 blur-sm pointer-events-none" style={{ top: '40%', left: '48%', animationDuration: '4.1s', animationDelay: '0.8s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-300/75 pointer-events-none" style={{ top: '28%', left: '72%', animationDuration: '2.9s', animationDelay: '2.4s' }} />
         </div>
         <div className="px-5 pb-5">
           <div className="flex items-end gap-3 -mt-6 mb-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white text-lg font-bold ring-2 ring-background shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white text-lg font-bold ring-2 ring-background shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-indigo-500/30">
               {seller.username[0].toUpperCase()}
             </div>
             <div className="pb-0.5">
@@ -521,7 +532,7 @@ export default async function ListingPage({
               className="inline-flex items-center gap-1 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
             >
               View profile
-              <ArrowRight className="h-3 w-3" />
+              <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
