@@ -359,39 +359,49 @@ export default async function ListingPage({
 
       {/* Tags */}
       {(listing.techStack?.length || listing.monetization?.length) ? (
-        <div className="space-y-4">
-          {listing.techStack?.length ? (
-            <div>
-              <h2 className="font-semibold mb-2.5 text-sm uppercase tracking-wide text-muted-foreground">Tech Stack</h2>
-              <div className="flex flex-wrap gap-2">
-                {listing.techStack.map((t) => (
-                  <span
-                    key={t}
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${getTagStyle(t, TECH_BADGE_COLORS)}`}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 shrink-0" />
-                    {t}
-                  </span>
-                ))}
+        <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-indigo-200 dark:hover:border-indigo-800/60 hover:shadow-sm transition-all duration-200">
+          <div className="space-y-5">
+            {listing.techStack?.length ? (
+              <div>
+                <h2 className="font-semibold mb-3 text-sm uppercase tracking-wide text-muted-foreground flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 dark:bg-indigo-500 shrink-0" />
+                  Tech Stack
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {listing.techStack.map((t, i) => (
+                    <span
+                      key={t}
+                      className={`animate-tag-pop inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${getTagStyle(t, TECH_BADGE_COLORS)}`}
+                      style={{ animationDelay: `${i * 0.05}s` }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 shrink-0" />
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : null}
-          {listing.monetization?.length ? (
-            <div>
-              <h2 className="font-semibold mb-2.5 text-sm uppercase tracking-wide text-muted-foreground">Monetization</h2>
-              <div className="flex flex-wrap gap-2">
-                {listing.monetization.map((m) => (
-                  <span
-                    key={m}
-                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${getTagStyle(m, MONETIZATION_BADGE_COLORS)}`}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 shrink-0" />
-                    {m}
-                  </span>
-                ))}
+            ) : null}
+            {listing.monetization?.length ? (
+              <div>
+                <h2 className="font-semibold mb-3 text-sm uppercase tracking-wide text-muted-foreground flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 dark:bg-emerald-500 shrink-0" />
+                  Monetization
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {listing.monetization.map((m, i) => (
+                    <span
+                      key={m}
+                      className={`animate-tag-pop inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${getTagStyle(m, MONETIZATION_BADGE_COLORS)}`}
+                      style={{ animationDelay: `${(i + (listing.techStack?.length ?? 0)) * 0.05}s` }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 shrink-0" />
+                      {m}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
       ) : null}
 
