@@ -55,6 +55,17 @@ const CATEGORY_SPARKLES: Record<string, [string, string]> = {
   "other":            ["rgba(148,163,184,0.50)",  "rgba(99,102,241,0.40)"],
 }
 
+const TICKER_STYLES: Record<string, { dot: string; price: string; badge: string }> = {
+  "content-site":     { dot: "bg-sky-400/70",     price: "text-sky-300",     badge: "bg-sky-400/15" },
+  "saas":             { dot: "bg-violet-400/70",   price: "text-violet-300",  badge: "bg-violet-400/15" },
+  "ecommerce":        { dot: "bg-orange-400/70",   price: "text-orange-300",  badge: "bg-orange-400/15" },
+  "tool-or-app":      { dot: "bg-teal-400/70",     price: "text-teal-300",    badge: "bg-teal-400/15" },
+  "newsletter":       { dot: "bg-rose-400/70",     price: "text-rose-300",    badge: "bg-rose-400/15" },
+  "community":        { dot: "bg-emerald-400/70",  price: "text-emerald-300", badge: "bg-emerald-400/15" },
+  "service-business": { dot: "bg-amber-400/70",    price: "text-amber-300",   badge: "bg-amber-400/15" },
+  "other":            { dot: "bg-slate-400/70",    price: "text-slate-300",   badge: "bg-slate-400/15" },
+}
+
 export default async function HomePage({
   searchParams,
 }: {
@@ -205,13 +216,16 @@ export default async function HomePage({
                 <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-900/90 to-transparent z-10 pointer-events-none" />
                 <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-900/90 to-transparent z-10 pointer-events-none" />
                 <div className="animate-marquee flex gap-8 w-max hover:[animation-play-state:paused]">
-                  {[...rows, ...rows].map(({ listing }, i) => (
-                    <span key={i} className="inline-flex items-center gap-2 shrink-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/50 shrink-0" />
-                      <span className="text-[11px] text-slate-300 font-medium max-w-[150px] truncate">{listing.title}</span>
-                      <span className="text-[11px] font-bold text-emerald-400">{formatCurrency(listing.askingPrice)}</span>
-                    </span>
-                  ))}
+                  {[...rows, ...rows].map(({ listing }, i) => {
+                    const ts = TICKER_STYLES[listing.category] ?? TICKER_STYLES["other"]
+                    return (
+                      <span key={i} className="inline-flex items-center gap-2 shrink-0">
+                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${ts.dot}`} />
+                        <span className="text-[11px] text-slate-300 font-medium max-w-[150px] truncate">{listing.title}</span>
+                        <span className={`text-[11px] font-bold rounded px-1.5 py-0.5 ${ts.price} ${ts.badge}`}>{formatCurrency(listing.askingPrice)}</span>
+                      </span>
+                    )
+                  })}
                 </div>
               </div>
             )}
