@@ -5,7 +5,7 @@ import { ListingCard } from "@/components/listings/ListingCard"
 import { FeaturedListingCard } from "@/components/listings/FeaturedListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
-import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
+import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, Check, X, type LucideIcon } from "lucide-react"
 import { formatCurrency } from "@/lib/slug"
 
 export const dynamic = "force-dynamic"
@@ -311,6 +311,88 @@ export default async function HomePage({
                   <span><span className="font-medium text-foreground">3 yrs</span> old</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Broker vs Direct comparison */}
+      <div className="mb-10">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">vs. traditional brokers</span>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {/* WebsitesForSale card */}
+          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 to-emerald-500" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.2)_0%,_transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.12)_0%,_transparent_60%)]" />
+            <div className="relative">
+              <div className="flex items-center gap-2.5 mb-5">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-sm font-bold shrink-0">W</span>
+                <span className="font-bold text-white text-base">WebsitesForSale</span>
+                <span className="ml-auto text-[10px] font-bold bg-emerald-400/15 text-emerald-400 border border-emerald-400/25 px-2.5 py-1 rounded-full tracking-wide">FREE</span>
+              </div>
+              <div className="space-y-3.5">
+                {(
+                  [
+                    { label: "Commission fee", value: "0%" },
+                    { label: "Listing fee", value: "Always free" },
+                    { label: "Direct seller contact", value: true },
+                    { label: "AI listing generation", value: true },
+                    { label: "Time to list", value: "30 seconds" },
+                  ] as { label: string; value: string | boolean }[]
+                ).map(({ label, value }) => (
+                  <div key={label} className="flex items-center justify-between gap-3">
+                    <span className="text-sm text-slate-300">{label}</span>
+                    {typeof value === "boolean" ? (
+                      <span className="inline-flex items-center gap-1 text-emerald-400 text-sm font-semibold shrink-0">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-400/15 shrink-0">
+                          <Check className="w-3 h-3" />
+                        </span>
+                        Yes
+                      </span>
+                    ) : (
+                      <span className="text-sm font-bold text-emerald-400 shrink-0">{value}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Traditional broker card */}
+          <div className="relative rounded-2xl overflow-hidden bg-muted/50 dark:bg-slate-900/40 border border-border/60 p-6">
+            <div className="flex items-center gap-2.5 mb-5">
+              <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-muted-foreground/15 text-muted-foreground text-sm font-bold shrink-0">B</span>
+              <span className="font-bold text-muted-foreground text-base">Traditional Broker</span>
+            </div>
+            <div className="space-y-3.5">
+              {(
+                [
+                  { label: "Commission fee", value: "10–15%" },
+                  { label: "Listing fee", value: "$49–$299" },
+                  { label: "Direct seller contact", value: false },
+                  { label: "AI listing generation", value: false },
+                  { label: "Time to list", value: "Days to weeks" },
+                ] as { label: string; value: string | boolean }[]
+              ).map(({ label, value }) => (
+                <div key={label} className="flex items-center justify-between gap-3">
+                  <span className="text-sm text-muted-foreground">{label}</span>
+                  {typeof value === "boolean" ? (
+                    <span className="inline-flex items-center gap-1 text-muted-foreground/60 text-sm font-medium shrink-0">
+                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-400/10 shrink-0">
+                        <X className="w-3 h-3 text-red-400/80" />
+                      </span>
+                      No
+                    </span>
+                  ) : (
+                    <span className="text-sm font-semibold text-muted-foreground/70 shrink-0 line-through decoration-muted-foreground/40">{value}</span>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
