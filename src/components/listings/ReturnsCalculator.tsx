@@ -65,24 +65,39 @@ export function ReturnsCalculator({
   const maxProfit = Math.max(...years.map((y) => y.profit))
 
   return (
-    <div className="rounded-2xl border border-border/60 bg-card overflow-hidden">
-      {/* Header */}
-      <div className="px-5 py-4 border-b border-border/40 flex items-center gap-2.5">
-        <div className="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
-          <TrendingUp className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
+    <div className="animate-on-scroll animate-comparison-card-glow relative rounded-2xl overflow-hidden border border-indigo-200/60 dark:border-indigo-900/40">
+      {/* Colored top accent bar */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-violet-500 to-emerald-500 z-10" />
+
+      {/* Gradient header */}
+      <div className="relative bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-500 px-5 py-4 overflow-hidden">
+        {/* Ambient orb */}
+        <div className="animate-orb-1 absolute -top-4 -right-4 w-20 h-20 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+        {/* Shimmer sweep */}
+        <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+        {/* Sparkle particles */}
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-white/70 blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '6%', animationDuration: '3.2s', animationDelay: '0s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/80 pointer-events-none" style={{ top: '68%', left: '4%', animationDuration: '2.5s', animationDelay: '1.3s' }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-200/70 blur-[0.5px] pointer-events-none" style={{ top: '20%', right: '10%', animationDuration: '3.8s', animationDelay: '0.6s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '65%', right: '8%', animationDuration: '2.7s', animationDelay: '1.9s' }} />
+        <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/20 blur-sm pointer-events-none" style={{ top: '44%', left: '52%', animationDuration: '4.1s', animationDelay: '0.9s' }} />
+        <div className="relative flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center shrink-0">
+            <TrendingUp className="h-3.5 w-3.5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm text-white">3-Year Returns Calculator</h3>
+            <p className="text-xs text-indigo-100">Projected profit at different growth rates</p>
+          </div>
+          {!monthlyProfit && (
+            <span className="ml-auto text-[10px] text-indigo-200 bg-white/10 border border-white/15 px-2 py-0.5 rounded-full shrink-0">
+              ~40% margin estimate
+            </span>
+          )}
         </div>
-        <div>
-          <h3 className="font-semibold text-sm">3-Year Returns Calculator</h3>
-          <p className="text-xs text-muted-foreground">Projected profit at different growth rates</p>
-        </div>
-        {!monthlyProfit && (
-          <span className="ml-auto text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-            ~40% margin estimate
-          </span>
-        )}
       </div>
 
-      <div className="px-5 py-5 space-y-5">
+      <div className="bg-card px-5 py-5 space-y-5">
         {/* Growth scenario selector */}
         <div>
           <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-2.5">
@@ -96,14 +111,16 @@ export function ReturnsCalculator({
                 <button
                   key={s.label}
                   onClick={() => setScenarioIdx(i)}
-                  className={`flex flex-col items-center gap-0.5 py-2.5 px-2 rounded-xl border text-center transition-all duration-200 ${
+                  className={`group relative overflow-hidden flex flex-col items-center gap-0.5 py-2.5 px-2 rounded-xl border text-center transition-all duration-200 ${
                     isActive
                       ? st.active + " shadow-sm"
                       : "border-border/60 hover:border-border text-muted-foreground hover:text-foreground bg-muted/30"
                   }`}
                 >
-                  <span className="text-[11px] font-bold">{s.label}</span>
-                  <span className={`text-[10px] font-medium ${isActive ? "opacity-80" : "opacity-60"}`}>
+                  {/* Shine sweep on hover */}
+                  <span className="card-shine absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/[0.18] to-transparent pointer-events-none" />
+                  <span className="text-[11px] font-bold relative z-10">{s.label}</span>
+                  <span className={`text-[10px] font-medium relative z-10 ${isActive ? "opacity-80" : "opacity-60"}`}>
                     +{s.growth}%/yr
                   </span>
                 </button>
