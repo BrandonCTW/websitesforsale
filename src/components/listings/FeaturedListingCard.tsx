@@ -280,7 +280,12 @@ export function FeaturedListingCard({
           </div>
 
           {/* Right: Details */}
-          <div className="p-6 flex flex-col gap-4 justify-between">
+          <div className="p-6 flex flex-col gap-4 justify-between relative">
+            {/* Category-tinted sparkle particles */}
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '8%', right: '7%', animationDuration: '3.4s', animationDelay: '0.3s', backgroundColor: sparkleColors[0] }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '72%', right: '5%', animationDuration: '2.7s', animationDelay: '1.5s', backgroundColor: sparkleColors[1] }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '45%', left: '4%', animationDuration: '3.1s', animationDelay: '2.1s', backgroundColor: sparkleColors[2] }} />
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '88%', left: '6%', animationDuration: '3.8s', animationDelay: '0.8s', backgroundColor: sparkleColors[0] }} />
             <div className="space-y-3">
               {/* Category + deal tier badges */}
               <div className="flex items-center gap-2 flex-wrap">
@@ -373,9 +378,10 @@ export function FeaturedListingCard({
                   by <span className="font-medium text-foreground">{sellerUsername}</span>
                 </p>
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 group-hover:from-indigo-700 group-hover:to-indigo-600 text-white text-xs font-semibold px-4 py-2 shadow-sm transition-all">
-                View Listing
-                <ArrowRight className="h-3.5 w-3.5" />
+              <span className="relative overflow-hidden inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 group-hover:from-indigo-700 group-hover:to-indigo-600 text-white text-xs font-semibold px-4 py-2 shadow-sm transition-all">
+                <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                <span className="relative z-10">View Listing</span>
+                <ArrowRight className="h-3.5 w-3.5 relative z-10" />
               </span>
             </div>
           </div>
