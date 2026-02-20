@@ -358,6 +358,13 @@ export default async function HomePage({
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 to-emerald-500" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.2)_0%,_transparent_60%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.12)_0%,_transparent_60%)]" />
+            {/* Sparkle particles */}
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/70 blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '7%', animationDuration: '3.4s', animationDelay: '0s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/60 pointer-events-none" style={{ top: '62%', left: '5%', animationDuration: '2.6s', animationDelay: '1.3s' }} />
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/65 blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '8%', animationDuration: '3.9s', animationDelay: '0.6s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '72%', right: '6%', animationDuration: '2.8s', animationDelay: '1.9s' }} />
+            <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/20 blur-sm pointer-events-none" style={{ top: '45%', right: '14%', animationDuration: '4.3s', animationDelay: '0.9s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/65 pointer-events-none" style={{ top: '85%', left: '62%', animationDuration: '3.1s', animationDelay: '2.4s' }} />
             <div className="relative">
               <div className="flex items-center gap-2.5 mb-5">
                 <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-sm font-bold shrink-0">W</span>
