@@ -263,7 +263,7 @@ export function ListingCard({
                   <TrendingUp className="h-3 w-3 shrink-0" />
                   Monthly Revenue
                 </p>
-                <p className="font-semibold">{formatCurrency(listing.monthlyRevenue)}</p>
+                <p className="font-semibold animate-revenue-gradient">{formatCurrency(listing.monthlyRevenue)}</p>
               </div>
             ) : null}
             {listing.monthlyTraffic ? (
@@ -272,7 +272,7 @@ export function ListingCard({
                   <Eye className="h-3 w-3 shrink-0" />
                   Monthly Traffic
                 </p>
-                <p className="font-semibold">{formatNumber(listing.monthlyTraffic)}</p>
+                <p className="font-semibold animate-traffic-gradient">{formatNumber(listing.monthlyTraffic)}</p>
               </div>
             ) : null}
             <div>
