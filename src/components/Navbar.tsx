@@ -51,11 +51,19 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           {user ? (
             <>
-              <Link href="/dashboard/listings" className="relative text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group">
+              <Link href="/dashboard/listings" className="relative text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 group flex items-center gap-2">
+                {/* Gradient avatar chip */}
+                <div className="relative flex-shrink-0">
+                  <span className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/80 blur-[0.5px] pointer-events-none z-10" style={{ top: '-4px', left: '-3px', animationDuration: '3.1s', animationDelay: '0s' }} />
+                  <span className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/75 pointer-events-none z-10" style={{ bottom: '-3px', right: '-3px', animationDuration: '2.7s', animationDelay: '1.4s' }} />
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white text-[10px] font-bold shadow-sm ring-1 ring-white/20 transition-all duration-200 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-indigo-400/30">
+                    {user.username[0].toUpperCase()}
+                  </div>
+                </div>
                 Dashboard
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-300 group-hover:w-full" />
               </Link>
-              <Button size="sm" variant="outline" onClick={logout} className="transition-all duration-200 hover:border-indigo-300 hover:text-indigo-600">
+              <Button size="sm" variant="outline" onClick={logout} className="transition-all duration-200 hover:border-rose-300 hover:text-rose-600 dark:hover:border-rose-700 dark:hover:text-rose-400">
                 Log out
               </Button>
             </>
