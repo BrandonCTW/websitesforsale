@@ -616,3 +616,22 @@
 .animate-marker-glow-amber   { animation: marker-glow-amber 2.5s ease-in-out infinite; }
 .animate-marker-glow-orange  { animation: marker-glow-orange 2.5s ease-in-out infinite; }
 .animate-marker-glow-red     { animation: marker-glow-red 2.5s ease-in-out infinite; }
+
+@keyframes sell-cta-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(99,102,241,0.12),
+      0 8px 40px rgba(99,102,241,0.07),
+      0 2px 8px rgba(16,185,129,0.04);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1.5px rgba(99,102,241,0.32),
+      0 16px 64px rgba(99,102,241,0.16),
+      0 6px 28px rgba(16,185,129,0.10);
+  }
+}
+
+.animate-sell-cta-glow {
+  animation: sell-cta-glow 5s ease-in-out infinite;
+}

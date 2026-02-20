@@ -268,7 +268,15 @@ export default async function HomePage({
       </div>
 
       {/* Sell Your Site section */}
-      <div className="mb-10 animate-on-scroll rounded-2xl border border-indigo-200 dark:border-indigo-900/40 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 dark:from-indigo-950/30 dark:via-slate-900 dark:to-emerald-950/20 overflow-hidden">
+      <div className="mb-10 animate-on-scroll animate-sell-cta-glow relative rounded-2xl border border-indigo-200 dark:border-indigo-900/40 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 dark:from-indigo-950/30 dark:via-slate-900 dark:to-emerald-950/20 overflow-hidden">
+        {/* Sparkle particles */}
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '4%', animationDuration: '3.3s', animationDelay: '0s', backgroundColor: 'rgba(99,102,241,0.50)' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '66%', left: '3%', animationDuration: '2.7s', animationDelay: '1.2s', backgroundColor: 'rgba(165,180,252,0.65)' }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '5%', animationDuration: '3.8s', animationDelay: '0.5s', backgroundColor: 'rgba(16,185,129,0.50)' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '72%', right: '4%', animationDuration: '2.5s', animationDelay: '1.9s', backgroundColor: 'rgba(52,211,153,0.60)' }} />
+        <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full blur-sm pointer-events-none" style={{ top: '42%', left: '48%', animationDuration: '4.3s', animationDelay: '0.8s', backgroundColor: 'rgba(99,102,241,0.22)' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '28%', left: '20%', animationDuration: '3.1s', animationDelay: '2.4s', backgroundColor: 'rgba(16,185,129,0.55)' }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '80%', left: '38%', animationDuration: '3.5s', animationDelay: '1.6s', backgroundColor: 'rgba(99,102,241,0.40)' }} />
         <div className="grid md:grid-cols-2 gap-0">
           {/* Left: copy + CTA */}
           <div className="p-8 flex flex-col justify-center">
