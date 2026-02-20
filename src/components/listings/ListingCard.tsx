@@ -64,6 +64,17 @@ const CARD_HOVER_STYLES: Record<string, string> = {
   "other":            "hover:shadow-slate-200/70 dark:hover:shadow-slate-800/60 hover:border-slate-300/80 dark:hover:border-slate-700/60",
 }
 
+const CATEGORY_ACCENT: Record<string, string> = {
+  "content-site":     "from-sky-400 to-sky-500",
+  "saas":             "from-violet-400 to-violet-500",
+  "ecommerce":        "from-orange-400 to-orange-500",
+  "tool-or-app":      "from-teal-400 to-teal-500",
+  "newsletter":       "from-rose-400 to-rose-500",
+  "community":        "from-emerald-400 to-emerald-500",
+  "service-business": "from-amber-400 to-amber-500",
+  "other":            "from-slate-400 to-slate-500",
+}
+
 const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: string }> = {
   "content-site":       { bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",            radial: "rgba(14,165,233,0.14)",  icon: "text-sky-400 dark:text-sky-700" },
   "saas":               { bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", radial: "rgba(139,92,246,0.14)",  icon: "text-violet-400 dark:text-violet-700" },
@@ -100,7 +111,8 @@ export function ListingCard({
   const CategoryIcon = CATEGORY_ICONS[listing.category] ?? LayoutGrid
 
   return (
-    <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.08}s` }}>
+    <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up block relative" style={{ animationDelay: `${index * 0.08}s` }}>
+      <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl z-10 bg-gradient-to-r ${CATEGORY_ACCENT[listing.category] ?? CATEGORY_ACCENT["other"]}`} />
       <Card className={`h-full hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 ${CARD_HOVER_STYLES[listing.category] ?? CARD_HOVER_STYLES["other"]}`}>
         {imageUrl ? (
           <div className="aspect-video overflow-hidden rounded-t-lg bg-muted relative">
