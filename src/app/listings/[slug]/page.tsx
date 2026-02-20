@@ -438,17 +438,24 @@ export default async function ListingPage({
       {relatedRows.length > 0 && (
         <>
           <div>
-            <div className="flex items-center justify-between mb-5">
+            <div className="relative flex items-center justify-between mb-5">
+              {/* Category-tinted sparkle particles around the heading */}
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '2px', left: '1%', animationDuration: '3.2s', animationDelay: '0s', backgroundColor: sparkleColors[0] }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '22px', left: '4%', animationDuration: '2.5s', animationDelay: '1.1s', backgroundColor: sparkleColors[1] }} />
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '4px', left: '38%', animationDuration: '3.7s', animationDelay: '0.6s', backgroundColor: sparkleColors[2] }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '28px', left: '55%', animationDuration: '2.8s', animationDelay: '1.8s', backgroundColor: sparkleColors[0] }} />
+              <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full blur-sm pointer-events-none" style={{ top: '8px', left: '70%', animationDuration: '4.1s', animationDelay: '0.9s', backgroundColor: sparkleColors[2], opacity: 0.45 }} />
               <div>
-                <h2 className="text-xl font-semibold">More {CATEGORY_LABELS[listing.category] ?? "Listings"} for Sale</h2>
+                <h2 className="text-xl font-semibold animate-section-label">More {CATEGORY_LABELS[listing.category] ?? "Listings"} for Sale</h2>
                 <p className="text-sm text-muted-foreground mt-0.5">Similar listings you might be interested in</p>
               </div>
               <Link
                 href={`/?category=${listing.category}`}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+                className="group relative inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors shrink-0"
               >
                 View all
-                <ArrowRight className="h-3.5 w-3.5" />
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-300 group-hover:w-full" />
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
