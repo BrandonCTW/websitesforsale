@@ -4,6 +4,16 @@ import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 import { DollarSign, TrendingUp, Eye, Clock, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
 
+function getAvatarGradient(username: string): string {
+  let hash = 0
+  for (let i = 0; i < username.length; i++) {
+    hash = username.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  const hue = Math.abs(hash) % 360
+  const hue2 = (hue + 40) % 360
+  return `linear-gradient(135deg, hsl(${hue}, 65%, 50%), hsl(${hue2}, 70%, 55%))`
+}
+
 function isNewListing(createdAt: Date | string): boolean {
   const created = new Date(createdAt)
   const diffMs = Date.now() - created.getTime()
@@ -186,9 +196,17 @@ export function ListingCard({
             </div>
           </div>
 
-          <p className="text-xs text-muted-foreground">
-            Listed by <span className="font-medium">{sellerUsername}</span>
-          </p>
+          <div className="pt-2.5 border-t border-border/50 flex items-center gap-2">
+            <div
+              className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 shadow-sm"
+              style={{ background: getAvatarGradient(sellerUsername) }}
+            >
+              {sellerUsername[0].toUpperCase()}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Listed by <span className="font-medium text-foreground">{sellerUsername}</span>
+            </p>
+          </div>
         </CardContent>
       </Card>
     </Link>
