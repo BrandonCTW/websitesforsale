@@ -9,11 +9,12 @@ import { ImageGallery } from "@/components/listings/ImageGallery"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
-import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, type LucideIcon } from "lucide-react"
+import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle } from "lucide-react"
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 import { ScrollProgress } from "@/components/listings/ScrollProgress"
 import { DealMeter } from "@/components/listings/DealMeter"
 import { ReturnsCalculator } from "@/components/listings/ReturnsCalculator"
+import { MetricBox } from "@/components/listings/MetricBox"
 
 export const dynamic = "force-dynamic"
 
@@ -241,15 +242,15 @@ export default async function ListingPage({
 
       {/* Key metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <MetricBox label="Asking Price" value={formatCurrency(listing.askingPrice)} color="indigo" icon={DollarSign} index={0} />
+        <MetricBox label="Asking Price" value={formatCurrency(listing.askingPrice)} rawValue={listing.askingPrice} prefix="$" color="indigo" icon={DollarSign} index={0} />
         {listing.monthlyRevenue != null && (
-          <MetricBox label="Monthly Revenue" value={formatCurrency(listing.monthlyRevenue)} color="emerald" icon={TrendingUp} index={1} />
+          <MetricBox label="Monthly Revenue" value={formatCurrency(listing.monthlyRevenue)} rawValue={listing.monthlyRevenue} prefix="$" color="emerald" icon={TrendingUp} index={1} />
         )}
         {listing.monthlyProfit != null && (
-          <MetricBox label="Monthly Profit" value={formatCurrency(listing.monthlyProfit)} color="teal" icon={Wallet} index={2} />
+          <MetricBox label="Monthly Profit" value={formatCurrency(listing.monthlyProfit)} rawValue={listing.monthlyProfit} prefix="$" color="teal" icon={Wallet} index={2} />
         )}
         {listing.monthlyTraffic != null && (
-          <MetricBox label="Monthly Traffic" value={formatNumber(listing.monthlyTraffic) + " views"} color="sky" icon={Eye} index={3} />
+          <MetricBox label="Monthly Traffic" value={formatNumber(listing.monthlyTraffic) + " views"} rawValue={listing.monthlyTraffic} suffix=" views" color="sky" icon={Eye} index={3} />
         )}
         <MetricBox label="Age" value={age} color="amber" icon={Clock} index={4} />
         {listing.monthlyRevenue && listing.askingPrice ? (
@@ -531,61 +532,3 @@ export default async function ListingPage({
   )
 }
 
-type MetricColor = "indigo" | "emerald" | "teal" | "sky" | "amber" | "violet"
-
-const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; value: string; icon: string }> = {
-  indigo: {
-    border: "border-indigo-200 dark:border-indigo-800/60",
-    bg: "bg-gradient-to-br from-indigo-50/70 to-emerald-50/50 dark:from-indigo-950/30 dark:to-emerald-950/20",
-    value: "bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent",
-    icon: "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400",
-  },
-  emerald: {
-    border: "border-emerald-200 dark:border-emerald-800/60",
-    bg: "bg-gradient-to-br from-emerald-50/70 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/20",
-    value: "text-emerald-700 dark:text-emerald-400",
-    icon: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400",
-  },
-  teal: {
-    border: "border-teal-200 dark:border-teal-800/60",
-    bg: "bg-gradient-to-br from-teal-50/70 to-cyan-50/50 dark:from-teal-950/30 dark:to-cyan-950/20",
-    value: "text-teal-700 dark:text-teal-400",
-    icon: "bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-400",
-  },
-  sky: {
-    border: "border-sky-200 dark:border-sky-800/60",
-    bg: "bg-gradient-to-br from-sky-50/70 to-blue-50/50 dark:from-sky-950/30 dark:to-blue-950/20",
-    value: "text-sky-700 dark:text-sky-400",
-    icon: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400",
-  },
-  amber: {
-    border: "border-amber-200 dark:border-amber-800/60",
-    bg: "bg-gradient-to-br from-amber-50/70 to-orange-50/50 dark:from-amber-950/30 dark:to-orange-950/20",
-    value: "text-amber-700 dark:text-amber-400",
-    icon: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400",
-  },
-  violet: {
-    border: "border-violet-200 dark:border-violet-800/60",
-    bg: "bg-gradient-to-br from-violet-50/70 to-purple-50/50 dark:from-violet-950/30 dark:to-purple-950/20",
-    value: "text-violet-700 dark:text-violet-400",
-    icon: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400",
-  },
-}
-
-function MetricBox({ label, value, color = "indigo", icon: Icon, index = 0 }: { label: string; value: string; color?: MetricColor; icon?: LucideIcon; index?: number }) {
-  const styles = METRIC_COLOR_STYLES[color]
-  return (
-    <div
-      className={`rounded-lg border p-4 animate-fade-in-up ${styles.border} ${styles.bg}`}
-      style={{ animationDelay: `${index * 80}ms` }}
-    >
-      {Icon && (
-        <div className={`w-7 h-7 rounded-md flex items-center justify-center mb-2.5 ${styles.icon}`}>
-          <Icon className="h-3.5 w-3.5" />
-        </div>
-      )}
-      <p className="text-xs text-muted-foreground mb-1">{label}</p>
-      <p className={`font-semibold text-lg ${styles.value}`}>{value}</p>
-    </div>
-  )
-}
