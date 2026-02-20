@@ -178,31 +178,40 @@ export default async function HomePage({
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 sm:gap-2">
-          <div className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-indigo-900/60 dark:to-indigo-950/30 border border-indigo-200/60 dark:border-indigo-800/40 flex items-center justify-center mb-3 shadow-sm">
-              <Search className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+          <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
+            <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-indigo-100 dark:text-indigo-950/70 leading-none select-none pointer-events-none">1</span>
+            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60">
+              <Search className="w-5 h-5 text-white" />
             </div>
             <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1">Step 1</p>
             <h3 className="font-semibold text-sm mb-1.5">Browse listings</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">Filter by category, price, revenue, and traffic to find your next acquisition.</p>
           </div>
           <div className="hidden sm:flex items-center justify-center">
-            <ArrowRight className="w-5 h-5 text-muted-foreground/30" />
+            <div className="flex items-center gap-0.5">
+              <div className="h-px w-5 bg-gradient-to-r from-indigo-300 to-indigo-200 dark:from-indigo-700 dark:to-indigo-800" />
+              <ArrowRight className="w-4 h-4 text-indigo-300 dark:text-indigo-700" />
+            </div>
           </div>
-          <div className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-indigo-900/60 dark:to-indigo-950/30 border border-indigo-200/60 dark:border-indigo-800/40 flex items-center justify-center mb-3 shadow-sm">
-              <MessageCircle className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+          <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
+            <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-indigo-100 dark:text-indigo-950/70 leading-none select-none pointer-events-none">2</span>
+            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60">
+              <MessageCircle className="w-5 h-5 text-white" />
             </div>
             <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1">Step 2</p>
             <h3 className="font-semibold text-sm mb-1.5">Contact the seller</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">Reach out directly — no broker fees, no commissions, no middlemen.</p>
           </div>
           <div className="hidden sm:flex items-center justify-center">
-            <ArrowRight className="w-5 h-5 text-muted-foreground/30" />
+            <div className="flex items-center gap-0.5">
+              <div className="h-px w-5 bg-gradient-to-r from-indigo-200 to-emerald-200 dark:from-indigo-800 dark:to-emerald-800" />
+              <ArrowRight className="w-4 h-4 text-emerald-300 dark:text-emerald-700" />
+            </div>
           </div>
-          <div className="flex flex-col items-center text-center p-5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800">
-            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/60 dark:to-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 flex items-center justify-center mb-3 shadow-sm">
-              <Handshake className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+          <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-emerald-50/60 to-slate-50 dark:from-emerald-950/30 dark:to-slate-900/50 border border-emerald-100 dark:border-emerald-900/40 overflow-hidden">
+            <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-emerald-100 dark:text-emerald-950/70 leading-none select-none pointer-events-none">3</span>
+            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-400 dark:from-emerald-600 dark:to-emerald-500 flex items-center justify-center mb-3 shadow-md shadow-emerald-200/60 dark:shadow-emerald-900/60">
+              <Handshake className="w-5 h-5 text-white" />
             </div>
             <p className="text-[10px] font-bold text-emerald-500 dark:text-emerald-400 uppercase tracking-widest mb-1">Step 3</p>
             <h3 className="font-semibold text-sm mb-1.5">Close the deal</h3>
