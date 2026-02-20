@@ -2,7 +2,6 @@ import { notFound } from "next/navigation"
 import { db } from "@/db"
 import { listings, listingImages, users } from "@/db/schema"
 import { eq, ne, and, count } from "drizzle-orm"
-import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 import { ContactForm } from "@/components/listings/ContactForm"
@@ -24,6 +23,67 @@ const CATEGORY_LABELS: Record<string, string> = {
   "community": "Community",
   "service-business": "Service Business",
   "other": "Other",
+}
+
+const TECH_BADGE_COLORS: Record<string, string> = {
+  "wordpress":    "bg-blue-100   text-blue-700   border-blue-200   dark:bg-blue-900/30   dark:text-blue-300   dark:border-blue-800",
+  "react":        "bg-cyan-100   text-cyan-700   border-cyan-200   dark:bg-cyan-900/30   dark:text-cyan-300   dark:border-cyan-800",
+  "next.js":      "bg-neutral-100 text-neutral-800 border-neutral-300 dark:bg-neutral-800 dark:text-neutral-200 dark:border-neutral-600",
+  "nextjs":       "bg-neutral-100 text-neutral-800 border-neutral-300 dark:bg-neutral-800 dark:text-neutral-200 dark:border-neutral-600",
+  "node.js":      "bg-green-100  text-green-700  border-green-200  dark:bg-green-900/30  dark:text-green-300  dark:border-green-800",
+  "nodejs":       "bg-green-100  text-green-700  border-green-200  dark:bg-green-900/30  dark:text-green-300  dark:border-green-800",
+  "python":       "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-800",
+  "django":       "bg-teal-100   text-teal-700   border-teal-200   dark:bg-teal-900/30   dark:text-teal-300   dark:border-teal-800",
+  "shopify":      "bg-teal-100   text-teal-700   border-teal-200   dark:bg-teal-900/30   dark:text-teal-300   dark:border-teal-800",
+  "vue":          "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+  "vue.js":       "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+  "nuxt":         "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+  "nuxt.js":      "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+  "tailwind":     "bg-sky-100    text-sky-700    border-sky-200    dark:bg-sky-900/30    dark:text-sky-300    dark:border-sky-800",
+  "tailwindcss":  "bg-sky-100    text-sky-700    border-sky-200    dark:bg-sky-900/30    dark:text-sky-300    dark:border-sky-800",
+  "php":          "bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/30 dark:text-violet-300 dark:border-violet-800",
+  "laravel":      "bg-rose-100   text-rose-700   border-rose-200   dark:bg-rose-900/30   dark:text-rose-300   dark:border-rose-800",
+  "typescript":   "bg-blue-100   text-blue-700   border-blue-200   dark:bg-blue-900/30   dark:text-blue-300   dark:border-blue-800",
+  "javascript":   "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-800",
+  "ruby on rails":"bg-red-100    text-red-700    border-red-200    dark:bg-red-900/30    dark:text-red-300    dark:border-red-800",
+  "rails":        "bg-red-100    text-red-700    border-red-200    dark:bg-red-900/30    dark:text-red-300    dark:border-red-800",
+  "svelte":       "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
+  "sveltekit":    "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
+  "flutter":      "bg-sky-100    text-sky-700    border-sky-200    dark:bg-sky-900/30    dark:text-sky-300    dark:border-sky-800",
+  "woocommerce":  "bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800",
+  "ghost":        "bg-slate-100  text-slate-700  border-slate-200  dark:bg-slate-800     dark:text-slate-300  dark:border-slate-700",
+  "webflow":      "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800",
+  "aws":          "bg-amber-100  text-amber-700  border-amber-200  dark:bg-amber-900/30  dark:text-amber-300  dark:border-amber-800",
+  "supabase":     "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+}
+
+const MONETIZATION_BADGE_COLORS: Record<string, string> = {
+  "display ads":          "bg-amber-100  text-amber-700  border-amber-200  dark:bg-amber-900/30  dark:text-amber-300  dark:border-amber-800",
+  "adsense":              "bg-amber-100  text-amber-700  border-amber-200  dark:bg-amber-900/30  dark:text-amber-300  dark:border-amber-800",
+  "google adsense":       "bg-amber-100  text-amber-700  border-amber-200  dark:bg-amber-900/30  dark:text-amber-300  dark:border-amber-800",
+  "affiliate marketing":  "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
+  "affiliates":           "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
+  "amazon associates":    "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800",
+  "subscriptions":        "bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/30 dark:text-violet-300 dark:border-violet-800",
+  "saas":                 "bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/30 dark:text-violet-300 dark:border-violet-800",
+  "ecommerce":            "bg-teal-100   text-teal-700   border-teal-200   dark:bg-teal-900/30   dark:text-teal-300   dark:border-teal-800",
+  "sponsored content":    "bg-rose-100   text-rose-700   border-rose-200   dark:bg-rose-900/30   dark:text-rose-300   dark:border-rose-800",
+  "sponsorships":         "bg-rose-100   text-rose-700   border-rose-200   dark:bg-rose-900/30   dark:text-rose-300   dark:border-rose-800",
+  "digital products":     "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800",
+  "info products":        "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800",
+  "consulting":           "bg-sky-100    text-sky-700    border-sky-200    dark:bg-sky-900/30    dark:text-sky-300    dark:border-sky-800",
+  "services":             "bg-sky-100    text-sky-700    border-sky-200    dark:bg-sky-900/30    dark:text-sky-300    dark:border-sky-800",
+  "lead generation":      "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+  "leads":                "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+  "marketplace":          "bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800",
+  "newsletter":           "bg-pink-100   text-pink-700   border-pink-200   dark:bg-pink-900/30   dark:text-pink-300   dark:border-pink-800",
+  "email list":           "bg-pink-100   text-pink-700   border-pink-200   dark:bg-pink-900/30   dark:text-pink-300   dark:border-pink-800",
+}
+
+const DEFAULT_BADGE_STYLE = "bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"
+
+function getTagStyle(value: string, colorMap: Record<string, string>): string {
+  return colorMap[value.toLowerCase().trim()] ?? DEFAULT_BADGE_STYLE
 }
 
 export default async function ListingPage({
@@ -227,23 +287,35 @@ export default async function ListingPage({
 
       {/* Tags */}
       {(listing.techStack?.length || listing.monetization?.length) ? (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {listing.techStack?.length ? (
             <div>
-              <h2 className="font-semibold mb-2">Tech Stack</h2>
+              <h2 className="font-semibold mb-2.5 text-sm uppercase tracking-wide text-muted-foreground">Tech Stack</h2>
               <div className="flex flex-wrap gap-2">
                 {listing.techStack.map((t) => (
-                  <Badge key={t} variant="outline">{t}</Badge>
+                  <span
+                    key={t}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${getTagStyle(t, TECH_BADGE_COLORS)}`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 shrink-0" />
+                    {t}
+                  </span>
                 ))}
               </div>
             </div>
           ) : null}
           {listing.monetization?.length ? (
             <div>
-              <h2 className="font-semibold mb-2">Monetization</h2>
+              <h2 className="font-semibold mb-2.5 text-sm uppercase tracking-wide text-muted-foreground">Monetization</h2>
               <div className="flex flex-wrap gap-2">
                 {listing.monetization.map((m) => (
-                  <Badge key={m} variant="outline">{m}</Badge>
+                  <span
+                    key={m}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${getTagStyle(m, MONETIZATION_BADGE_COLORS)}`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 shrink-0" />
+                    {m}
+                  </span>
                 ))}
               </div>
             </div>
