@@ -129,6 +129,17 @@ const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: s
   "other":              { bg: "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",    radial: "rgba(100,116,139,0.12)", icon: "text-slate-400 dark:text-slate-600" },
 }
 
+const CATEGORY_SPARKLE_COLORS: Record<string, [string, string, string]> = {
+  "content-site":     ["rgba(56,189,248,0.75)",  "rgba(255,255,255,0.60)", "rgba(14,165,233,0.65)"],
+  "saas":             ["rgba(167,139,250,0.75)",  "rgba(255,255,255,0.60)", "rgba(139,92,246,0.65)"],
+  "ecommerce":        ["rgba(251,146,60,0.75)",   "rgba(255,255,255,0.60)", "rgba(249,115,22,0.65)"],
+  "tool-or-app":      ["rgba(45,212,191,0.75)",   "rgba(255,255,255,0.60)", "rgba(20,184,166,0.65)"],
+  "newsletter":       ["rgba(251,113,133,0.75)",  "rgba(255,255,255,0.60)", "rgba(244,63,94,0.65)"],
+  "community":        ["rgba(52,211,153,0.75)",   "rgba(255,255,255,0.60)", "rgba(16,185,129,0.65)"],
+  "service-business": ["rgba(251,191,36,0.75)",   "rgba(255,255,255,0.60)", "rgba(245,158,11,0.65)"],
+  "other":            ["rgba(129,140,248,0.75)",  "rgba(255,255,255,0.60)", "rgba(52,211,153,0.65)"],
+}
+
 export function ListingCard({
   listing,
   sellerUsername,
@@ -217,6 +228,19 @@ export function ListingCard({
             <div className="absolute bottom-4 right-4 opacity-20 select-none pointer-events-none">
               <CategoryIcon className={`w-6 h-6 ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon}`} />
             </div>
+            {/* Category-tinted sparkle particles */}
+            {(() => {
+              const sc = CATEGORY_SPARKLE_COLORS[listing.category] ?? CATEGORY_SPARKLE_COLORS["other"]
+              const delay = (index * 0.37) % 2
+              return (
+                <>
+                  <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '20%', left: '9%', animationDuration: '3.1s', animationDelay: `${delay}s`, backgroundColor: sc[0] }} />
+                  <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '65%', left: '6%', animationDuration: '2.4s', animationDelay: `${(delay + 1.1) % 2.5}s`, backgroundColor: sc[1] }} />
+                  <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '10%', animationDuration: '3.6s', animationDelay: `${(delay + 0.5) % 3}s`, backgroundColor: sc[2] }} />
+                  <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '72%', right: '8%', animationDuration: '2.7s', animationDelay: `${(delay + 1.8) % 2.8}s`, backgroundColor: sc[1] }} />
+                </>
+              )
+            })()}
             {showNewBadge && (
               <span className="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-md">
                 New
