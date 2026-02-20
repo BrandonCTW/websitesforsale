@@ -4,7 +4,7 @@ import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
-import { Search, ShieldCheck, MessageCircle, BadgePercent } from "lucide-react"
+import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -84,6 +84,64 @@ export default async function HomePage({
                 <BadgePercent className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                 No commissions
               </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sell Your Site section */}
+      <div className="mb-10 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 dark:from-indigo-950/30 dark:via-slate-900 dark:to-emerald-950/20 overflow-hidden">
+        <div className="grid md:grid-cols-2 gap-0">
+          {/* Left: copy + CTA */}
+          <div className="p-8 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 px-3 py-1 text-xs font-medium text-indigo-700 dark:text-indigo-300 mb-4 w-fit">
+              <Sparkles className="h-3 w-3" />
+              AI-powered
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+              List your site in 30 seconds —{" "}
+              <span className="bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">
+                AI writes the listing
+              </span>
+            </h2>
+            <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+              Enter your URL and asking price. Our AI scrapes your site and generates a polished, buyer-ready listing — title, description, tech stack, and more. Edit anything before publishing.
+            </p>
+            <Link
+              href="/dashboard/listings/new"
+              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all w-fit"
+            >
+              List Your Site
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          {/* Right: mock AI-generated listing card */}
+          <div className="p-6 flex items-center justify-center bg-white/60 dark:bg-slate-900/40 border-t md:border-t-0 md:border-l border-indigo-100 dark:border-indigo-900/30">
+            <div className="w-full max-w-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm p-4 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <p className="text-[10px] font-medium text-indigo-500 uppercase tracking-wide mb-1 flex items-center gap-1">
+                    <Sparkles className="h-2.5 w-2.5" /> AI Generated
+                  </p>
+                  <h3 className="font-semibold text-sm leading-snug">Profitable Recipe Blog for Sale</h3>
+                </div>
+                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 shrink-0">$12,000</span>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                A well-established food & recipe content site with 45k monthly readers. Monetized through display ads and Amazon affiliates with consistent passive income. Built on WordPress with a clean, fast theme. Ready for a new owner to grow.
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">Content Site</span>
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">WordPress</span>
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">Display Ads</span>
+                <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">Affiliates</span>
+              </div>
+              <div className="border-t border-slate-100 dark:border-slate-800 pt-2 flex gap-4 text-[10px] text-muted-foreground">
+                <span><span className="font-medium text-foreground">$420</span>/mo revenue</span>
+                <span><span className="font-medium text-foreground">45k</span> pageviews</span>
+                <span><span className="font-medium text-foreground">3 yrs</span> old</span>
+              </div>
             </div>
           </div>
         </div>
