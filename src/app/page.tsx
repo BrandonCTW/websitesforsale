@@ -5,6 +5,7 @@ import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
 import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
+import { formatCurrency } from "@/lib/slug"
 
 export const dynamic = "force-dynamic"
 
@@ -132,6 +133,23 @@ export default async function HomePage({
               <span className="text-white/20">·</span>
               <span><span className="font-semibold text-slate-200">$0</span> in fees</span>
             </div>
+
+            {/* Live listings ticker */}
+            {rows.length >= 3 && (
+              <div className="mt-5 relative overflow-hidden rounded-lg bg-white/5 border border-white/10 py-2.5">
+                <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-900/90 to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-900/90 to-transparent z-10 pointer-events-none" />
+                <div className="animate-marquee flex gap-8 w-max hover:[animation-play-state:paused]">
+                  {[...rows, ...rows].map(({ listing }, i) => (
+                    <span key={i} className="inline-flex items-center gap-2 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/50 shrink-0" />
+                      <span className="text-[11px] text-slate-300 font-medium max-w-[150px] truncate">{listing.title}</span>
+                      <span className="text-[11px] font-bold text-emerald-400">{formatCurrency(listing.askingPrice)}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
