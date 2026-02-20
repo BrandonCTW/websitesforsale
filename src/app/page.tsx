@@ -7,6 +7,7 @@ import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
 import { Search, ShieldCheck, MessageCircle, BadgePercent, Sparkles, ArrowRight, Handshake, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, Check, X, type LucideIcon } from "lucide-react"
 import { formatCurrency } from "@/lib/slug"
+import { CountUp } from "@/components/CountUp"
 
 export const dynamic = "force-dynamic"
 
@@ -164,10 +165,10 @@ export default async function HomePage({
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
                 </span>
-                <span><span className="font-semibold text-slate-200">{totalListings}</span> active listings</span>
+                <span><CountUp target={totalListings} className="font-semibold text-slate-200" duration={1600} /> active listings</span>
               </span>
               <span className="text-white/20">·</span>
-              <span><span className="font-semibold text-slate-200">8</span> categories</span>
+              <span><CountUp target={8} className="font-semibold text-slate-200" duration={900} /> categories</span>
               <span className="text-white/20">·</span>
               <span><span className="font-semibold text-slate-200">$0</span> in fees</span>
             </div>
