@@ -123,22 +123,29 @@ export function FilterBar({ categories }: { categories: string[] }) {
     <div className="space-y-3">
       {/* Category chips */}
       <div className="flex flex-wrap gap-2">
-        {categories.map((c) => {
+        {categories.map((c, index) => {
           const styles = CATEGORY_CHIP_STYLES[c] ?? CATEGORY_CHIP_STYLES["other"]
           const isActive = activeCategory === c
           const Icon = CATEGORY_ICONS[c] ?? LayoutGrid
           return (
-            <button
+            <div
               key={c}
-              onClick={() => toggleCategory(c)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
-                isActive ? `${styles.active} animate-chip-glow` : styles.inactive
-              }`}
-              style={isActive ? ({ "--chip-glow": CATEGORY_GLOW[c] ?? CATEGORY_GLOW["other"] } as React.CSSProperties) : undefined}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${index * 50}ms` }}
             >
-              <Icon className="h-3 w-3 shrink-0" />
-              {CATEGORY_LABELS[c] ?? c}
-            </button>
+              <button
+                onClick={() => toggleCategory(c)}
+                className={`group relative overflow-hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
+                  isActive ? `${styles.active} animate-chip-glow` : styles.inactive
+                }`}
+                style={isActive ? ({ "--chip-glow": CATEGORY_GLOW[c] ?? CATEGORY_GLOW["other"] } as React.CSSProperties) : undefined}
+              >
+                {/* Shine sweep on hover */}
+                <span className="card-shine absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/[0.18] to-transparent pointer-events-none" />
+                <Icon className="h-3 w-3 shrink-0" />
+                {CATEGORY_LABELS[c] ?? c}
+              </button>
+            </div>
           )
         })}
       </div>
