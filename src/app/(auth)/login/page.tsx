@@ -48,8 +48,11 @@ function LoginForm() {
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex-col justify-between p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.25)_0%,_transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
-        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+        {/* Animated floating orbs */}
+        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none animate-orb-1" />
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none animate-orb-2" />
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 rounded-full bg-violet-500/10 blur-3xl pointer-events-none animate-orb-1 [animation-delay:-3s]" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-emerald-400/10 blur-2xl pointer-events-none animate-orb-2 [animation-delay:-6s]" />
 
         <div className="relative">
           <Link href="/" className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
