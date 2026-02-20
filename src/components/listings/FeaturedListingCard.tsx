@@ -176,7 +176,7 @@ export function FeaturedListingCard({
 
   return (
     <Link href={`/listings/${listing.slug}`} className="block group animate-fade-in-up">
-      <div className="relative rounded-2xl border border-border/60 overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-card">
+      <div className="relative rounded-2xl border border-border/60 overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-card animate-spotlight-glow">
         {/* Top category accent bar */}
         <div className={`absolute top-0 left-0 right-0 h-[3px] z-10 bg-gradient-to-r ${accent}`} />
 
