@@ -22,6 +22,13 @@ function getMarkerColor(multiple: number): string {
   return "border-red-500 shadow-red-200 dark:shadow-red-900"
 }
 
+function getMarkerGlowClass(multiple: number): string {
+  if (multiple < 20) return "animate-marker-glow-emerald"
+  if (multiple < 30) return "animate-marker-glow-amber"
+  if (multiple < 42) return "animate-marker-glow-orange"
+  return "animate-marker-glow-red"
+}
+
 export function DealMeter({ multiple }: DealMeterProps) {
   const [mounted, setMounted] = useState(false)
 
@@ -34,6 +41,7 @@ export function DealMeter({ multiple }: DealMeterProps) {
   const position = (clampedMultiple / SCALE_MAX) * 100
   const label = getLabel(multiple)
   const markerBorder = getMarkerColor(multiple)
+  const markerGlowClass = getMarkerGlowClass(multiple)
 
   const ticks = [
     { pct: (10 / SCALE_MAX) * 100, label: "10x" },
@@ -58,7 +66,9 @@ export function DealMeter({ multiple }: DealMeterProps) {
 
       {/* Bar */}
       <div className="relative">
-        <div className="h-3 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 via-orange-400 to-red-500 shadow-inner" />
+        <div className="h-3 rounded-full bg-gradient-to-r from-emerald-400 via-amber-400 via-orange-400 to-red-500 shadow-inner overflow-hidden relative">
+          <div className="animate-deal-bar-shimmer absolute inset-y-0 w-[12%] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
+        </div>
 
         {/* Tick marks */}
         {ticks.map(({ pct, label: tickLabel }) => (
@@ -74,7 +84,7 @@ export function DealMeter({ multiple }: DealMeterProps) {
 
         {/* Marker */}
         <div
-          className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white dark:bg-slate-900 border-[2.5px] shadow-md transition-all duration-700 ease-out ${markerBorder}`}
+          className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white dark:bg-slate-900 border-[2.5px] shadow-md transition-all duration-700 ease-out ${markerBorder} ${markerGlowClass}`}
           style={{
             left: mounted ? `${position}%` : "0%",
           }}
