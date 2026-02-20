@@ -4,7 +4,7 @@ import { users, listings } from "@/db/schema"
 import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { formatCurrency } from "@/lib/slug"
-import { LayoutGrid } from "lucide-react"
+import { LayoutGrid, ShieldCheck, Package } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -42,16 +42,44 @@ export default async function SellerProfilePage({
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       {/* Profile header */}
-      <div className="mb-10 rounded-2xl overflow-hidden border border-border/60">
-        {/* Gradient banner */}
-        <div className="relative h-28 bg-gradient-to-br from-indigo-600 via-indigo-500 to-emerald-500">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.15)_0%,_transparent_60%)]" />
+      <div className="mb-10 rounded-2xl overflow-hidden border border-border/60 shadow-sm">
+        {/* Dark hero banner */}
+        <div className="relative h-36 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+          {/* Accent top bar */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-indigo-400 to-emerald-500" />
+          {/* Radial color overlays */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.30)_0%,_transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.18)_0%,_transparent_60%)]" />
+          {/* Animated orbs */}
+          <div className="animate-orb-1 absolute -top-8 -right-8 w-52 h-52 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
+          <div className="animate-orb-2 absolute -bottom-8 -left-8 w-44 h-44 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+          {/* Dot-grid texture */}
+          <div
+            className="absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)",
+              backgroundSize: "18px 18px",
+            }}
+          />
+          {/* Trust badges overlaid on banner (bottom-right) */}
+          <div className="absolute bottom-3 right-4 flex items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/10 border border-white/15 px-2.5 py-1 text-[10px] font-medium text-slate-300 backdrop-blur-sm">
+              <ShieldCheck className="h-3 w-3 text-emerald-400 shrink-0" />
+              Verified Seller
+            </span>
+            {sellerListings.length > 0 && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 border border-white/15 px-2.5 py-1 text-[10px] font-medium text-slate-300 backdrop-blur-sm">
+                <Package className="h-3 w-3 text-indigo-400 shrink-0" />
+                {sellerListings.length} listing{sellerListings.length !== 1 ? "s" : ""}
+              </span>
+            )}
+          </div>
         </div>
         {/* Profile card body */}
         <div className="px-6 pb-6 bg-card">
           <div className="flex items-end gap-4 -mt-10 mb-4">
             {/* Avatar */}
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white text-3xl font-bold ring-4 ring-background shrink-0">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center text-white text-3xl font-bold ring-4 ring-background shadow-lg shrink-0">
               {initial}
             </div>
             <div className="pb-1">
