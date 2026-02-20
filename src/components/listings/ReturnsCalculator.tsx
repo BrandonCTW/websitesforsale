@@ -11,10 +11,10 @@ const SCENARIOS = [
 ] as const
 
 const SCENARIO_STYLES = [
-  { active: "bg-slate-700 text-white border-slate-600",       dot: "bg-slate-400",  bar: "bg-slate-400",   text: "text-slate-700 dark:text-slate-300",      gradient: "text-slate-700 dark:text-slate-300" },
-  { active: "bg-emerald-600 text-white border-emerald-500",   dot: "bg-emerald-400", bar: "bg-emerald-500", text: "text-emerald-700 dark:text-emerald-400",  gradient: "animate-revenue-gradient" },
-  { active: "bg-indigo-600 text-white border-indigo-500",     dot: "bg-indigo-400",  bar: "bg-indigo-500",  text: "text-indigo-700 dark:text-indigo-400",    gradient: "animate-price-gradient" },
-  { active: "bg-violet-600 text-white border-violet-500",     dot: "bg-violet-400",  bar: "bg-violet-500",  text: "text-violet-700 dark:text-violet-400",    gradient: "animate-violet-gradient" },
+  { active: "bg-slate-700 text-white border-slate-600",       dot: "bg-slate-400",  bar: "bg-slate-400",   text: "text-slate-700 dark:text-slate-300",      gradient: "text-slate-700 dark:text-slate-300",    accentBar: "from-slate-400 to-slate-500",    hoverShadow: "hover:shadow-slate-100/60 dark:hover:shadow-slate-800/40",    hoverBorder: "hover:border-slate-200 dark:hover:border-slate-700/60",    shimmerMid: "via-slate-400/[0.07]" },
+  { active: "bg-emerald-600 text-white border-emerald-500",   dot: "bg-emerald-400", bar: "bg-emerald-500", text: "text-emerald-700 dark:text-emerald-400",  gradient: "animate-revenue-gradient",              accentBar: "from-emerald-400 to-emerald-500", hoverShadow: "hover:shadow-emerald-100/60 dark:hover:shadow-emerald-900/40", hoverBorder: "hover:border-emerald-200 dark:hover:border-emerald-800/60", shimmerMid: "via-emerald-400/[0.06]" },
+  { active: "bg-indigo-600 text-white border-indigo-500",     dot: "bg-indigo-400",  bar: "bg-indigo-500",  text: "text-indigo-700 dark:text-indigo-400",    gradient: "animate-price-gradient",                accentBar: "from-indigo-400 to-indigo-500",   hoverShadow: "hover:shadow-indigo-100/60 dark:hover:shadow-indigo-900/40",  hoverBorder: "hover:border-indigo-200 dark:hover:border-indigo-800/60",  shimmerMid: "via-indigo-400/[0.06]" },
+  { active: "bg-violet-600 text-white border-violet-500",     dot: "bg-violet-400",  bar: "bg-violet-500",  text: "text-violet-700 dark:text-violet-400",    gradient: "animate-violet-gradient",               accentBar: "from-violet-400 to-violet-500",   hoverShadow: "hover:shadow-violet-100/60 dark:hover:shadow-violet-900/40",  hoverBorder: "hover:border-violet-200 dark:hover:border-violet-800/60",  shimmerMid: "via-violet-400/[0.06]" },
 ]
 
 const SCENARIO_SPARKLE_COLORS = [
@@ -157,36 +157,48 @@ export function ReturnsCalculator({
 
         {/* KPI row */}
         <div className="grid grid-cols-3 gap-3 pt-1">
-          <div className="relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+          <div className={`group relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center hover:-translate-y-0.5 hover:shadow-md ${styles.hoverShadow} ${styles.hoverBorder} transition-all duration-200 cursor-default`}>
+            {/* Colored left accent bar */}
+            <div className={`absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b ${styles.accentBar} opacity-70`} />
+            {/* Shimmer sweep */}
+            <div className={`animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent ${styles.shimmerMid} to-transparent pointer-events-none`} style={{ animationDelay: '0s' }} />
             <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '9%', animationDuration: '3.2s', animationDelay: '0s', backgroundColor: sparkleColor }} />
             <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '76%', right: '8%', animationDuration: '2.7s', animationDelay: '1.5s', backgroundColor: sparkleColor }} />
-            <div className="flex items-center justify-center gap-1 mb-1">
-              <DollarSign className="h-3 w-3 text-muted-foreground" />
+            <div className="flex items-center justify-center gap-1 mb-1 relative">
+              <DollarSign className="h-3 w-3 text-muted-foreground group-hover:scale-110 transition-transform duration-200" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">3-yr Profit</span>
             </div>
-            <p className={`text-base font-bold ${styles.gradient}`}>{fmt(cumulativeProfit)}</p>
+            <p className={`text-base font-bold relative ${styles.gradient}`}>{fmt(cumulativeProfit)}</p>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+          <div className={`group relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center hover:-translate-y-0.5 hover:shadow-md ${styles.hoverShadow} ${styles.hoverBorder} transition-all duration-200 cursor-default`}>
+            {/* Colored left accent bar */}
+            <div className={`absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b ${styles.accentBar} opacity-70`} />
+            {/* Shimmer sweep */}
+            <div className={`animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent ${styles.shimmerMid} to-transparent pointer-events-none`} style={{ animationDelay: '1.4s' }} />
             <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '18%', left: '10%', animationDuration: '2.9s', animationDelay: '0.8s', backgroundColor: sparkleColor }} />
             <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '70%', right: '9%', animationDuration: '3.5s', animationDelay: '2.1s', backgroundColor: sparkleColor }} />
-            <div className="flex items-center justify-center gap-1 mb-1">
-              <Zap className="h-3 w-3 text-muted-foreground" />
+            <div className="flex items-center justify-center gap-1 mb-1 relative">
+              <Zap className="h-3 w-3 text-muted-foreground group-hover:scale-110 transition-transform duration-200" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">ROI</span>
             </div>
-            <p className={`text-base font-bold ${roi >= 0 ? styles.gradient : "text-red-600 dark:text-red-400"}`}>
+            <p className={`text-base font-bold relative ${roi >= 0 ? styles.gradient : "text-red-600 dark:text-red-400"}`}>
               {roi >= 0 ? "+" : ""}{roi.toFixed(0)}%
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+          <div className={`group relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center hover:-translate-y-0.5 hover:shadow-md ${styles.hoverShadow} ${styles.hoverBorder} transition-all duration-200 cursor-default`}>
+            {/* Colored left accent bar */}
+            <div className={`absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b ${styles.accentBar} opacity-70`} />
+            {/* Shimmer sweep */}
+            <div className={`animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent ${styles.shimmerMid} to-transparent pointer-events-none`} style={{ animationDelay: '2.8s' }} />
             <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '12%', right: '9%', animationDuration: '3.4s', animationDelay: '0.4s', backgroundColor: sparkleColor }} />
             <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '80%', left: '8%', animationDuration: '2.5s', animationDelay: '1.8s', backgroundColor: sparkleColor }} />
-            <div className="flex items-center justify-center gap-1 mb-1">
-              <Calendar className="h-3 w-3 text-muted-foreground" />
+            <div className="flex items-center justify-center gap-1 mb-1 relative">
+              <Calendar className="h-3 w-3 text-muted-foreground group-hover:scale-110 transition-transform duration-200" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">Payback</span>
             </div>
-            <p className={`text-base font-bold ${styles.gradient}`}>{paybackMonths}mo</p>
+            <p className={`text-base font-bold relative ${styles.gradient}`}>{paybackMonths}mo</p>
           </div>
         </div>
 
