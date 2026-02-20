@@ -305,7 +305,9 @@ export default async function ListingPage({
       <Separator />
 
       {/* Live URL */}
-      <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/30 px-5 py-4 flex items-center gap-3 hover:border-sky-200 dark:hover:border-sky-800/60 hover:shadow-sm transition-all duration-200">
+      <div className="animate-on-scroll relative overflow-hidden rounded-xl border border-border/60 bg-muted/30 px-5 py-4 flex items-center gap-3 hover:border-sky-200 dark:hover:border-sky-800/60 hover:shadow-sm transition-all duration-200">
+        <div className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-sky-400 to-sky-500 opacity-70" />
+        <div className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-sky-400/[0.05] to-transparent animate-shimmer pointer-events-none" />
         <div className="flex-shrink-0 h-9 w-9 rounded-lg bg-sky-100 dark:bg-sky-900/40 flex items-center justify-center">
           <Globe className="h-4 w-4 text-sky-600 dark:text-sky-400" />
         </div>
@@ -323,7 +325,9 @@ export default async function ListingPage({
       </div>
 
       {/* Description */}
-      <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-indigo-200 dark:hover:border-indigo-800/60 hover:shadow-sm transition-all duration-200">
+      <div className="animate-on-scroll relative overflow-hidden rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-indigo-200 dark:hover:border-indigo-800/60 hover:shadow-sm transition-all duration-200">
+        <div className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-indigo-400 to-indigo-500 opacity-70" />
+        <div className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400/[0.05] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: "0.8s" }} />
         <div className="flex items-center gap-2 mb-3">
           <div className="h-6 w-6 rounded-md bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
             <Info className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
@@ -334,7 +338,9 @@ export default async function ListingPage({
       </div>
 
       {/* Reason for selling */}
-      <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-amber-200 dark:hover:border-amber-800/60 hover:shadow-sm transition-all duration-200">
+      <div className="animate-on-scroll relative overflow-hidden rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-amber-200 dark:hover:border-amber-800/60 hover:shadow-sm transition-all duration-200">
+        <div className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-amber-400 to-amber-500 opacity-70" />
+        <div className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-amber-400/[0.05] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: "1.6s" }} />
         <div className="flex items-center gap-2 mb-3">
           <div className="h-6 w-6 rounded-md bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
             <MessageSquare className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
@@ -346,7 +352,9 @@ export default async function ListingPage({
 
       {/* Included assets */}
       {listing.includedAssets && (
-        <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-emerald-200 dark:hover:border-emerald-800/60 hover:shadow-sm transition-all duration-200">
+        <div className="animate-on-scroll relative overflow-hidden rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-emerald-200 dark:hover:border-emerald-800/60 hover:shadow-sm transition-all duration-200">
+          <div className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-emerald-400 to-emerald-500 opacity-70" />
+          <div className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-emerald-400/[0.05] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: "2.4s" }} />
           <div className="flex items-center gap-2 mb-3">
             <div className="h-6 w-6 rounded-md bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center">
               <Package className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
