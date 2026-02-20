@@ -42,19 +42,26 @@ export default async function EditListingPage({
         {/* Radial gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.25)_0%,_transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
-        {/* Subtle orbs */}
-        <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+        {/* Animated orbs */}
+        <div className="animate-orb-1 absolute -top-8 -right-8 w-48 h-48 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
+        <div className="animate-orb-2 absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+        {/* Sparkle particles */}
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/70 blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '6%', animationDuration: '3.2s', animationDelay: '0s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/60 pointer-events-none" style={{ top: '62%', left: '4%', animationDuration: '2.5s', animationDelay: '1.1s' }} />
+        <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/65 blur-[0.5px] pointer-events-none" style={{ top: '20%', right: '9%', animationDuration: '3.8s', animationDelay: '0.6s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/75 pointer-events-none" style={{ top: '58%', right: '7%', animationDuration: '2.7s', animationDelay: '1.8s' }} />
+        <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-indigo-200/35 blur-sm pointer-events-none" style={{ top: '75%', left: '68%', animationDuration: '4.1s', animationDelay: '0.9s' }} />
+        <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/50 pointer-events-none" style={{ top: '38%', left: '50%', animationDuration: '2.9s', animationDelay: '2.2s' }} />
 
         <div className="relative mb-5">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-3 py-1 text-xs font-medium text-indigo-200 mb-4">
+          <div className="animate-fade-in-up inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-3 py-1 text-xs font-medium text-indigo-200 mb-4" style={{ animationDelay: '0.05s' }}>
             <PencilLine className="h-3 w-3 text-indigo-300" />
             Edit listing
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1">
+          <h1 className="animate-fade-in-up text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1" style={{ animationDelay: '0.15s' }}>
             {listing.title}
           </h1>
-          <p className="text-slate-400 text-sm">
+          <p className="animate-fade-in-up text-slate-400 text-sm" style={{ animationDelay: '0.25s' }}>
             Update your listing details, photos, and asking price
           </p>
         </div>
