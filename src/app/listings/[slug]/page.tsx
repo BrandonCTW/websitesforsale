@@ -9,7 +9,7 @@ import { ImageGallery } from "@/components/listings/ImageGallery"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
-import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle } from "lucide-react"
+import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, Mail } from "lucide-react"
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 import { ScrollProgress } from "@/components/listings/ScrollProgress"
 import { DealMeter } from "@/components/listings/DealMeter"
@@ -522,8 +522,18 @@ export default async function ListingPage({
       {/* Contact form */}
       {listing.status === "active" && <FloatingContactButton />}
       {listing.status === "active" ? (
-        <div id="contact">
-          <h2 className="text-xl font-semibold mb-4">Contact the Seller</h2>
+        <div id="contact" className="relative">
+          {/* Sparkle particles near Contact heading */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/65 blur-[0.5px] pointer-events-none" style={{ top: '6px', left: '2%', animationDuration: '3.3s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/75 pointer-events-none" style={{ top: '4px', right: '4%', animationDuration: '2.7s', animationDelay: '1.4s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-indigo-200/40 blur-sm pointer-events-none" style={{ top: '14px', left: '52%', animationDuration: '4.0s', animationDelay: '0.8s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/60 pointer-events-none" style={{ top: '22px', right: '18%', animationDuration: '2.4s', animationDelay: '2.1s' }} />
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-500 flex items-center justify-center shrink-0 shadow-sm shadow-indigo-200/50 dark:shadow-indigo-900/50">
+              <Mail className="h-4 w-4 text-white" />
+            </div>
+            <h2 className="text-xl font-semibold animate-section-label">Contact the Seller</h2>
+          </div>
           {session ? (
             <ContactForm
               listingId={listing.id}
