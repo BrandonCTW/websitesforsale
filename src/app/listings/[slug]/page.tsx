@@ -9,7 +9,7 @@ import { ImageGallery } from "@/components/listings/ImageGallery"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
-import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, type LucideIcon } from "lucide-react"
+import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, type LucideIcon } from "lucide-react"
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 
 export const dynamic = "force-dynamic"
@@ -328,12 +328,24 @@ export default async function ListingPage({
         <>
           <Separator />
           <div>
-            <h2 className="text-xl font-semibold mb-4">Frequently Asked Questions</h2>
-            <div className="space-y-4">
+            <div className="flex items-center gap-2.5 mb-5">
+              <div className="h-7 w-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
+                <HelpCircle className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              </div>
+              <h2 className="text-xl font-semibold">Frequently Asked Questions</h2>
+            </div>
+            <div className="space-y-3">
               {listing.faqs.map((faq, i) => (
-                <div key={i} className="rounded-lg border p-4">
-                  <p className="font-medium mb-1">{faq.q}</p>
-                  <p className="text-muted-foreground text-sm whitespace-pre-wrap">{faq.a}</p>
+                <div key={i} className="rounded-xl border border-border/60 overflow-hidden">
+                  <div className="flex items-start gap-3 px-5 py-4 bg-muted/30">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white text-[10px] font-bold mt-0.5 shadow-sm">
+                      {i + 1}
+                    </div>
+                    <p className="font-semibold text-sm leading-snug pt-0.5">{faq.q}</p>
+                  </div>
+                  <div className="px-5 py-4 border-t border-border/40 bg-background/60 pl-14">
+                    <p className="text-muted-foreground text-sm whitespace-pre-wrap leading-relaxed">{faq.a}</p>
+                  </div>
                 </div>
               ))}
             </div>
