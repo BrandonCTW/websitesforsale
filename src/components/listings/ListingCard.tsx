@@ -194,7 +194,9 @@ export function ListingCard({
                 </div>
               </div>
               {/* Page content mockup */}
-              <div className="flex-1 p-2 space-y-1.5">
+              <div className="flex-1 p-2 space-y-1.5 relative overflow-hidden">
+                {/* Scan line */}
+                <div className="animate-mockup-scan" style={{ animationDelay: `${index * 1.4}s` }} />
                 {/* Hero block */}
                 <div className={`h-5 rounded-md bg-gradient-to-r ${CATEGORY_ACCENT[listing.category] ?? CATEGORY_ACCENT["other"]} opacity-30`} />
                 {/* Content rows */}

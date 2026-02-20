@@ -422,3 +422,21 @@
 .animate-chip-glow {
   animation: chip-glow 2s ease-in-out infinite;
 }
+
+@keyframes mockup-scan {
+  0% { top: -3px; opacity: 0; }
+  8% { opacity: 0.85; }
+  92% { opacity: 0.85; }
+  100% { top: calc(100% + 3px); opacity: 0; }
+}
+
+.animate-mockup-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, rgba(99,102,241,0.45) 30%, rgba(52,211,153,0.45) 70%, transparent 100%);
+  animation: mockup-scan 7s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 10;
+}

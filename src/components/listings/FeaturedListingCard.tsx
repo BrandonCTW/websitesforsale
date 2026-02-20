@@ -226,7 +226,9 @@ export function FeaturedListingCard({
                     <div className="w-5 h-3 rounded bg-black/5 dark:bg-white/5" />
                   </div>
                   {/* Page content mockup */}
-                  <div className="flex-1 p-3 space-y-2">
+                  <div className="flex-1 p-3 space-y-2 relative overflow-hidden">
+                    {/* Scan line */}
+                    <div className="animate-mockup-scan" style={{ animationDelay: '0.6s' }} />
                     {/* Hero banner */}
                     <div
                       className={`h-9 rounded-lg bg-gradient-to-r ${accent} opacity-25`}
