@@ -11,6 +11,7 @@ import { ListingCard } from "@/components/listings/ListingCard"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
 import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, type LucideIcon } from "lucide-react"
+import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 
 export const dynamic = "force-dynamic"
 
@@ -339,8 +340,9 @@ export default async function ListingPage({
       </div>
 
       {/* Contact form */}
+      {listing.status === "active" && <FloatingContactButton />}
       {listing.status === "active" ? (
-        <div>
+        <div id="contact">
           <h2 className="text-xl font-semibold mb-4">Contact the Seller</h2>
           {session ? (
             <ContactForm
