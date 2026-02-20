@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
-import { DollarSign, TrendingUp, Eye, Clock, Globe, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
+import { DollarSign, TrendingUp, Eye, Clock, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
 
 function isNewListing(createdAt: Date | string): boolean {
   const created = new Date(createdAt)
@@ -41,6 +41,17 @@ const CATEGORY_STYLES: Record<string, string> = {
   "community": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
   "service-business": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
   "other": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
+}
+
+const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: string }> = {
+  "content-site":       { bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",            radial: "rgba(14,165,233,0.14)",  icon: "text-sky-400 dark:text-sky-700" },
+  "saas":               { bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", radial: "rgba(139,92,246,0.14)",  icon: "text-violet-400 dark:text-violet-700" },
+  "ecommerce":          { bg: "from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/30", radial: "rgba(249,115,22,0.14)", icon: "text-orange-400 dark:text-orange-700" },
+  "tool-or-app":        { bg: "from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/30",        radial: "rgba(20,184,166,0.14)",  icon: "text-teal-400 dark:text-teal-700" },
+  "newsletter":         { bg: "from-rose-50 to-rose-100 dark:from-rose-950/40 dark:to-rose-900/30",        radial: "rgba(244,63,94,0.14)",   icon: "text-rose-400 dark:text-rose-700" },
+  "community":          { bg: "from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/30", radial: "rgba(16,185,129,0.14)", icon: "text-emerald-400 dark:text-emerald-700" },
+  "service-business":   { bg: "from-amber-50 to-amber-100 dark:from-amber-950/40 dark:to-amber-900/30",    radial: "rgba(245,158,11,0.14)", icon: "text-amber-400 dark:text-amber-700" },
+  "other":              { bg: "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",    radial: "rgba(100,116,139,0.12)", icon: "text-slate-400 dark:text-slate-600" },
 }
 
 export function ListingCard({
@@ -89,10 +100,13 @@ export function ListingCard({
             )}
           </div>
         ) : (
-          <div className="aspect-video rounded-t-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.12)_0%,_transparent_70%)]" />
+          <div className={`aspect-video rounded-t-lg bg-gradient-to-br ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).bg} flex items-center justify-center relative overflow-hidden`}>
+            <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).radial} 0%, transparent 70%)` }} />
             <div className="relative flex flex-col items-center gap-2 select-none">
-              <Globe className="w-10 h-10 text-indigo-300 dark:text-indigo-700" />
+              <CategoryIcon className={`w-10 h-10 ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon}`} />
+              <span className={`text-[10px] font-semibold uppercase tracking-widest ${(CATEGORY_PLACEHOLDER[listing.category] ?? CATEGORY_PLACEHOLDER["other"]).icon} opacity-70`}>
+                {CATEGORY_LABELS[listing.category] ?? listing.category}
+              </span>
             </div>
             {showNewBadge && (
               <span className="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-md">
