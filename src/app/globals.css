@@ -530,3 +530,21 @@
 .cat-glow-emerald { --cat-glow: rgba(16, 185, 129, 0.40); }
 .cat-glow-amber   { --cat-glow: rgba(245, 158, 11, 0.40); }
 .cat-glow-slate   { --cat-glow: rgba(100, 116, 139, 0.28); }
+
+@keyframes nav-border-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-nav-border {
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(99, 102, 241, 0.5) 20%,
+    rgba(52, 211, 153, 0.6) 50%,
+    rgba(99, 102, 241, 0.5) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: nav-border-flow 5s linear infinite;
+}

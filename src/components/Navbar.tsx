@@ -37,7 +37,7 @@ export function Navbar() {
   }
 
   return (
-    <nav className={`sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? "shadow-md shadow-black/5 dark:shadow-black/20" : ""}`}>
+    <nav className={`sticky top-0 z-50 relative bg-background/80 backdrop-blur-md transition-shadow duration-300 ${scrolled ? "shadow-md shadow-black/5 dark:shadow-black/20" : ""}`}>
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight group">
           <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-xs font-bold shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3">
@@ -74,6 +74,7 @@ export function Navbar() {
           )}
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 h-px animate-nav-border" />
     </nav>
   )
 }
