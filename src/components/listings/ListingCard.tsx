@@ -75,6 +75,17 @@ const CATEGORY_ACCENT: Record<string, string> = {
   "other":            "from-slate-400 to-slate-500",
 }
 
+const DEAL_TIERS = [
+  { maxMultiple: 20, label: "Great Deal", dotCls: "bg-emerald-400", textCls: "text-emerald-700 dark:text-emerald-300", bgCls: "bg-emerald-50 dark:bg-emerald-950/40" },
+  { maxMultiple: 30, label: "Fair Value", dotCls: "bg-amber-400",   textCls: "text-amber-700 dark:text-amber-300",   bgCls: "bg-amber-50 dark:bg-amber-950/40"   },
+  { maxMultiple: 42, label: "Premium",    dotCls: "bg-orange-400",  textCls: "text-orange-700 dark:text-orange-300", bgCls: "bg-orange-50 dark:bg-orange-950/40" },
+  { maxMultiple: Infinity, label: "Expensive", dotCls: "bg-red-400", textCls: "text-red-700 dark:text-red-300", bgCls: "bg-red-50 dark:bg-red-950/40" },
+] as const
+
+function getDealTier(multiple: number) {
+  return DEAL_TIERS.find((t) => multiple < t.maxMultiple) ?? DEAL_TIERS[DEAL_TIERS.length - 1]
+}
+
 const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: string }> = {
   "content-site":       { bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",            radial: "rgba(14,165,233,0.14)",  icon: "text-sky-400 dark:text-sky-700" },
   "saas":               { bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", radial: "rgba(139,92,246,0.14)",  icon: "text-violet-400 dark:text-violet-700" },
@@ -109,6 +120,7 @@ export function ListingCard({
 
   const showNewBadge = isNewListing(listing.createdAt)
   const CategoryIcon = CATEGORY_ICONS[listing.category] ?? LayoutGrid
+  const dealTier = multiple ? getDealTier(parseFloat(multiple)) : null
 
   return (
     <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up block relative" style={{ animationDelay: `${index * 0.08}s` }}>
@@ -215,9 +227,15 @@ export function ListingCard({
             >
               {sellerUsername[0].toUpperCase()}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground flex-1 min-w-0">
               Listed by <span className="font-medium text-foreground">{sellerUsername}</span>
             </p>
+            {dealTier && (
+              <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${dealTier.bgCls} ${dealTier.textCls}`}>
+                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dealTier.dotCls}`} />
+                {dealTier.label}
+              </span>
+            )}
           </div>
         </CardContent>
       </Card>
