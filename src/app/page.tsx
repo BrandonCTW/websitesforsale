@@ -193,7 +193,7 @@ export default async function HomePage({
       </div>
 
       {/* How it works */}
-      <div className="mb-10">
+      <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-6">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
           <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">How it works</span>
@@ -243,7 +243,7 @@ export default async function HomePage({
       </div>
 
       {/* Sell Your Site section */}
-      <div className="mb-10 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 dark:from-indigo-950/30 dark:via-slate-900 dark:to-emerald-950/20 overflow-hidden">
+      <div className="mb-10 animate-on-scroll rounded-2xl border border-indigo-200 dark:border-indigo-900/40 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 dark:from-indigo-950/30 dark:via-slate-900 dark:to-emerald-950/20 overflow-hidden">
         <div className="grid md:grid-cols-2 gap-0">
           {/* Left: copy + CTA */}
           <div className="p-8 flex flex-col justify-center">
@@ -317,7 +317,7 @@ export default async function HomePage({
       </div>
 
       {/* Broker vs Direct comparison */}
-      <div className="mb-10">
+      <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-6">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
           <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">vs. traditional brokers</span>
@@ -399,7 +399,7 @@ export default async function HomePage({
       </div>
 
       {/* Browse by Category */}
-      <div className="mb-10">
+      <div className="mb-10 animate-on-scroll">
         <div className="flex items-center gap-4 mb-5">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
           <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Browse by category</span>
