@@ -454,3 +454,12 @@
   color: transparent;
   animation: price-gradient-flow 4s linear infinite;
 }
+
+.animate-brand-gradient {
+  background-image: linear-gradient(to right, #4f46e5, #059669, #818cf8, #4f46e5);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-gradient-flow 9s linear infinite;
+}

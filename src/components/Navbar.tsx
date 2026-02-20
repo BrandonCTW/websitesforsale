@@ -43,7 +43,7 @@ export function Navbar() {
           <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-gradient-to-br from-indigo-500 to-emerald-500 text-white text-xs font-bold shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3">
             W
           </span>
-          <span className="bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+          <span className="animate-brand-gradient">
             WebsitesForSale
           </span>
         </Link>
