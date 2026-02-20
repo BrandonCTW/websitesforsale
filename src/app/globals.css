@@ -755,3 +755,13 @@
 .animate-upload-zone-glow {
   animation: upload-zone-glow 3s ease-in-out infinite;
 }
+
+@keyframes count-complete {
+  0%   { filter: none; }
+  25%  { filter: drop-shadow(0 0 5px rgba(251,191,36,0.85)) drop-shadow(0 0 12px rgba(251,191,36,0.45)); }
+  100% { filter: none; }
+}
+
+.animate-count-complete {
+  animation: count-complete 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

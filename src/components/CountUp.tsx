@@ -20,11 +20,13 @@ export function CountUp({
   suffix?: string
 }) {
   const [value, setValue] = useState(0)
+  const [complete, setComplete] = useState(false)
   const startRef = useRef<number | null>(null)
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
     startRef.current = null
+    setComplete(false)
     function tick(timestamp: number) {
       if (startRef.current === null) startRef.current = timestamp
       const elapsed = timestamp - startRef.current
@@ -32,6 +34,8 @@ export function CountUp({
       setValue(Math.round(easeOutExpo(progress) * target))
       if (progress < 1) {
         rafRef.current = requestAnimationFrame(tick)
+      } else {
+        setComplete(true)
       }
     }
     rafRef.current = requestAnimationFrame(tick)
@@ -39,7 +43,7 @@ export function CountUp({
   }, [target, duration])
 
   return (
-    <span className={className}>
+    <span className={`${className ?? ""}${complete ? " animate-count-complete" : ""}`}>
       {prefix}
       {value.toLocaleString()}
       {suffix}
