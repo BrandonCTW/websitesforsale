@@ -253,7 +253,7 @@ export function ListingCard({
                 <DollarSign className="h-3 w-3 shrink-0" />
                 Asking Price
               </p>
-              <p className="font-bold bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+              <p className="font-bold animate-price-gradient">
                 {formatCurrency(listing.askingPrice)}
               </p>
             </div>
