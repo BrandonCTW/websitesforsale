@@ -70,8 +70,16 @@ export default function SettingsPage() {
       <div className="max-w-sm">
         {status === "success" ? (
           <div className="rounded-2xl overflow-hidden border border-emerald-200 dark:border-emerald-800/50 shadow-sm">
-            <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4">
-              <p className="font-semibold text-white flex items-center gap-2">
+            <div className="relative bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4 overflow-hidden">
+              {/* Orb blob */}
+              <div className="animate-orb-1 absolute -top-4 -right-4 w-20 h-20 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+              {/* Shimmer sweep */}
+              <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+              {/* Sparkle particles */}
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-200/70 blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '12%', animationDuration: '3.2s', animationDelay: '0s' }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '70%', left: '6%', animationDuration: '2.6s', animationDelay: '1.3s' }} />
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-teal-200/65 blur-[0.5px] pointer-events-none" style={{ top: '22%', left: '40%', animationDuration: '3.7s', animationDelay: '0.7s' }} />
+              <p className="font-semibold text-white flex items-center gap-2 relative">
                 <CheckCircle className="h-4 w-4" />
                 Password updated
               </p>
@@ -91,12 +99,22 @@ export default function SettingsPage() {
         ) : (
           <div className="rounded-2xl overflow-hidden border border-indigo-100 dark:border-indigo-900/50 shadow-sm">
             {/* Gradient header */}
-            <div className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-500 px-6 py-4">
-              <p className="font-semibold text-white text-base flex items-center gap-2">
+            <div className="relative bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-500 px-6 py-4 overflow-hidden">
+              {/* Ambient orb blob */}
+              <div className="animate-orb-1 absolute -top-4 -right-4 w-24 h-24 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+              {/* Shimmer sweep */}
+              <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+              {/* Sparkle particles */}
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-white/70 blur-[0.5px] pointer-events-none" style={{ top: '20%', left: '6%', animationDuration: '3.2s', animationDelay: '0s' }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/80 pointer-events-none" style={{ top: '68%', left: '4%', animationDuration: '2.5s', animationDelay: '1.3s' }} />
+              <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-200/70 blur-[0.5px] pointer-events-none" style={{ top: '22%', right: '10%', animationDuration: '3.8s', animationDelay: '0.6s' }} />
+              <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/65 pointer-events-none" style={{ top: '65%', right: '8%', animationDuration: '2.7s', animationDelay: '1.9s' }} />
+              <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/20 blur-sm pointer-events-none" style={{ top: '42%', left: '54%', animationDuration: '4.1s', animationDelay: '0.9s' }} />
+              <p className="font-semibold text-white text-base flex items-center gap-2 relative">
                 <Lock className="h-4 w-4" />
                 Change password
               </p>
-              <p className="text-indigo-100 text-sm mt-0.5">
+              <p className="text-indigo-100 text-sm mt-0.5 relative">
                 Keep your account secure with a strong password
               </p>
             </div>
@@ -133,20 +151,24 @@ export default function SettingsPage() {
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-500 hover:from-indigo-700 hover:to-violet-600 disabled:opacity-60 disabled:cursor-not-allowed px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
-              >
-                {status === "loading" ? (
-                  <>
-                    <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                    Saving…
-                  </>
-                ) : (
-                  "Update password"
-                )}
-              </button>
+              <div className="relative inline-block">
+                <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 pointer-events-none" aria-hidden="true" />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="relative overflow-hidden inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-violet-500 hover:from-indigo-700 hover:to-violet-600 disabled:opacity-60 disabled:cursor-not-allowed px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all"
+                >
+                  <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                  {status === "loading" ? (
+                    <>
+                      <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin relative z-10" />
+                      <span className="relative z-10">Saving…</span>
+                    </>
+                  ) : (
+                    <span className="relative z-10">Update password</span>
+                  )}
+                </button>
+              </div>
             </form>
           </div>
         )}
