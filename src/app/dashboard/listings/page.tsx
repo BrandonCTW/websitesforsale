@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { formatCurrency } from "@/lib/slug"
 import { ListingActions } from "@/components/dashboard/ListingActions"
-import { Globe, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, TrendingUp, type LucideIcon } from "lucide-react"
+import { FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, TrendingUp, type LucideIcon } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -43,6 +43,39 @@ const CATEGORY_STYLES: Record<string, string> = {
   "community": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
   "service-business": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
   "other": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
+}
+
+const CATEGORY_PLACEHOLDER_BG: Record<string, string> = {
+  "content-site":     "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",
+  "saas":             "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30",
+  "ecommerce":        "from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/30",
+  "tool-or-app":      "from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/30",
+  "newsletter":       "from-rose-50 to-rose-100 dark:from-rose-950/40 dark:to-rose-900/30",
+  "community":        "from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/30",
+  "service-business": "from-amber-50 to-amber-100 dark:from-amber-950/40 dark:to-amber-900/30",
+  "other":            "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",
+}
+
+const CATEGORY_ICON_COLOR: Record<string, string> = {
+  "content-site":     "text-sky-400 dark:text-sky-600",
+  "saas":             "text-violet-400 dark:text-violet-600",
+  "ecommerce":        "text-orange-400 dark:text-orange-600",
+  "tool-or-app":      "text-teal-400 dark:text-teal-600",
+  "newsletter":       "text-rose-400 dark:text-rose-600",
+  "community":        "text-emerald-400 dark:text-emerald-600",
+  "service-business": "text-amber-400 dark:text-amber-600",
+  "other":            "text-slate-400 dark:text-slate-600",
+}
+
+const CATEGORY_RADIAL: Record<string, string> = {
+  "content-site":     "rgba(14,165,233,0.18)",
+  "saas":             "rgba(139,92,246,0.18)",
+  "ecommerce":        "rgba(249,115,22,0.18)",
+  "tool-or-app":      "rgba(20,184,166,0.18)",
+  "newsletter":       "rgba(244,63,94,0.18)",
+  "community":        "rgba(16,185,129,0.18)",
+  "service-business": "rgba(245,158,11,0.18)",
+  "other":            "rgba(99,102,241,0.14)",
 }
 
 const STATUS_CONFIG: Record<string, {
@@ -189,9 +222,11 @@ export default async function DashboardListingsPage() {
             return (
               <div
                 key={listing.id}
-                className={`group rounded-xl border border-l-4 ${s.borderColor} bg-card p-4 transition-all duration-200 ${s.bgGradient} hover:shadow-md animate-fade-in-up`}
+                className={`group relative rounded-xl border border-l-4 ${s.borderColor} bg-card p-4 transition-all duration-200 ${s.bgGradient} hover:shadow-md animate-fade-in-up overflow-hidden`}
                 style={{ animationDelay: `${index * 0.07}s` }}
               >
+                {/* Shine sweep on hover */}
+                <div className="card-shine absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent pointer-events-none z-20" />
                 <div className="flex items-center gap-4">
                   {/* Thumbnail */}
                   {thumbnailUrl ? (
@@ -201,8 +236,15 @@ export default async function DashboardListingsPage() {
                       className="w-16 h-12 object-cover rounded-lg shrink-0 border border-border/40"
                     />
                   ) : (
-                    <div className="w-16 h-12 rounded-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center shrink-0 border border-border/40">
-                      <Globe className="w-5 h-5 text-indigo-300 dark:text-indigo-700" />
+                    <div className={`relative w-16 h-12 rounded-lg bg-gradient-to-br overflow-hidden shrink-0 border border-border/40 ${CATEGORY_PLACEHOLDER_BG[listing.category] ?? CATEGORY_PLACEHOLDER_BG["other"]}`}>
+                      {/* Radial glow */}
+                      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top right, ${CATEGORY_RADIAL[listing.category] ?? CATEGORY_RADIAL["other"]} 0%, transparent 70%)` }} />
+                      {/* Category icon */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <CatIcon className={`w-6 h-6 ${CATEGORY_ICON_COLOR[listing.category] ?? CATEGORY_ICON_COLOR["other"]}`} />
+                      </div>
+                      {/* Scan line */}
+                      <div className="animate-mockup-scan" style={{ animationDelay: `${index * 1.4}s` }} />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
