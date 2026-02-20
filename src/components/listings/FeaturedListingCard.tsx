@@ -195,11 +195,20 @@ export function FeaturedListingCard({
         <div className={`absolute top-0 left-0 right-0 h-[3px] z-10 bg-gradient-to-r ${accent}`} />
 
         {/* Spotlight badge */}
-        <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-indigo-200 dark:border-indigo-800/60 rounded-full px-2.5 py-1 shadow-sm">
-          <Sparkles className="w-3 h-3 text-indigo-500" />
-          <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-            Spotlight
-          </span>
+        <div className="absolute top-4 left-4 z-20 relative inline-flex">
+          {/* Pulsing gradient ring */}
+          <span className="animate-cta-ring absolute -inset-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none opacity-70" aria-hidden="true" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/80 blur-[0.5px] pointer-events-none" style={{ top: '-7px', left: '-4px', animationDuration: '2.8s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/75 pointer-events-none" style={{ bottom: '-5px', right: '-4px', animationDuration: '3.2s', animationDelay: '1.3s' }} />
+          <div className="relative overflow-hidden flex items-center gap-1.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border border-indigo-200 dark:border-indigo-800/60 rounded-full px-2.5 py-1 shadow-sm">
+            {/* Shimmer sweep */}
+            <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-indigo-300/[0.20] to-transparent pointer-events-none" aria-hidden="true" />
+            <Sparkles className="w-3 h-3 text-indigo-500 relative z-10" />
+            <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider relative z-10">
+              Spotlight
+            </span>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-[44%_1fr] pt-[3px]">
