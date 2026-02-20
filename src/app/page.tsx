@@ -4,7 +4,7 @@ import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
-import { Search } from "lucide-react"
+import { Search, ShieldCheck, MessageCircle, BadgePercent } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -73,15 +73,15 @@ export default async function HomePage({
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-4 py-1.5 text-sm text-slate-200 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 inline-block" />
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                 Zero broker fees
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-4 py-1.5 text-sm text-slate-200 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 inline-block" />
+                <MessageCircle className="h-3.5 w-3.5 text-indigo-400 shrink-0" />
                 Direct seller contact
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-4 py-1.5 text-sm text-slate-200 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 inline-block" />
+                <BadgePercent className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                 No commissions
               </span>
             </div>

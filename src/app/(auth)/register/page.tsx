@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Zap, MessageCircle, TrendingUp } from "lucide-react"
 
 export default function RegisterPage() {
   return <Suspense><RegisterForm /></Suspense>
@@ -71,16 +72,18 @@ function RegisterForm() {
           </div>
 
           <div className="space-y-4">
-            {[
-              { color: "emerald", text: "List your site in minutes" },
-              { color: "indigo", text: "Contact sellers directly — no fees" },
-              { color: "emerald", text: "Browse verified revenue metrics" },
-            ].map(({ color, text }) => (
-              <div key={text} className="flex items-center gap-3">
-                <div className={`h-2 w-2 rounded-full bg-${color}-400 shrink-0`} />
-                <span className="text-slate-300 text-sm">{text}</span>
-              </div>
-            ))}
+            <div className="flex items-center gap-3">
+              <Zap className="h-4 w-4 text-emerald-400 shrink-0" />
+              <span className="text-slate-300 text-sm">List your site in minutes</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <MessageCircle className="h-4 w-4 text-indigo-400 shrink-0" />
+              <span className="text-slate-300 text-sm">Contact sellers directly — no fees</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <TrendingUp className="h-4 w-4 text-emerald-400 shrink-0" />
+              <span className="text-slate-300 text-sm">Browse verified revenue metrics</span>
+            </div>
           </div>
         </div>
 

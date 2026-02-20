@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ShieldCheck, MessageCircle } from "lucide-react"
 
 export function Footer() {
   return (
@@ -64,11 +65,11 @@ export function Footer() {
             </ul>
             <div className="pt-2 flex flex-col gap-1.5">
               <span className="inline-flex items-center gap-1.5 text-xs text-slate-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 inline-block" />
+                <ShieldCheck className="h-3 w-3 text-emerald-400 shrink-0" />
                 Zero broker fees
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs text-slate-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 inline-block" />
+                <MessageCircle className="h-3 w-3 text-indigo-400 shrink-0" />
                 Direct seller contact
               </span>
             </div>

@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { ShieldCheck, MessageCircle, BarChart2 } from "lucide-react"
 
 export default function LoginPage() {
   return <Suspense><LoginForm /></Suspense>
@@ -70,16 +71,18 @@ function LoginForm() {
           </div>
 
           <div className="space-y-4">
-            {[
-              { color: "emerald", text: "Zero broker fees or commissions" },
-              { color: "indigo", text: "Direct contact with sellers" },
-              { color: "emerald", text: "Verified listings with real metrics" },
-            ].map(({ color, text }) => (
-              <div key={text} className="flex items-center gap-3">
-                <div className={`h-2 w-2 rounded-full bg-${color}-400 shrink-0`} />
-                <span className="text-slate-300 text-sm">{text}</span>
-              </div>
-            ))}
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
+              <span className="text-slate-300 text-sm">Zero broker fees or commissions</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <MessageCircle className="h-4 w-4 text-indigo-400 shrink-0" />
+              <span className="text-slate-300 text-sm">Direct contact with sellers</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <BarChart2 className="h-4 w-4 text-emerald-400 shrink-0" />
+              <span className="text-slate-300 text-sm">Verified listings with real metrics</span>
+            </div>
           </div>
         </div>
 
