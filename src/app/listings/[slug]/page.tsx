@@ -399,21 +399,28 @@ export default async function ListingPage({
       {listing.faqs && listing.faqs.length > 0 && (
         <>
           <Separator />
-          <div>
+          <div className="relative">
+            {/* Sparkle particles near FAQ heading */}
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/65 blur-[0.5px] pointer-events-none" style={{ top: '6px', left: '2%', animationDuration: '3.3s', animationDelay: '0s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-violet-200/75 pointer-events-none" style={{ top: '4px', right: '4%', animationDuration: '2.7s', animationDelay: '1.4s' }} />
+            <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-indigo-200/40 blur-sm pointer-events-none" style={{ top: '14px', left: '52%', animationDuration: '4.0s', animationDelay: '0.8s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/50 pointer-events-none" style={{ top: '22px', right: '18%', animationDuration: '2.4s', animationDelay: '2.1s' }} />
             <div className="flex items-center gap-2.5 mb-5">
               <div className="h-7 w-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
                 <HelpCircle className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <h2 className="text-xl font-semibold">Frequently Asked Questions</h2>
+              <h2 className="text-xl font-semibold animate-section-label">Frequently Asked Questions</h2>
             </div>
             <div className="space-y-3">
               {listing.faqs.map((faq, i) => (
                 <div key={i} className="rounded-xl border border-border/60 overflow-hidden">
-                  <div className="flex items-start gap-3 px-5 py-4 bg-muted/30">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white text-[10px] font-bold mt-0.5 shadow-sm">
+                  <div className="relative flex items-start gap-3 px-5 py-4 bg-muted/30 overflow-hidden">
+                    {/* Shimmer sweep */}
+                    <div className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-indigo-400/[0.06] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: `${i * 1.1}s` }} />
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white text-[10px] font-bold mt-0.5 shadow-sm relative z-10">
                       {i + 1}
                     </div>
-                    <p className="font-semibold text-sm leading-snug pt-0.5">{faq.q}</p>
+                    <p className="font-semibold text-sm leading-snug pt-0.5 relative z-10">{faq.q}</p>
                   </div>
                   <div className="px-5 py-4 border-t border-border/40 bg-background/60 pl-14">
                     <p className="text-muted-foreground text-sm whitespace-pre-wrap leading-relaxed">{faq.a}</p>
