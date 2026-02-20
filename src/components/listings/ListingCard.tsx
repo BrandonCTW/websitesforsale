@@ -43,6 +43,17 @@ const CATEGORY_STYLES: Record<string, string> = {
   "other": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
 }
 
+const CARD_HOVER_STYLES: Record<string, string> = {
+  "content-site":     "hover:shadow-sky-100/70 dark:hover:shadow-sky-950/60 hover:border-sky-200/80 dark:hover:border-sky-800/60",
+  "saas":             "hover:shadow-violet-100/70 dark:hover:shadow-violet-950/60 hover:border-violet-200/80 dark:hover:border-violet-800/60",
+  "ecommerce":        "hover:shadow-orange-100/70 dark:hover:shadow-orange-950/60 hover:border-orange-200/80 dark:hover:border-orange-800/60",
+  "tool-or-app":      "hover:shadow-teal-100/70 dark:hover:shadow-teal-950/60 hover:border-teal-200/80 dark:hover:border-teal-800/60",
+  "newsletter":       "hover:shadow-rose-100/70 dark:hover:shadow-rose-950/60 hover:border-rose-200/80 dark:hover:border-rose-800/60",
+  "community":        "hover:shadow-emerald-100/70 dark:hover:shadow-emerald-950/60 hover:border-emerald-200/80 dark:hover:border-emerald-800/60",
+  "service-business": "hover:shadow-amber-100/70 dark:hover:shadow-amber-950/60 hover:border-amber-200/80 dark:hover:border-amber-800/60",
+  "other":            "hover:shadow-slate-200/70 dark:hover:shadow-slate-800/60 hover:border-slate-300/80 dark:hover:border-slate-700/60",
+}
+
 const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: string }> = {
   "content-site":       { bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",            radial: "rgba(14,165,233,0.14)",  icon: "text-sky-400 dark:text-sky-700" },
   "saas":               { bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", radial: "rgba(139,92,246,0.14)",  icon: "text-violet-400 dark:text-violet-700" },
@@ -80,7 +91,7 @@ export function ListingCard({
 
   return (
     <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.08}s` }}>
-      <Card className="h-full hover:shadow-xl hover:shadow-indigo-100/60 dark:hover:shadow-indigo-950/50 transition-all duration-300 cursor-pointer group hover:border-indigo-200/70 dark:hover:border-indigo-800/50 hover:-translate-y-1">
+      <Card className={`h-full hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 ${CARD_HOVER_STYLES[listing.category] ?? CARD_HOVER_STYLES["other"]}`}>
         {imageUrl ? (
           <div className="aspect-video overflow-hidden rounded-t-lg bg-muted relative">
             <img
