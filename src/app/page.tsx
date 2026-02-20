@@ -71,6 +71,16 @@ export default async function HomePage({
     .from(listings)
     .where(eq(listings.status, "active"))
 
+  const categoryCountRows = await db
+    .select({ category: listings.category, total: count() })
+    .from(listings)
+    .where(eq(listings.status, "active"))
+    .groupBy(listings.category)
+
+  const categoryCountMap = Object.fromEntries(
+    categoryCountRows.map(({ category, total }) => [category, total])
+  )
+
   const images = filtered.length
     ? await db.select().from(listingImages).where(eq(listingImages.displayOrder, 0))
     : []
@@ -235,16 +245,26 @@ export default async function HomePage({
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder }) => {
             const isActive = category === key
+            const listingCount = categoryCountMap[key] ?? 0
             return (
               <Link
                 key={key}
                 href={isActive ? "/" : `/?category=${key}`}
-                className={`group flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
+                className={`group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
                   isActive
                     ? `${activeBorder} shadow-sm ring-1 ring-current ring-opacity-20`
                     : `border-slate-100 dark:border-slate-800 ${hoverBorder} hover:shadow-sm`
                 }`}
               >
+                {listingCount > 0 && (
+                  <span className={`absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                    isActive
+                      ? "bg-white/30 text-current"
+                      : "bg-white/70 dark:bg-white/10 text-slate-500 dark:text-slate-400"
+                  }`}>
+                    {listingCount}
+                  </span>
+                )}
                 <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/80 dark:bg-white/5 shadow-sm group-hover:scale-110 group-hover:shadow-md transition-all duration-200">
                   <Icon className={`w-5 h-5 ${iconCls}`} />
                 </div>
