@@ -3,9 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, type LucideIcon } from "lucide-react"
+import { FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, Search, X, type LucideIcon } from "lucide-react"
 
 const CATEGORY_LABELS: Record<string, string> = {
   "content-site": "Content Site",
@@ -151,39 +150,57 @@ export function FilterBar({ categories }: { categories: string[] }) {
       </div>
 
       {/* Search + price row */}
-      <div className="flex flex-wrap gap-3 items-center">
-        <form onSubmit={handleSearch} className="flex gap-2 flex-1 min-w-[200px]">
-          <Input
-            placeholder="Search listings..."
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            className="max-w-xs"
-          />
-          <Button type="submit" variant="secondary" size="sm">Search</Button>
-        </form>
+      <div className="relative overflow-hidden rounded-xl border border-border/60 bg-background/80 backdrop-blur-sm px-3 py-3 shadow-sm">
+        {/* Subtle shimmer sweep */}
+        <div className="animate-shimmer absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400/[0.04] to-transparent pointer-events-none" />
+        <div className="relative flex flex-wrap gap-3 items-center">
+          <form onSubmit={handleSearch} className="flex gap-2 flex-1 min-w-[200px]">
+            <div className="relative flex-1 max-w-xs group">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground group-focus-within:text-indigo-500 transition-colors duration-200 pointer-events-none" />
+              <Input
+                placeholder="Search listings..."
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                className="pl-8 focus-visible:ring-indigo-400/50 focus-visible:border-indigo-300 dark:focus-visible:border-indigo-700 transition-all duration-200"
+              />
+            </div>
+            <button
+              type="submit"
+              className="relative overflow-hidden inline-flex items-center gap-1.5 rounded-md bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-px shrink-0"
+            >
+              <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" aria-hidden="true" />
+              <Search className="h-3.5 w-3.5 relative z-10" />
+              <span className="relative z-10">Search</span>
+            </button>
+          </form>
 
-        <Select
-          value={searchParams.get("maxPrice") ?? "all"}
-          onValueChange={(v) => apply("maxPrice", v)}
-        >
-          <SelectTrigger className="w-40">
-            <SelectValue placeholder="Max price" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Any price</SelectItem>
-            <SelectItem value="1000">Under $1,000</SelectItem>
-            <SelectItem value="5000">Under $5,000</SelectItem>
-            <SelectItem value="10000">Under $10,000</SelectItem>
-            <SelectItem value="25000">Under $25,000</SelectItem>
-            <SelectItem value="50000">Under $50,000</SelectItem>
-          </SelectContent>
-        </Select>
+          <Select
+            value={searchParams.get("maxPrice") ?? "all"}
+            onValueChange={(v) => apply("maxPrice", v)}
+          >
+            <SelectTrigger className="w-40 focus:ring-indigo-400/50 focus:border-indigo-300 dark:focus:border-indigo-700">
+              <SelectValue placeholder="Max price" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Any price</SelectItem>
+              <SelectItem value="1000">Under $1,000</SelectItem>
+              <SelectItem value="5000">Under $5,000</SelectItem>
+              <SelectItem value="10000">Under $10,000</SelectItem>
+              <SelectItem value="25000">Under $25,000</SelectItem>
+              <SelectItem value="50000">Under $50,000</SelectItem>
+            </SelectContent>
+          </Select>
 
-        {hasFilters && (
-          <Button variant="ghost" size="sm" onClick={reset}>
-            Clear filters
-          </Button>
-        )}
+          {hasFilters && (
+            <button
+              onClick={reset}
+              className="inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground border border-border/60 hover:border-border bg-transparent hover:bg-muted/50 transition-all duration-200 shrink-0"
+            >
+              <X className="h-3 w-3" />
+              Clear
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )
