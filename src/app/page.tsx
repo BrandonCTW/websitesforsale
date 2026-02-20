@@ -649,6 +649,19 @@ export default async function HomePage({
               <>
                 {spotlightItem && (
                   <div className="mb-6">
+                    {/* Spotlight section header */}
+                    <div className="relative flex items-center gap-4 mb-4">
+                      <div className="h-px flex-1 animate-section-divider" />
+                      <div className="flex items-center gap-2 animate-section-label">
+                        <span className="relative flex h-1.5 w-1.5 shrink-0">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-400" />
+                        </span>
+                        <Sparkles className="h-3 w-3 text-indigo-500 dark:text-indigo-400 shrink-0" />
+                        <span className="text-[11px] font-bold uppercase tracking-widest">Spotlight Listing</span>
+                      </div>
+                      <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "3.5s" }} />
+                    </div>
                     <FeaturedListingCard
                       listing={spotlightItem.listing}
                       sellerUsername={spotlightItem.seller.username}
