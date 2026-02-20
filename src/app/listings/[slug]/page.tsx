@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 import { ContactForm } from "@/components/listings/ContactForm"
+import { ImageGallery } from "@/components/listings/ImageGallery"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
 
@@ -111,16 +112,7 @@ export default async function ListingPage({
 
       {/* Images */}
       {images.length > 0 && (
-        <div className="grid grid-cols-2 gap-3">
-          {images.map((img, i) => (
-            <img
-              key={img.id}
-              src={img.url}
-              alt={`Screenshot ${i + 1}`}
-              className={`rounded-lg object-cover w-full ${i === 0 && images.length > 1 ? "col-span-2 aspect-video" : "aspect-video"}`}
-            />
-          ))}
-        </div>
+        <ImageGallery images={images} />
       )}
 
       {/* Key metrics */}
