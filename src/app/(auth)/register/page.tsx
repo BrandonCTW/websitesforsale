@@ -6,7 +6,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function RegisterPage() {
   return <Suspense><RegisterForm /></Suspense>
@@ -44,15 +43,67 @@ function RegisterForm() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-56px)] items-center justify-center px-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Create an account</CardTitle>
-          <CardDescription>Free to join — list sites for sale or contact sellers</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={submit} className="space-y-4">
-            <div className="space-y-1">
+    <div className="flex min-h-[calc(100vh-56px)]">
+      {/* Left panel — branding */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex-col justify-between p-12">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.25)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
+        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
+
+        <div className="relative">
+          <Link href="/" className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+            WebsitesForSale
+          </Link>
+        </div>
+
+        <div className="relative space-y-8">
+          <div>
+            <h2 className="text-3xl font-bold text-white leading-snug mb-3">
+              Join the marketplace.{" "}
+              <span className="bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+                It&apos;s free.
+              </span>
+            </h2>
+            <p className="text-slate-400 text-base">
+              List your site or browse hundreds of profitable websites for sale — no fees, no middleman.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { color: "emerald", text: "List your site in minutes" },
+              { color: "indigo", text: "Contact sellers directly — no fees" },
+              { color: "emerald", text: "Browse verified revenue metrics" },
+            ].map(({ color, text }) => (
+              <div key={text} className="flex items-center gap-3">
+                <div className={`h-2 w-2 rounded-full bg-${color}-400 shrink-0`} />
+                <span className="text-slate-300 text-sm">{text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <p className="text-slate-500 text-xs">
+            &copy; {new Date().getFullYear()} WebsitesForSale. All rights reserved.
+          </p>
+        </div>
+      </div>
+
+      {/* Right panel — form */}
+      <div className="flex-1 flex items-center justify-center px-4 py-12 bg-background">
+        <div className="w-full max-w-sm space-y-8">
+          <div>
+            <Link href="/" className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent lg:hidden">
+              WebsitesForSale
+            </Link>
+            <h1 className="text-2xl font-bold mt-6 lg:mt-0">Create your account</h1>
+            <p className="text-muted-foreground text-sm mt-1">Free to join — list sites or contact sellers</p>
+          </div>
+
+          <form onSubmit={submit} className="space-y-5">
+            <div className="space-y-1.5">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -61,9 +112,10 @@ function RegisterForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoFocus
+                placeholder="you@example.com"
               />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
@@ -74,7 +126,7 @@ function RegisterForm() {
               />
               <p className="text-xs text-muted-foreground">3–20 chars, letters/numbers/_ -</p>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <Label htmlFor="pw">Password</Label>
               <Input
                 id="pw"
@@ -86,19 +138,28 @@ function RegisterForm() {
                 placeholder="min 8 characters"
               />
             </div>
-            {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            {error && (
+              <div className="rounded-lg bg-destructive/10 border border-destructive/20 px-3 py-2">
+                <p className="text-sm text-destructive">{error}</p>
+              </div>
+            )}
+            <Button
+              type="submit"
+              className="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white shadow-sm"
+              disabled={loading}
+            >
               {loading ? "Creating account..." : "Create account"}
             </Button>
           </form>
-          <p className="mt-4 text-sm text-center text-muted-foreground">
+
+          <p className="text-sm text-center text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="underline">
+            <Link href="/login" className="font-medium text-foreground hover:underline">
               Log in
             </Link>
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
