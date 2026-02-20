@@ -311,7 +311,12 @@ export function ListingCard({
             </p>
             {dealTier && (
               <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${dealTier.bgCls} ${dealTier.textCls}`}>
-                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dealTier.dotCls}`} />
+                <span className="relative flex items-center justify-center shrink-0 w-1.5 h-1.5">
+                  {dealTier.label === "Great Deal" && (
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${dealTier.dotCls} opacity-75`} />
+                  )}
+                  <span className={`relative inline-flex rounded-full w-1.5 h-1.5 ${dealTier.dotCls}`} />
+                </span>
                 {dealTier.label}
               </span>
             )}

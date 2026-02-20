@@ -271,7 +271,12 @@ export function FeaturedListingCard({
                   <span
                     className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${dealTier.bgCls} ${dealTier.textCls}`}
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full ${dealTier.dotCls}`} />
+                    <span className="relative flex items-center justify-center w-1.5 h-1.5">
+                      {dealTier.label === "Great Deal" && (
+                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${dealTier.dotCls} opacity-75`} />
+                      )}
+                      <span className={`relative inline-flex rounded-full w-1.5 h-1.5 ${dealTier.dotCls}`} />
+                    </span>
                     {dealTier.label}
                   </span>
                 )}
