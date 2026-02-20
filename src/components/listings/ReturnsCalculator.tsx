@@ -11,10 +11,10 @@ const SCENARIOS = [
 ] as const
 
 const SCENARIO_STYLES = [
-  { active: "bg-slate-700 text-white border-slate-600",       dot: "bg-slate-400",  bar: "bg-slate-400",   text: "text-slate-700 dark:text-slate-300" },
-  { active: "bg-emerald-600 text-white border-emerald-500",   dot: "bg-emerald-400", bar: "bg-emerald-500", text: "text-emerald-700 dark:text-emerald-400" },
-  { active: "bg-indigo-600 text-white border-indigo-500",     dot: "bg-indigo-400",  bar: "bg-indigo-500",  text: "text-indigo-700 dark:text-indigo-400" },
-  { active: "bg-violet-600 text-white border-violet-500",     dot: "bg-violet-400",  bar: "bg-violet-500",  text: "text-violet-700 dark:text-violet-400" },
+  { active: "bg-slate-700 text-white border-slate-600",       dot: "bg-slate-400",  bar: "bg-slate-400",   text: "text-slate-700 dark:text-slate-300",      gradient: "text-slate-700 dark:text-slate-300" },
+  { active: "bg-emerald-600 text-white border-emerald-500",   dot: "bg-emerald-400", bar: "bg-emerald-500", text: "text-emerald-700 dark:text-emerald-400",  gradient: "animate-revenue-gradient" },
+  { active: "bg-indigo-600 text-white border-indigo-500",     dot: "bg-indigo-400",  bar: "bg-indigo-500",  text: "text-indigo-700 dark:text-indigo-400",    gradient: "animate-price-gradient" },
+  { active: "bg-violet-600 text-white border-violet-500",     dot: "bg-violet-400",  bar: "bg-violet-500",  text: "text-violet-700 dark:text-violet-400",    gradient: "animate-violet-gradient" },
 ]
 
 function fmt(n: number): string {
@@ -111,7 +111,7 @@ export function ReturnsCalculator({
               const heightPct = maxProfit > 0 ? (y.profit / maxProfit) * 100 : 0
               return (
                 <div key={y.yr} className="flex-1 flex flex-col items-center gap-1.5">
-                  <span className={`text-[10px] font-bold ${styles.text}`}>{fmt(y.profit)}</span>
+                  <span className={`text-[10px] font-bold ${styles.gradient}`}>{fmt(y.profit)}</span>
                   <div className="w-full flex items-end" style={{ height: "56px" }}>
                     <div
                       className={`w-full rounded-t-md ${styles.bar} opacity-80 transition-all duration-500`}
@@ -132,7 +132,7 @@ export function ReturnsCalculator({
               <DollarSign className="h-3 w-3 text-muted-foreground" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">3-yr Profit</span>
             </div>
-            <p className={`text-base font-bold ${styles.text}`}>{fmt(cumulativeProfit)}</p>
+            <p className={`text-base font-bold ${styles.gradient}`}>{fmt(cumulativeProfit)}</p>
           </div>
 
           <div className="rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
@@ -140,7 +140,7 @@ export function ReturnsCalculator({
               <Zap className="h-3 w-3 text-muted-foreground" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">ROI</span>
             </div>
-            <p className={`text-base font-bold ${roi >= 0 ? styles.text : "text-red-600 dark:text-red-400"}`}>
+            <p className={`text-base font-bold ${roi >= 0 ? styles.gradient : "text-red-600 dark:text-red-400"}`}>
               {roi >= 0 ? "+" : ""}{roi.toFixed(0)}%
             </p>
           </div>
@@ -150,7 +150,7 @@ export function ReturnsCalculator({
               <Calendar className="h-3 w-3 text-muted-foreground" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">Payback</span>
             </div>
-            <p className={`text-base font-bold ${styles.text}`}>{paybackMonths}mo</p>
+            <p className={`text-base font-bold ${styles.gradient}`}>{paybackMonths}mo</p>
           </div>
         </div>
 
