@@ -298,20 +298,20 @@ export default async function HomePage({
                       <Sparkles className="h-2.5 w-2.5" /> AI Generated
                       <span className="animate-cursor inline-block w-[1.5px] h-3 bg-indigo-400 ml-0.5 align-middle" />
                     </p>
-                    <h3 className="font-semibold text-sm leading-snug">Profitable Recipe Blog for Sale</h3>
+                    <h3 className="font-semibold text-sm leading-snug animate-ai-title-type">Profitable Recipe Blog for Sale</h3>
                   </div>
                   <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 shrink-0">$12,000</span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 animate-ai-content-fade">
                   A well-established food & recipe content site with 45k monthly readers. Monetized through display ads and Amazon affiliates with consistent passive income. Built on WordPress with a clean, fast theme. Ready for a new owner to grow.
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  <span className="inline-flex items-center rounded-full bg-sky-100 dark:bg-sky-900/40 px-2.5 py-0.5 text-[10px] font-medium text-sky-700 dark:text-sky-300">Content Site</span>
-                  <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-2.5 py-0.5 text-[10px] font-medium text-blue-700 dark:text-blue-300">WordPress</span>
-                  <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900/30 px-2.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-300">Display Ads</span>
-                  <span className="inline-flex items-center rounded-full bg-orange-100 dark:bg-orange-900/30 px-2.5 py-0.5 text-[10px] font-medium text-orange-700 dark:text-orange-300">Affiliates</span>
+                  <span className="inline-flex items-center rounded-full bg-sky-100 dark:bg-sky-900/40 px-2.5 py-0.5 text-[10px] font-medium text-sky-700 dark:text-sky-300 animate-ai-tag-pop" style={{ animationDelay: "0s" }}>Content Site</span>
+                  <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-2.5 py-0.5 text-[10px] font-medium text-blue-700 dark:text-blue-300 animate-ai-tag-pop" style={{ animationDelay: "0.18s" }}>WordPress</span>
+                  <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900/30 px-2.5 py-0.5 text-[10px] font-medium text-amber-700 dark:text-amber-300 animate-ai-tag-pop" style={{ animationDelay: "0.36s" }}>Display Ads</span>
+                  <span className="inline-flex items-center rounded-full bg-orange-100 dark:bg-orange-900/30 px-2.5 py-0.5 text-[10px] font-medium text-orange-700 dark:text-orange-300 animate-ai-tag-pop" style={{ animationDelay: "0.54s" }}>Affiliates</span>
                 </div>
-                <div className="border-t border-slate-100 dark:border-slate-800 pt-2 flex gap-4 text-[10px] text-muted-foreground">
+                <div className="border-t border-slate-100 dark:border-slate-800 pt-2 flex gap-4 text-[10px] text-muted-foreground animate-ai-content-fade" style={{ animationDelay: "0.2s" }}>
                   <span><span className="font-medium text-foreground">$420</span>/mo revenue</span>
                   <span><span className="font-medium text-foreground">45k</span> pageviews</span>
                   <span><span className="font-medium text-foreground">3 yrs</span> old</span>

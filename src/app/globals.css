@@ -368,3 +368,39 @@
   background-size: 300% 100%;
   animation: section-divider-sweep 7s ease-in-out infinite;
 }
+
+/* AI mock card demo – typewriter title reveal */
+@keyframes ai-title-type {
+  0%, 6%    { clip-path: inset(0 100% 0 0); }
+  38%, 68%  { clip-path: inset(0 0%   0 0); }
+  82%, 100% { clip-path: inset(0 100% 0 0); }
+}
+
+.animate-ai-title-type {
+  animation: ai-title-type 8s ease-in-out infinite;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* AI mock card demo – description / metrics fade */
+@keyframes ai-content-fade {
+  0%, 35%   { opacity: 0; }
+  48%, 68%  { opacity: 1; }
+  82%, 100% { opacity: 0; }
+}
+
+.animate-ai-content-fade {
+  animation: ai-content-fade 8s ease-in-out infinite;
+}
+
+/* AI mock card demo – tag pill staggered pop */
+@keyframes ai-tag-pop {
+  0%, 40%   { opacity: 0; transform: scale(0.7); }
+  55%, 68%  { opacity: 1; transform: scale(1);   }
+  82%, 100% { opacity: 0; transform: scale(0.7); }
+}
+
+.animate-ai-tag-pop {
+  animation: ai-tag-pop 8s ease-in-out infinite;
+}
