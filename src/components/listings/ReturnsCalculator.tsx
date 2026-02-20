@@ -17,6 +17,13 @@ const SCENARIO_STYLES = [
   { active: "bg-violet-600 text-white border-violet-500",     dot: "bg-violet-400",  bar: "bg-violet-500",  text: "text-violet-700 dark:text-violet-400",    gradient: "animate-violet-gradient" },
 ]
 
+const SCENARIO_SPARKLE_COLORS = [
+  "rgba(148,163,184,0.75)",
+  "rgba(52,211,153,0.75)",
+  "rgba(99,102,241,0.75)",
+  "rgba(167,139,250,0.75)",
+]
+
 function fmt(n: number): string {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
   if (n >= 1_000)     return `$${Math.round(n / 1_000)}k`
@@ -35,6 +42,7 @@ export function ReturnsCalculator({
   const [scenarioIdx, setScenarioIdx] = useState(1)
   const scenario = SCENARIOS[scenarioIdx]
   const styles = SCENARIO_STYLES[scenarioIdx]
+  const sparkleColor = SCENARIO_SPARKLE_COLORS[scenarioIdx]
 
   // Profit margin: use actual profit if available, otherwise 40% estimate
   const profitMargin = monthlyProfit && monthlyProfit > 0
@@ -107,16 +115,21 @@ export function ReturnsCalculator({
         {/* Bar chart */}
         <div>
           <div className="flex items-end gap-3 h-24">
-            {years.map((y) => {
+            {years.map((y, i) => {
               const heightPct = maxProfit > 0 ? (y.profit / maxProfit) * 100 : 0
               return (
                 <div key={y.yr} className="flex-1 flex flex-col items-center gap-1.5">
                   <span className={`text-[10px] font-bold ${styles.gradient}`}>{fmt(y.profit)}</span>
                   <div className="w-full flex items-end" style={{ height: "56px" }}>
                     <div
-                      className={`w-full rounded-t-md ${styles.bar} opacity-80 transition-all duration-500`}
+                      className={`relative overflow-hidden w-full rounded-t-md ${styles.bar} opacity-80 transition-all duration-500`}
                       style={{ height: `${Math.max(heightPct, 4)}%` }}
-                    />
+                    >
+                      <div
+                        className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/35 to-transparent pointer-events-none"
+                        style={{ animationDelay: `${i * 0.45}s` }}
+                      />
+                    </div>
                   </div>
                   <span className="text-[10px] text-muted-foreground font-medium">Yr {y.yr}</span>
                 </div>
@@ -127,7 +140,9 @@ export function ReturnsCalculator({
 
         {/* KPI row */}
         <div className="grid grid-cols-3 gap-3 pt-1">
-          <div className="rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+          <div className="relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '9%', animationDuration: '3.2s', animationDelay: '0s', backgroundColor: sparkleColor }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '76%', right: '8%', animationDuration: '2.7s', animationDelay: '1.5s', backgroundColor: sparkleColor }} />
             <div className="flex items-center justify-center gap-1 mb-1">
               <DollarSign className="h-3 w-3 text-muted-foreground" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">3-yr Profit</span>
@@ -135,7 +150,9 @@ export function ReturnsCalculator({
             <p className={`text-base font-bold ${styles.gradient}`}>{fmt(cumulativeProfit)}</p>
           </div>
 
-          <div className="rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+          <div className="relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '18%', left: '10%', animationDuration: '2.9s', animationDelay: '0.8s', backgroundColor: sparkleColor }} />
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '70%', right: '9%', animationDuration: '3.5s', animationDelay: '2.1s', backgroundColor: sparkleColor }} />
             <div className="flex items-center justify-center gap-1 mb-1">
               <Zap className="h-3 w-3 text-muted-foreground" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">ROI</span>
@@ -145,7 +162,9 @@ export function ReturnsCalculator({
             </p>
           </div>
 
-          <div className="rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+          <div className="relative overflow-hidden rounded-xl bg-muted/40 border border-border/40 px-3 py-3 text-center">
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '12%', right: '9%', animationDuration: '3.4s', animationDelay: '0.4s', backgroundColor: sparkleColor }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '80%', left: '8%', animationDuration: '2.5s', animationDelay: '1.8s', backgroundColor: sparkleColor }} />
             <div className="flex items-center justify-center gap-1 mb-1">
               <Calendar className="h-3 w-3 text-muted-foreground" />
               <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">Payback</span>
