@@ -406,18 +406,19 @@ export default async function HomePage({
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder }) => {
+          {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder }, i) => {
             const isActive = category === key
             const listingCount = categoryCountMap[key] ?? 0
             return (
               <Link
                 key={key}
                 href={isActive ? "/" : `/?category=${key}`}
-                className={`group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
+                className={`animate-fade-in-up group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
                   isActive
                     ? `${activeBorder} shadow-sm ring-1 ring-current ring-opacity-20`
                     : `border-slate-100 dark:border-slate-800 ${hoverBorder} hover:shadow-sm`
                 }`}
+                style={{ animationDelay: `${i * 0.06}s` }}
               >
                 {listingCount > 0 && (
                   <span className={`absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
