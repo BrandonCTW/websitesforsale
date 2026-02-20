@@ -44,6 +44,17 @@ const CATEGORY_DISPLAY: {
   { key: "other",            label: "Other",           Icon: LayoutGrid,  bg: "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",     iconCls: "text-slate-500 dark:text-slate-400",   activeBorder: "border-slate-400 dark:border-slate-500",  hoverBorder: "hover:border-slate-200 dark:hover:border-slate-700",     hoverShadow: "hover:shadow-slate-200/70 dark:hover:shadow-slate-800/60", glowClass: "cat-glow-slate" },
 ]
 
+const CATEGORY_SPARKLES: Record<string, [string, string]> = {
+  "content-site":     ["rgba(56,189,248,0.65)",  "rgba(14,165,233,0.50)"],
+  "saas":             ["rgba(167,139,250,0.65)",  "rgba(139,92,246,0.50)"],
+  "ecommerce":        ["rgba(251,146,60,0.65)",   "rgba(249,115,22,0.50)"],
+  "tool-or-app":      ["rgba(45,212,191,0.65)",   "rgba(20,184,166,0.50)"],
+  "newsletter":       ["rgba(251,113,133,0.65)",  "rgba(244,63,94,0.50)"],
+  "community":        ["rgba(52,211,153,0.65)",   "rgba(16,185,129,0.50)"],
+  "service-business": ["rgba(251,191,36,0.65)",   "rgba(245,158,11,0.50)"],
+  "other":            ["rgba(148,163,184,0.50)",  "rgba(99,102,241,0.40)"],
+}
+
 export default async function HomePage({
   searchParams,
 }: {
@@ -453,17 +464,23 @@ export default async function HomePage({
           {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder, hoverShadow, glowClass }, i) => {
             const isActive = category === key
             const listingCount = categoryCountMap[key] ?? 0
+            const sc = CATEGORY_SPARKLES[key] ?? CATEGORY_SPARKLES["other"]
+            const spDelay = (i * 0.37) % 2
             return (
               <Link
                 key={key}
                 href={isActive ? "/" : `/?category=${key}`}
-                className={`animate-fade-in-up group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
+                className={`animate-fade-in-up group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br overflow-hidden ${bg} ${
                   isActive
                     ? `${activeBorder} shadow-sm ring-1 ring-current ring-opacity-20 animate-category-glow ${glowClass}`
                     : `border-slate-100 dark:border-slate-800 ${hoverBorder} hover:shadow-md ${hoverShadow} hover:-translate-y-0.5`
                 }`}
                 style={{ animationDelay: `${i * 0.06}s` }}
               >
+                {/* Category-tinted sparkle particles */}
+                <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '13%', left: '9%', animationDuration: '3.2s', animationDelay: `${spDelay}s`, backgroundColor: sc[0] }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '75%', right: '9%', animationDuration: '2.5s', animationDelay: `${(spDelay + 1.2) % 2.5}s`, backgroundColor: sc[1] }} />
+                <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '18%', right: '10%', animationDuration: '3.7s', animationDelay: `${(spDelay + 0.7) % 3}s`, backgroundColor: sc[0] }} />
                 {listingCount > 0 && (
                   <span className={`absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
                     isActive
