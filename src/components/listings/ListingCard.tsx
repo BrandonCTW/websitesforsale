@@ -36,10 +36,12 @@ export function ListingCard({
   listing,
   sellerUsername,
   imageUrl,
+  index = 0,
 }: {
   listing: Listing
   sellerUsername: string
   imageUrl?: string
+  index?: number
 }) {
   const age =
     listing.ageMonths >= 12
@@ -54,7 +56,7 @@ export function ListingCard({
   const showNewBadge = isNewListing(listing.createdAt)
 
   return (
-    <Link href={`/listings/${listing.slug}`}>
+    <Link href={`/listings/${listing.slug}`} className="animate-fade-in-up" style={{ animationDelay: `${index * 0.08}s` }}>
       <Card className="h-full hover:shadow-xl hover:shadow-indigo-100/60 dark:hover:shadow-indigo-950/50 transition-all duration-300 cursor-pointer group hover:border-indigo-200/70 dark:hover:border-indigo-800/50 hover:-translate-y-1">
         {imageUrl ? (
           <div className="aspect-video overflow-hidden rounded-t-lg bg-muted relative">

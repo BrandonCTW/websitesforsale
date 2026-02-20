@@ -113,12 +113,13 @@ export default async function HomePage({
             {filtered.length} listing{filtered.length !== 1 ? "s" : ""} found
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(({ listing, seller }) => (
+            {filtered.map(({ listing, seller }, i) => (
               <ListingCard
                 key={listing.id}
                 listing={listing}
                 sellerUsername={seller.username}
                 imageUrl={imageMap[listing.id]}
+                index={i}
               />
             ))}
           </div>
