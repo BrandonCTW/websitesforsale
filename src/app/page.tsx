@@ -3,6 +3,8 @@ import { listings, listingImages, users } from "@/db/schema"
 import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
+import Link from "next/link"
+import { Search } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -90,20 +92,37 @@ export default async function HomePage({
       <FilterBar categories={CATEGORIES} />
 
       {filtered.length === 0 ? (
-        <div className="text-center text-muted-foreground py-20">
-          No listings match your filters.
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
+            <Search className="w-7 h-7 text-indigo-400 dark:text-indigo-500" />
+          </div>
+          <h3 className="font-semibold text-lg mb-2">No listings found</h3>
+          <p className="text-muted-foreground text-sm max-w-xs mb-6">
+            Try adjusting your filters or search terms to find what you&apos;re looking for.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 transition-opacity"
+          >
+            Browse all listings
+          </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {filtered.map(({ listing, seller }) => (
-            <ListingCard
-              key={listing.id}
-              listing={listing}
-              sellerUsername={seller.username}
-              imageUrl={imageMap[listing.id]}
-            />
-          ))}
-        </div>
+        <>
+          <p className="text-sm text-muted-foreground mt-6 mb-2">
+            {filtered.length} listing{filtered.length !== 1 ? "s" : ""} found
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map(({ listing, seller }) => (
+              <ListingCard
+                key={listing.id}
+                listing={listing}
+                sellerUsername={seller.username}
+                imageUrl={imageMap[listing.id]}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   )
