@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
+import { DollarSign, TrendingUp, Eye, Clock } from "lucide-react"
 
 function isNewListing(createdAt: Date | string): boolean {
   const created = new Date(createdAt)
@@ -108,25 +109,37 @@ export function ListingCard({
 
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div>
-              <p className="text-muted-foreground text-xs">Asking Price</p>
+              <p className="text-muted-foreground text-xs flex items-center gap-1">
+                <DollarSign className="h-3 w-3 shrink-0" />
+                Asking Price
+              </p>
               <p className="font-bold bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
                 {formatCurrency(listing.askingPrice)}
               </p>
             </div>
             {listing.monthlyRevenue ? (
               <div>
-                <p className="text-muted-foreground text-xs">Monthly Revenue</p>
+                <p className="text-muted-foreground text-xs flex items-center gap-1">
+                  <TrendingUp className="h-3 w-3 shrink-0" />
+                  Monthly Revenue
+                </p>
                 <p className="font-semibold">{formatCurrency(listing.monthlyRevenue)}</p>
               </div>
             ) : null}
             {listing.monthlyTraffic ? (
               <div>
-                <p className="text-muted-foreground text-xs">Monthly Traffic</p>
+                <p className="text-muted-foreground text-xs flex items-center gap-1">
+                  <Eye className="h-3 w-3 shrink-0" />
+                  Monthly Traffic
+                </p>
                 <p className="font-semibold">{formatNumber(listing.monthlyTraffic)}</p>
               </div>
             ) : null}
             <div>
-              <p className="text-muted-foreground text-xs">Age</p>
+              <p className="text-muted-foreground text-xs flex items-center gap-1">
+                <Clock className="h-3 w-3 shrink-0" />
+                Age
+              </p>
               <p className="font-semibold">{age}</p>
             </div>
           </div>
