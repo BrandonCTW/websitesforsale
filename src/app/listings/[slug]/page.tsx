@@ -9,6 +9,7 @@ import { ContactForm } from "@/components/listings/ContactForm"
 import { ImageGallery } from "@/components/listings/ImageGallery"
 import { getSession } from "@/lib/auth"
 import Link from "next/link"
+import { Globe, Info, MessageSquare, Package } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -140,35 +141,55 @@ export default async function ListingPage({
       <Separator />
 
       {/* Live URL */}
-      <div>
-        <h2 className="font-semibold mb-1">Live Site</h2>
-        <a
-          href={listing.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:underline break-all"
-        >
-          {listing.url}
-        </a>
+      <div className="rounded-xl border border-border/60 bg-muted/30 px-5 py-4 flex items-center gap-3">
+        <div className="flex-shrink-0 h-9 w-9 rounded-lg bg-sky-100 dark:bg-sky-900/40 flex items-center justify-center">
+          <Globe className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-0.5">Live Site</p>
+          <a
+            href={listing.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-600 dark:text-sky-400 hover:underline break-all text-sm font-medium"
+          >
+            {listing.url}
+          </a>
+        </div>
       </div>
 
       {/* Description */}
-      <div>
-        <h2 className="font-semibold mb-2">About This Site</h2>
-        <p className="text-muted-foreground whitespace-pre-wrap">{listing.description}</p>
+      <div className="rounded-xl border border-border/60 bg-muted/20 px-5 py-5">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-6 w-6 rounded-md bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
+            <Info className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
+          </div>
+          <h2 className="font-semibold">About This Site</h2>
+        </div>
+        <p className="text-muted-foreground whitespace-pre-wrap text-sm leading-relaxed">{listing.description}</p>
       </div>
 
       {/* Reason for selling */}
-      <div>
-        <h2 className="font-semibold mb-2">Reason for Selling</h2>
-        <p className="text-muted-foreground whitespace-pre-wrap">{listing.reasonForSelling}</p>
+      <div className="rounded-xl border border-border/60 bg-muted/20 px-5 py-5">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-6 w-6 rounded-md bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
+            <MessageSquare className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+          </div>
+          <h2 className="font-semibold">Reason for Selling</h2>
+        </div>
+        <p className="text-muted-foreground whitespace-pre-wrap text-sm leading-relaxed">{listing.reasonForSelling}</p>
       </div>
 
       {/* Included assets */}
       {listing.includedAssets && (
-        <div>
-          <h2 className="font-semibold mb-2">What&apos;s Included</h2>
-          <p className="text-muted-foreground whitespace-pre-wrap">{listing.includedAssets}</p>
+        <div className="rounded-xl border border-border/60 bg-muted/20 px-5 py-5">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="h-6 w-6 rounded-md bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center">
+              <Package className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <h2 className="font-semibold">What&apos;s Included</h2>
+          </div>
+          <p className="text-muted-foreground whitespace-pre-wrap text-sm leading-relaxed">{listing.includedAssets}</p>
         </div>
       )}
 
