@@ -11,6 +11,7 @@ import { getSession } from "@/lib/auth"
 import Link from "next/link"
 import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, type LucideIcon } from "lucide-react"
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
+import { ScrollProgress } from "@/components/listings/ScrollProgress"
 
 export const dynamic = "force-dynamic"
 
@@ -155,6 +156,7 @@ export default async function ListingPage({
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 space-y-8">
+      <ScrollProgress />
       {/* Header Banner */}
       <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.22)_0%,_transparent_60%)]" />
