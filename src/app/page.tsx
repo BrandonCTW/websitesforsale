@@ -257,6 +257,42 @@ export default async function HomePage({
 
       <FilterBar categories={CATEGORIES} />
 
+      {/* Budget range quick-filters */}
+      <div className="mt-5 flex flex-wrap items-center gap-2">
+        <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider shrink-0">Budget:</span>
+        {(
+          [
+            { label: "Any",        min: undefined,  max: undefined  },
+            { label: "Under $1k",  min: undefined,  max: "1000"     },
+            { label: "$1k – $5k",  min: "1000",     max: "5000"     },
+            { label: "$5k – $25k", min: "5000",     max: "25000"    },
+            { label: "$25k+",      min: "25000",    max: undefined  },
+          ] as { label: string; min?: string; max?: string }[]
+        ).map(({ label, min, max }) => {
+          const isActive =
+            (min ?? "") === (minPrice ?? "") && (max ?? "") === (maxPrice ?? "")
+          const urlParams = new URLSearchParams()
+          if (category) urlParams.set("category", category)
+          if (min)       urlParams.set("minPrice", min)
+          if (max)       urlParams.set("maxPrice", max)
+          if (q)         urlParams.set("q", q)
+          const href = urlParams.size > 0 ? `/?${urlParams}` : "/"
+          return (
+            <Link
+              key={label}
+              href={href}
+              className={`rounded-full text-xs font-medium px-3.5 py-1.5 border transition-all duration-200 ${
+                isActive
+                  ? "bg-gradient-to-r from-indigo-600 to-emerald-600 text-white border-transparent shadow-sm"
+                  : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-indigo-300 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 bg-white dark:bg-slate-900/50"
+              }`}
+            >
+              {label}
+            </Link>
+          )
+        })}
+      </div>
+
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
