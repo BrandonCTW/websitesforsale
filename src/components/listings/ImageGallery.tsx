@@ -65,9 +65,10 @@ export function ImageGallery({ images }: ImageGalleryProps) {
           onClick={() => openLightbox(activeIndex)}
         >
           <img
+            key={images[activeIndex].id}
             src={images[activeIndex].url}
             alt={`Screenshot ${activeIndex + 1}`}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02] animate-fade-in"
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center">
             <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 dark:bg-black/70 rounded-full p-2.5 shadow-lg">
@@ -108,7 +109,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
       {/* Lightbox */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in"
           onClick={(e) => { if (e.target === e.currentTarget) closeLightbox() }}
         >
           {/* Close button */}
@@ -138,9 +139,10 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
           {/* Main image */}
           <img
+            key={lightboxIndex}
             src={images[lightboxIndex].url}
             alt={`Screenshot ${lightboxIndex + 1}`}
-            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl animate-lightbox-enter"
           />
 
           {/* Next button */}
