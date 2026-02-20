@@ -252,3 +252,12 @@
   color: transparent;
   animation: text-gradient-flow 5s linear infinite;
 }
+
+@keyframes card-shine {
+  0% { transform: translateX(-200%) skewX(-12deg); }
+  100% { transform: translateX(600%) skewX(-12deg); }
+}
+
+.group:hover .card-shine {
+  animation: card-shine 0.7s ease-in-out forwards;
+}
