@@ -192,6 +192,9 @@ export default async function ListingPage({
         {/* Category-tinted radial gradients */}
         <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at top right, ${headerRadial.top} 0%, transparent 60%)` }} />
         <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at bottom left, ${headerRadial.bottom} 0%, transparent 60%)` }} />
+        {/* Animated floating orbs */}
+        <div className="animate-orb-1 absolute -top-10 -right-10 w-64 h-64 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
+        <div className="animate-orb-2 absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
         <div className="relative space-y-4">
           {/* Badges row */}
           <div className="flex items-center gap-2 flex-wrap">
