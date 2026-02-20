@@ -32,15 +32,16 @@ const CATEGORY_DISPLAY: {
   activeBorder: string
   hoverBorder: string
   hoverShadow: string
+  glowClass: string
 }[] = [
-  { key: "content-site",     label: "Content Sites",   Icon: FileText,    bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",           iconCls: "text-sky-500 dark:text-sky-400",      activeBorder: "border-sky-400 dark:border-sky-600",     hoverBorder: "hover:border-sky-200 dark:hover:border-sky-800",         hoverShadow: "hover:shadow-sky-100/70 dark:hover:shadow-sky-950/60" },
-  { key: "saas",             label: "SaaS",            Icon: Code2,       bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", iconCls: "text-violet-500 dark:text-violet-400", activeBorder: "border-violet-400 dark:border-violet-600", hoverBorder: "hover:border-violet-200 dark:hover:border-violet-800", hoverShadow: "hover:shadow-violet-100/70 dark:hover:shadow-violet-950/60" },
-  { key: "ecommerce",        label: "eCommerce",       Icon: ShoppingCart, bg: "from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/30", iconCls: "text-orange-500 dark:text-orange-400", activeBorder: "border-orange-400 dark:border-orange-600", hoverBorder: "hover:border-orange-200 dark:hover:border-orange-800", hoverShadow: "hover:shadow-orange-100/70 dark:hover:shadow-orange-950/60" },
-  { key: "tool-or-app",      label: "Tools & Apps",    Icon: Wrench,      bg: "from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/30",         iconCls: "text-teal-500 dark:text-teal-400",     activeBorder: "border-teal-400 dark:border-teal-600",    hoverBorder: "hover:border-teal-200 dark:hover:border-teal-800",       hoverShadow: "hover:shadow-teal-100/70 dark:hover:shadow-teal-950/60" },
-  { key: "newsletter",       label: "Newsletters",     Icon: Mail,        bg: "from-rose-50 to-rose-100 dark:from-rose-950/40 dark:to-rose-900/30",         iconCls: "text-rose-500 dark:text-rose-400",     activeBorder: "border-rose-400 dark:border-rose-600",    hoverBorder: "hover:border-rose-200 dark:hover:border-rose-800",       hoverShadow: "hover:shadow-rose-100/70 dark:hover:shadow-rose-950/60" },
-  { key: "community",        label: "Community",       Icon: Users,       bg: "from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/30", iconCls: "text-emerald-500 dark:text-emerald-400", activeBorder: "border-emerald-400 dark:border-emerald-600", hoverBorder: "hover:border-emerald-200 dark:hover:border-emerald-800", hoverShadow: "hover:shadow-emerald-100/70 dark:hover:shadow-emerald-950/60" },
-  { key: "service-business", label: "Service Biz",     Icon: Briefcase,   bg: "from-amber-50 to-amber-100 dark:from-amber-950/40 dark:to-amber-900/30",     iconCls: "text-amber-500 dark:text-amber-400",   activeBorder: "border-amber-400 dark:border-amber-600",  hoverBorder: "hover:border-amber-200 dark:hover:border-amber-800",     hoverShadow: "hover:shadow-amber-100/70 dark:hover:shadow-amber-950/60" },
-  { key: "other",            label: "Other",           Icon: LayoutGrid,  bg: "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",     iconCls: "text-slate-500 dark:text-slate-400",   activeBorder: "border-slate-400 dark:border-slate-500",  hoverBorder: "hover:border-slate-200 dark:hover:border-slate-700",     hoverShadow: "hover:shadow-slate-200/70 dark:hover:shadow-slate-800/60" },
+  { key: "content-site",     label: "Content Sites",   Icon: FileText,    bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",           iconCls: "text-sky-500 dark:text-sky-400",      activeBorder: "border-sky-400 dark:border-sky-600",     hoverBorder: "hover:border-sky-200 dark:hover:border-sky-800",         hoverShadow: "hover:shadow-sky-100/70 dark:hover:shadow-sky-950/60",     glowClass: "cat-glow-sky" },
+  { key: "saas",             label: "SaaS",            Icon: Code2,       bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", iconCls: "text-violet-500 dark:text-violet-400", activeBorder: "border-violet-400 dark:border-violet-600", hoverBorder: "hover:border-violet-200 dark:hover:border-violet-800", hoverShadow: "hover:shadow-violet-100/70 dark:hover:shadow-violet-950/60", glowClass: "cat-glow-violet" },
+  { key: "ecommerce",        label: "eCommerce",       Icon: ShoppingCart, bg: "from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/30", iconCls: "text-orange-500 dark:text-orange-400", activeBorder: "border-orange-400 dark:border-orange-600", hoverBorder: "hover:border-orange-200 dark:hover:border-orange-800", hoverShadow: "hover:shadow-orange-100/70 dark:hover:shadow-orange-950/60", glowClass: "cat-glow-orange" },
+  { key: "tool-or-app",      label: "Tools & Apps",    Icon: Wrench,      bg: "from-teal-50 to-teal-100 dark:from-teal-950/40 dark:to-teal-900/30",         iconCls: "text-teal-500 dark:text-teal-400",     activeBorder: "border-teal-400 dark:border-teal-600",    hoverBorder: "hover:border-teal-200 dark:hover:border-teal-800",       hoverShadow: "hover:shadow-teal-100/70 dark:hover:shadow-teal-950/60",   glowClass: "cat-glow-teal" },
+  { key: "newsletter",       label: "Newsletters",     Icon: Mail,        bg: "from-rose-50 to-rose-100 dark:from-rose-950/40 dark:to-rose-900/30",         iconCls: "text-rose-500 dark:text-rose-400",     activeBorder: "border-rose-400 dark:border-rose-600",    hoverBorder: "hover:border-rose-200 dark:hover:border-rose-800",       hoverShadow: "hover:shadow-rose-100/70 dark:hover:shadow-rose-950/60",   glowClass: "cat-glow-rose" },
+  { key: "community",        label: "Community",       Icon: Users,       bg: "from-emerald-50 to-emerald-100 dark:from-emerald-950/40 dark:to-emerald-900/30", iconCls: "text-emerald-500 dark:text-emerald-400", activeBorder: "border-emerald-400 dark:border-emerald-600", hoverBorder: "hover:border-emerald-200 dark:hover:border-emerald-800", hoverShadow: "hover:shadow-emerald-100/70 dark:hover:shadow-emerald-950/60", glowClass: "cat-glow-emerald" },
+  { key: "service-business", label: "Service Biz",     Icon: Briefcase,   bg: "from-amber-50 to-amber-100 dark:from-amber-950/40 dark:to-amber-900/30",     iconCls: "text-amber-500 dark:text-amber-400",   activeBorder: "border-amber-400 dark:border-amber-600",  hoverBorder: "hover:border-amber-200 dark:hover:border-amber-800",     hoverShadow: "hover:shadow-amber-100/70 dark:hover:shadow-amber-950/60", glowClass: "cat-glow-amber" },
+  { key: "other",            label: "Other",           Icon: LayoutGrid,  bg: "from-slate-50 to-slate-100 dark:from-slate-950/40 dark:to-slate-900/30",     iconCls: "text-slate-500 dark:text-slate-400",   activeBorder: "border-slate-400 dark:border-slate-500",  hoverBorder: "hover:border-slate-200 dark:hover:border-slate-700",     hoverShadow: "hover:shadow-slate-200/70 dark:hover:shadow-slate-800/60", glowClass: "cat-glow-slate" },
 ]
 
 export default async function HomePage({
@@ -421,7 +422,7 @@ export default async function HomePage({
           <div className="h-px flex-1 animate-section-divider" style={{ animationDelay: "5.9s" }} />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder, hoverShadow }, i) => {
+          {CATEGORY_DISPLAY.map(({ key, label, Icon, bg, iconCls, activeBorder, hoverBorder, hoverShadow, glowClass }, i) => {
             const isActive = category === key
             const listingCount = categoryCountMap[key] ?? 0
             return (
@@ -430,7 +431,7 @@ export default async function HomePage({
                 href={isActive ? "/" : `/?category=${key}`}
                 className={`animate-fade-in-up group relative flex flex-col items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 bg-gradient-to-br ${bg} ${
                   isActive
-                    ? `${activeBorder} shadow-sm ring-1 ring-current ring-opacity-20`
+                    ? `${activeBorder} shadow-sm ring-1 ring-current ring-opacity-20 animate-category-glow ${glowClass}`
                     : `border-slate-100 dark:border-slate-800 ${hoverBorder} hover:shadow-md ${hoverShadow} hover:-translate-y-0.5`
                 }`}
                 style={{ animationDelay: `${i * 0.06}s` }}

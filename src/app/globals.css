@@ -467,3 +467,21 @@
 .chip-glow-emerald { --chip-glow: rgba(16, 185, 129, 0.28); }
 .chip-glow-sky     { --chip-glow: rgba(14, 165, 233, 0.28); }
 .chip-glow-amber   { --chip-glow: rgba(245, 158, 11, 0.28); }
+
+@keyframes category-card-glow {
+  0%, 100% { box-shadow: 0 0 0 1px var(--cat-glow, rgba(99,102,241,0.18)), 0 4px 20px var(--cat-glow, rgba(99,102,241,0.10)); }
+  50% { box-shadow: 0 0 0 2px var(--cat-glow, rgba(99,102,241,0.38)), 0 10px 36px var(--cat-glow, rgba(99,102,241,0.22)); }
+}
+
+.animate-category-glow {
+  animation: category-card-glow 3s ease-in-out infinite;
+}
+
+.cat-glow-sky     { --cat-glow: rgba(14, 165, 233, 0.40); }
+.cat-glow-violet  { --cat-glow: rgba(139, 92, 246, 0.40); }
+.cat-glow-orange  { --cat-glow: rgba(249, 115, 22, 0.40); }
+.cat-glow-teal    { --cat-glow: rgba(20, 184, 166, 0.40); }
+.cat-glow-rose    { --cat-glow: rgba(244, 63, 94, 0.40); }
+.cat-glow-emerald { --cat-glow: rgba(16, 185, 129, 0.40); }
+.cat-glow-amber   { --cat-glow: rgba(245, 158, 11, 0.40); }
+.cat-glow-slate   { --cat-glow: rgba(100, 116, 139, 0.28); }
