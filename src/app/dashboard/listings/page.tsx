@@ -2,12 +2,13 @@ import { redirect } from "next/navigation"
 import Link from "next/link"
 import { getSession } from "@/lib/auth"
 import { db } from "@/db"
-import { listings, inquiries } from "@/db/schema"
-import { eq, count } from "drizzle-orm"
+import { listings, inquiries, listingImages } from "@/db/schema"
+import { eq, count, inArray } from "drizzle-orm"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { formatCurrency } from "@/lib/slug"
 import { ListingActions } from "@/components/dashboard/ListingActions"
+import { Globe } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -65,6 +66,14 @@ export default async function DashboardListingsPage() {
 
   const inquiryMap = Object.fromEntries(inquiryCounts.map((r) => [r.listingId, r.count]))
 
+  const listingIds = rows.map(({ listing }) => listing.id)
+  const images = listingIds.length > 0
+    ? await db.select().from(listingImages).where(
+        inArray(listingImages.listingId, listingIds)
+      ).then(imgs => imgs.filter(img => img.displayOrder === 0))
+    : []
+  const imageMap = Object.fromEntries(images.map((img) => [img.listingId, img.url]))
+
   const activeCount = rows.filter(({ listing }) => listing.status === "active").length
   const totalInquiries = rows.reduce((sum, { listing }) => sum + (inquiryMap[listing.id] ?? 0), 0)
 
@@ -121,12 +130,25 @@ export default async function DashboardListingsPage() {
           {rows.map(({ listing }) => {
             const s = STATUS_CONFIG[listing.status] ?? STATUS_CONFIG.unpublished
             const inquiryCount = inquiryMap[listing.id] ?? 0
+            const thumbnailUrl = imageMap[listing.id]
             return (
               <div
                 key={listing.id}
-                className={`group rounded-xl border border-l-4 ${s.borderColor} bg-card p-5 transition-all duration-200 ${s.bgGradient} hover:shadow-md`}
+                className={`group rounded-xl border border-l-4 ${s.borderColor} bg-card p-4 transition-all duration-200 ${s.bgGradient} hover:shadow-md`}
               >
-                <div className="flex items-start gap-4 flex-wrap">
+                <div className="flex items-center gap-4">
+                  {/* Thumbnail */}
+                  {thumbnailUrl ? (
+                    <img
+                      src={thumbnailUrl}
+                      alt=""
+                      className="w-16 h-12 object-cover rounded-lg shrink-0 border border-border/40"
+                    />
+                  ) : (
+                    <div className="w-16 h-12 rounded-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center shrink-0 border border-border/40">
+                      <Globe className="w-5 h-5 text-indigo-300 dark:text-indigo-700" />
+                    </div>
+                  )}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-2">
                       <span className={`inline-block h-2 w-2 rounded-full ${s.dotColor} shrink-0`} />
