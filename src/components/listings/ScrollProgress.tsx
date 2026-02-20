@@ -21,9 +21,15 @@ export function ScrollProgress() {
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] h-[3px] pointer-events-none">
       <div
-        className="h-full bg-gradient-to-r from-indigo-500 via-violet-500 to-emerald-500"
+        className="relative h-full bg-gradient-to-r from-indigo-500 via-violet-500 to-emerald-500"
         style={{ width: `${progress}%`, transition: "width 80ms linear" }}
-      />
+      >
+        {/* Glowing trailing orb */}
+        <div
+          className="animate-scroll-tip absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-violet-400"
+          aria-hidden="true"
+        />
+      </div>
     </div>
   )
 }
