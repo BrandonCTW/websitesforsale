@@ -64,7 +64,7 @@ export function Navbar() {
                 <Button size="sm" variant="ghost">Log in</Button>
               </Link>
               <Link href="/register">
-                <Button size="sm">List your site</Button>
+                <Button size="sm" className="bg-gradient-to-r from-indigo-600 to-emerald-600 hover:from-indigo-700 hover:to-emerald-700 border-0 text-white shadow-sm">List your site</Button>
               </Link>
             </>
           )}
