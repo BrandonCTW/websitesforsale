@@ -202,7 +202,7 @@ export default async function HomePage({
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 sm:gap-2">
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
             <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-indigo-100 dark:text-indigo-950/70 leading-none select-none pointer-events-none">1</span>
-            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60">
+            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60 animate-icon-float" style={{ animationDelay: "0s" }}>
               <Search className="w-5 h-5 text-white" />
             </div>
             <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1">Step 1</p>
@@ -217,7 +217,7 @@ export default async function HomePage({
           </div>
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
             <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-indigo-100 dark:text-indigo-950/70 leading-none select-none pointer-events-none">2</span>
-            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60">
+            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60 animate-icon-float" style={{ animationDelay: "0.9s" }}>
               <MessageCircle className="w-5 h-5 text-white" />
             </div>
             <p className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1">Step 2</p>
@@ -232,7 +232,7 @@ export default async function HomePage({
           </div>
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-emerald-50/60 to-slate-50 dark:from-emerald-950/30 dark:to-slate-900/50 border border-emerald-100 dark:border-emerald-900/40 overflow-hidden">
             <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-emerald-100 dark:text-emerald-950/70 leading-none select-none pointer-events-none">3</span>
-            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-400 dark:from-emerald-600 dark:to-emerald-500 flex items-center justify-center mb-3 shadow-md shadow-emerald-200/60 dark:shadow-emerald-900/60">
+            <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-400 dark:from-emerald-600 dark:to-emerald-500 flex items-center justify-center mb-3 shadow-md shadow-emerald-200/60 dark:shadow-emerald-900/60 animate-icon-float" style={{ animationDelay: "1.8s" }}>
               <Handshake className="w-5 h-5 text-white" />
             </div>
             <p className="text-[10px] font-bold text-emerald-500 dark:text-emerald-400 uppercase tracking-widest mb-1">Step 3</p>

@@ -220,3 +220,12 @@
 .animate-spotlight-glow {
   animation: spotlight-glow 3s ease-in-out infinite;
 }
+
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+.animate-icon-float {
+  animation: icon-float 3s ease-in-out infinite;
+}
