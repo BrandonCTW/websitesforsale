@@ -12,6 +12,7 @@ import Link from "next/link"
 import { Globe, Info, MessageSquare, Package, DollarSign, TrendingUp, Wallet, Eye, Clock, Layers, ArrowRight, HelpCircle, type LucideIcon } from "lucide-react"
 import { FloatingContactButton } from "@/components/listings/FloatingContactButton"
 import { ScrollProgress } from "@/components/listings/ScrollProgress"
+import { DealMeter } from "@/components/listings/DealMeter"
 
 export const dynamic = "force-dynamic"
 
@@ -231,6 +232,11 @@ export default async function ListingPage({
           />
         ) : null}
       </div>
+
+      {/* Deal Meter */}
+      {listing.monthlyRevenue != null && listing.monthlyRevenue > 0 && (
+        <DealMeter multiple={listing.askingPrice / listing.monthlyRevenue} />
+      )}
 
       <Separator />
 
