@@ -178,9 +178,13 @@ export default async function DashboardListingsPage() {
                 </span>
               </>
             )}
-            <Link href="/dashboard/listings/new">
-              <Button className="bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 border-0 text-white text-sm shadow-sm">
-                + New listing
+            <Link href="/dashboard/listings/new" className="group relative inline-block">
+              <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+              <span className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/80 blur-[0.5px] pointer-events-none" style={{ top: '-4px', left: '-6px', animationDuration: '3.1s', animationDelay: '0s' }} aria-hidden="true" />
+              <span className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-300/75 pointer-events-none" style={{ bottom: '-3px', right: '-5px', animationDuration: '2.6s', animationDelay: '1.2s' }} aria-hidden="true" />
+              <Button className="relative overflow-hidden bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 border-0 text-white text-sm shadow-sm">
+                <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" aria-hidden="true" />
+                <span className="relative z-10">+ New listing</span>
               </Button>
             </Link>
           </div>
@@ -290,31 +294,53 @@ export default async function DashboardListingsPage() {
                     </div>
 
                     <div className="flex items-center gap-3 flex-wrap">
-                      <div className="flex items-center gap-1.5 rounded-lg bg-background border px-3 py-1.5 shadow-sm">
-                        <span className="text-xs text-muted-foreground">Asking</span>
-                        <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                      {/* Asking Price pill */}
+                      <div className="relative overflow-hidden flex items-center gap-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/40 px-3 py-1.5 shadow-sm">
+                        <span className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-emerald-400/[0.06] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: `${index * 0.4}s` }} />
+                        <span className="text-xs font-medium text-emerald-700 dark:text-emerald-500">Asking</span>
+                        <span className="text-sm font-bold animate-price-gradient">
                           {formatCurrency(listing.askingPrice)}
                         </span>
                       </div>
 
+                      {/* Monthly Revenue pill */}
                       {listing.monthlyRevenue != null && listing.monthlyRevenue > 0 && (
-                        <div className="flex items-center gap-1.5 rounded-lg bg-background border px-3 py-1.5 shadow-sm">
-                          <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
-                          <span className="text-xs text-muted-foreground">Mo. Rev</span>
-                          <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                        <div className="relative overflow-hidden flex items-center gap-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200/70 dark:border-indigo-800/40 px-3 py-1.5 shadow-sm">
+                          <span className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400/[0.06] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: `${index * 0.4 + 1.4}s` }} />
+                          <TrendingUp className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400 shrink-0" />
+                          <span className="text-xs font-medium text-indigo-700 dark:text-indigo-500">Mo. Rev</span>
+                          <span className="text-sm font-bold animate-revenue-gradient">
                             {formatCurrency(listing.monthlyRevenue)}
                           </span>
                           {revenueMultiple !== null && (
-                            <span className="text-xs text-muted-foreground font-medium">
+                            <span className="text-xs text-indigo-400 dark:text-indigo-500 font-medium">
                               · {revenueMultiple}x
                             </span>
                           )}
                         </div>
                       )}
 
-                      <div className="flex items-center gap-1.5 rounded-lg bg-background border px-3 py-1.5 shadow-sm">
-                        <span className="text-xs text-muted-foreground">Inquiries</span>
-                        <span className={`text-sm font-bold ${inquiryCount > 0 ? "text-indigo-600 dark:text-indigo-400" : "text-muted-foreground"}`}>
+                      {/* Inquiries pill */}
+                      <div className={`relative overflow-hidden flex items-center gap-1.5 rounded-lg px-3 py-1.5 shadow-sm border ${
+                        inquiryCount > 0
+                          ? "bg-violet-50 dark:bg-violet-950/30 border-violet-200/70 dark:border-violet-800/40"
+                          : "bg-background border-border/60"
+                      }`}>
+                        {inquiryCount > 0 && (
+                          <span className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-violet-400/[0.06] to-transparent animate-shimmer pointer-events-none" style={{ animationDelay: `${index * 0.4 + 2.8}s` }} />
+                        )}
+                        {inquiryCount > 0 && (
+                          <span className="relative flex items-center justify-center shrink-0 w-1.5 h-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-violet-500" />
+                          </span>
+                        )}
+                        <span className={`text-xs font-medium ${inquiryCount > 0 ? "text-violet-700 dark:text-violet-500" : "text-muted-foreground"}`}>
+                          Inquiries
+                        </span>
+                        <span className={`text-sm font-bold ${
+                          inquiryCount > 0 ? "animate-violet-gradient" : "text-muted-foreground"
+                        }`}>
                           {inquiryCount}
                         </span>
                       </div>
