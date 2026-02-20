@@ -433,35 +433,47 @@ export default async function HomePage({
           </div>
 
           {/* Traditional broker card */}
-          <div className="relative rounded-2xl overflow-hidden bg-muted/50 dark:bg-slate-900/40 border border-border/60 p-6">
-            <div className="flex items-center gap-2.5 mb-5">
-              <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-muted-foreground/15 text-muted-foreground text-sm font-bold shrink-0">B</span>
-              <span className="font-bold text-muted-foreground text-base">Traditional Broker</span>
-            </div>
-            <div className="space-y-3.5">
-              {(
-                [
-                  { label: "Commission fee", value: "10–15%" },
-                  { label: "Listing fee", value: "$49–$299" },
-                  { label: "Direct seller contact", value: false },
-                  { label: "AI listing generation", value: false },
-                  { label: "Time to list", value: "Days to weeks" },
-                ] as { label: string; value: string | boolean }[]
-              ).map(({ label, value }, i) => (
-                <div key={label} className="flex items-center justify-between gap-3 animate-fade-in-up" style={{ animationDelay: `${i * 0.08 + 0.1}s` }}>
-                  <span className="text-sm text-muted-foreground">{label}</span>
-                  {typeof value === "boolean" ? (
-                    <span className="inline-flex items-center gap-1 text-muted-foreground/60 text-sm font-medium shrink-0">
-                      <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-400/10 shrink-0">
-                        <X className="w-3 h-3 text-red-400/80" />
+          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800/60 via-slate-900/50 to-slate-800/60 dark:from-slate-900/80 dark:via-slate-950/70 dark:to-slate-900/80 border border-slate-700/40 dark:border-slate-700/30 p-6">
+            {/* Muted gray top accent bar */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-slate-500/60 via-slate-400/40 to-slate-500/60" />
+            {/* Subtle radial overlays */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(100,116,139,0.10)_0%,_transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(71,85,105,0.08)_0%,_transparent_60%)]" />
+            {/* Faded sparkle particles — slate/gray tones */}
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-slate-400/40 pointer-events-none" style={{ top: '15%', left: '8%', animationDuration: '3.8s', animationDelay: '0.4s' }} />
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-slate-300/25 blur-[0.5px] pointer-events-none" style={{ top: '68%', right: '7%', animationDuration: '4.1s', animationDelay: '1.7s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-slate-400/35 pointer-events-none" style={{ top: '22%', right: '12%', animationDuration: '3.2s', animationDelay: '0.9s' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full bg-slate-300/30 pointer-events-none" style={{ top: '80%', left: '55%', animationDuration: '2.9s', animationDelay: '2.2s' }} />
+            <div className="relative">
+              <div className="flex items-center gap-2.5 mb-5">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-600/40 dark:bg-slate-700/50 text-slate-400 text-sm font-bold shrink-0">B</span>
+                <span className="font-bold text-slate-400 dark:text-slate-500 text-base">Traditional Broker</span>
+              </div>
+              <div className="space-y-3.5">
+                {(
+                  [
+                    { label: "Commission fee", value: "10–15%" },
+                    { label: "Listing fee", value: "$49–$299" },
+                    { label: "Direct seller contact", value: false },
+                    { label: "AI listing generation", value: false },
+                    { label: "Time to list", value: "Days to weeks" },
+                  ] as { label: string; value: string | boolean }[]
+                ).map(({ label, value }, i) => (
+                  <div key={label} className="flex items-center justify-between gap-3 animate-fade-in-up" style={{ animationDelay: `${i * 0.08 + 0.1}s` }}>
+                    <span className="text-sm text-slate-500 dark:text-slate-500">{label}</span>
+                    {typeof value === "boolean" ? (
+                      <span className="inline-flex items-center gap-1 text-slate-500/70 text-sm font-medium shrink-0">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-400/10 shrink-0">
+                          <X className="w-3 h-3 text-red-400/70" />
+                        </span>
+                        No
                       </span>
-                      No
-                    </span>
-                  ) : (
-                    <span className="text-sm font-semibold text-muted-foreground/70 shrink-0 line-through decoration-muted-foreground/40">{value}</span>
-                  )}
-                </div>
-              ))}
+                    ) : (
+                      <span className="text-sm font-semibold text-slate-500/80 shrink-0 line-through decoration-slate-500/40">{value}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
