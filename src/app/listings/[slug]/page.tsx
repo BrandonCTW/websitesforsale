@@ -197,7 +197,7 @@ export default async function ListingPage({
         <div className="animate-orb-2 absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
         <div className="relative space-y-4">
           {/* Badges row */}
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="animate-fade-in-up flex items-center gap-2 flex-wrap" style={{ animationDelay: "0.05s" }}>
             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/15 text-slate-200 backdrop-blur-sm">
               {CATEGORY_LABELS[listing.category] ?? listing.category}
             </span>
@@ -215,9 +215,9 @@ export default async function ListingPage({
             </span>
           </div>
           {/* Title */}
-          <h1 className="text-2xl sm:text-3xl font-bold text-white leading-snug">{listing.title}</h1>
+          <h1 className="animate-fade-in-up text-2xl sm:text-3xl font-bold text-white leading-snug" style={{ animationDelay: "0.15s" }}>{listing.title}</h1>
           {/* Price row */}
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="animate-fade-in-up flex items-center gap-3 flex-wrap" style={{ animationDelay: "0.25s" }}>
             <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text text-transparent">
               {formatCurrency(listing.askingPrice)}
             </span>
@@ -228,7 +228,7 @@ export default async function ListingPage({
             )}
           </div>
           {/* Seller */}
-          <p className="text-slate-400 text-sm">
+          <p className="animate-fade-in-up text-slate-400 text-sm" style={{ animationDelay: "0.35s" }}>
             Listed by{" "}
             <Link href={`/seller/${seller.username}`} className="text-slate-300 hover:text-white transition-colors hover:underline underline-offset-2">
               {seller.username}
@@ -284,7 +284,7 @@ export default async function ListingPage({
       <Separator />
 
       {/* Live URL */}
-      <div className="rounded-xl border border-border/60 bg-muted/30 px-5 py-4 flex items-center gap-3">
+      <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/30 px-5 py-4 flex items-center gap-3 hover:border-sky-200 dark:hover:border-sky-800/60 hover:shadow-sm transition-all duration-200">
         <div className="flex-shrink-0 h-9 w-9 rounded-lg bg-sky-100 dark:bg-sky-900/40 flex items-center justify-center">
           <Globe className="h-4 w-4 text-sky-600 dark:text-sky-400" />
         </div>
@@ -302,7 +302,7 @@ export default async function ListingPage({
       </div>
 
       {/* Description */}
-      <div className="rounded-xl border border-border/60 bg-muted/20 px-5 py-5">
+      <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-indigo-200 dark:hover:border-indigo-800/60 hover:shadow-sm transition-all duration-200">
         <div className="flex items-center gap-2 mb-3">
           <div className="h-6 w-6 rounded-md bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
             <Info className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
@@ -313,7 +313,7 @@ export default async function ListingPage({
       </div>
 
       {/* Reason for selling */}
-      <div className="rounded-xl border border-border/60 bg-muted/20 px-5 py-5">
+      <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-amber-200 dark:hover:border-amber-800/60 hover:shadow-sm transition-all duration-200">
         <div className="flex items-center gap-2 mb-3">
           <div className="h-6 w-6 rounded-md bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
             <MessageSquare className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
@@ -325,7 +325,7 @@ export default async function ListingPage({
 
       {/* Included assets */}
       {listing.includedAssets && (
-        <div className="rounded-xl border border-border/60 bg-muted/20 px-5 py-5">
+        <div className="animate-on-scroll rounded-xl border border-border/60 bg-muted/20 px-5 py-5 hover:border-emerald-200 dark:hover:border-emerald-800/60 hover:shadow-sm transition-all duration-200">
           <div className="flex items-center gap-2 mb-3">
             <div className="h-6 w-6 rounded-md bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center">
               <Package className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
