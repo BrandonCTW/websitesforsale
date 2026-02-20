@@ -29,6 +29,17 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   "other": LayoutGrid,
 }
 
+const CATEGORY_GLOW: Record<string, string> = {
+  "content-site":     "rgba(14,165,233,0.28)",
+  "saas":             "rgba(139,92,246,0.28)",
+  "ecommerce":        "rgba(249,115,22,0.28)",
+  "tool-or-app":      "rgba(20,184,166,0.28)",
+  "newsletter":       "rgba(244,63,94,0.28)",
+  "community":        "rgba(16,185,129,0.28)",
+  "service-business": "rgba(245,158,11,0.28)",
+  "other":            "rgba(100,116,139,0.22)",
+}
+
 const CATEGORY_CHIP_STYLES: Record<string, { active: string; inactive: string; dot: string }> = {
   "content-site": {
     active: "bg-sky-100 text-sky-700 border-sky-300 dark:bg-sky-900/60 dark:text-sky-300 dark:border-sky-700",
@@ -121,8 +132,9 @@ export function FilterBar({ categories }: { categories: string[] }) {
               key={c}
               onClick={() => toggleCategory(c)}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
-                isActive ? styles.active : styles.inactive
+                isActive ? `${styles.active} animate-chip-glow` : styles.inactive
               }`}
+              style={isActive ? ({ "--chip-glow": CATEGORY_GLOW[c] ?? CATEGORY_GLOW["other"] } as React.CSSProperties) : undefined}
             >
               <Icon className="h-3 w-3 shrink-0" />
               {CATEGORY_LABELS[c] ?? c}
