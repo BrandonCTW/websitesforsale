@@ -1,6 +1,6 @@
 import { db } from "@/db"
 import { listings, listingImages, users } from "@/db/schema"
-import { eq, and } from "drizzle-orm"
+import { eq, and, count } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
 import { FilterBar } from "@/components/listings/FilterBar"
 import Link from "next/link"
@@ -66,6 +66,11 @@ export default async function HomePage({
     return true
   })
 
+  const [{ totalListings }] = await db
+    .select({ totalListings: count() })
+    .from(listings)
+    .where(eq(listings.status, "active"))
+
   const images = filtered.length
     ? await db.select().from(listingImages).where(eq(listingImages.displayOrder, 0))
     : []
@@ -103,6 +108,19 @@ export default async function HomePage({
                 <BadgePercent className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                 No commissions
               </span>
+            </div>
+            <div className="mt-5 flex items-center justify-center gap-4 text-xs text-slate-400 flex-wrap">
+              <span className="flex items-center gap-2">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                </span>
+                <span><span className="font-semibold text-slate-200">{totalListings}</span> active listings</span>
+              </span>
+              <span className="text-white/20">·</span>
+              <span><span className="font-semibold text-slate-200">8</span> categories</span>
+              <span className="text-white/20">·</span>
+              <span><span className="font-semibold text-slate-200">$0</span> in fees</span>
             </div>
           </div>
         </div>
