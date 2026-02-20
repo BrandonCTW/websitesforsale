@@ -218,6 +218,9 @@ export default async function HomePage({
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 sm:gap-2">
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
             <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-indigo-100 dark:text-indigo-950/70 leading-none select-none pointer-events-none">1</span>
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '14%', left: '9%', animationDuration: '3.3s', animationDelay: '0s', backgroundColor: 'rgba(99,102,241,0.55)' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '62%', left: '6%', animationDuration: '2.6s', animationDelay: '1.4s', backgroundColor: 'rgba(165,180,252,0.65)' }} />
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '22%', right: '8%', animationDuration: '3.8s', animationDelay: '0.7s', backgroundColor: 'rgba(99,102,241,0.45)' }} />
             <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60 animate-step-icon-indigo" style={{ animationDelay: "0s" }}>
               <Search className="w-5 h-5 text-white" />
             </div>
@@ -233,6 +236,9 @@ export default async function HomePage({
           </div>
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-indigo-50/60 to-slate-50 dark:from-indigo-950/30 dark:to-slate-900/50 border border-indigo-100 dark:border-indigo-900/40 overflow-hidden">
             <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-indigo-100 dark:text-indigo-950/70 leading-none select-none pointer-events-none">2</span>
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '18%', left: '7%', animationDuration: '2.9s', animationDelay: '0.6s', backgroundColor: 'rgba(165,180,252,0.70)' }} />
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '55%', right: '7%', animationDuration: '3.5s', animationDelay: '1.8s', backgroundColor: 'rgba(99,102,241,0.50)' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '75%', left: '12%', animationDuration: '3.1s', animationDelay: '2.5s', backgroundColor: 'rgba(99,102,241,0.60)' }} />
             <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-400 dark:from-indigo-600 dark:to-indigo-500 flex items-center justify-center mb-3 shadow-md shadow-indigo-200/60 dark:shadow-indigo-900/60 animate-step-icon-indigo" style={{ animationDelay: "0.9s" }}>
               <MessageCircle className="w-5 h-5 text-white" />
             </div>
@@ -248,6 +254,9 @@ export default async function HomePage({
           </div>
           <div className="relative flex flex-col items-center text-center p-5 rounded-xl bg-gradient-to-br from-emerald-50/60 to-slate-50 dark:from-emerald-950/30 dark:to-slate-900/50 border border-emerald-100 dark:border-emerald-900/40 overflow-hidden">
             <span className="absolute -bottom-3 -right-1 text-[80px] font-black text-emerald-100 dark:text-emerald-950/70 leading-none select-none pointer-events-none">3</span>
+            <div className="animate-sparkle absolute w-1 h-1 rounded-full blur-[0.5px] pointer-events-none" style={{ top: '16%', left: '8%', animationDuration: '3.4s', animationDelay: '0.3s', backgroundColor: 'rgba(16,185,129,0.55)' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '68%', right: '9%', animationDuration: '2.8s', animationDelay: '1.6s', backgroundColor: 'rgba(52,211,153,0.65)' }} />
+            <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '30%', right: '6%', animationDuration: '3.6s', animationDelay: '2.3s', backgroundColor: 'rgba(16,185,129,0.50)' }} />
             <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-400 dark:from-emerald-600 dark:to-emerald-500 flex items-center justify-center mb-3 shadow-md shadow-emerald-200/60 dark:shadow-emerald-900/60 animate-step-icon-emerald" style={{ animationDelay: "1.8s" }}>
               <Handshake className="w-5 h-5 text-white" />
             </div>
