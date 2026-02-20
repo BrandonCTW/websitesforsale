@@ -3,6 +3,8 @@ import { db } from "@/db"
 import { users, listings } from "@/db/schema"
 import { eq, and } from "drizzle-orm"
 import { ListingCard } from "@/components/listings/ListingCard"
+import { formatCurrency } from "@/lib/slug"
+import { LayoutGrid } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -34,6 +36,9 @@ export default async function SellerProfilePage({
 
   const initial = seller.username[0].toUpperCase()
 
+  const totalValue = sellerListings.reduce((sum, l) => sum + l.askingPrice, 0)
+  const avgPrice = sellerListings.length > 0 ? Math.round(totalValue / sellerListings.length) : 0
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       {/* Profile header */}
@@ -54,27 +59,67 @@ export default async function SellerProfilePage({
               <p className="text-muted-foreground text-sm">Member since {memberSince}</p>
             </div>
           </div>
-          <div className="flex gap-6 text-sm">
+
+          {/* Stats row */}
+          <div className="flex flex-wrap gap-6 sm:gap-10 text-sm border-t border-border/40 pt-4 mt-2">
             <div>
               <p className="font-semibold text-lg">{sellerListings.length}</p>
               <p className="text-muted-foreground text-xs">Active listing{sellerListings.length !== 1 ? "s" : ""}</p>
             </div>
+            {sellerListings.length > 0 && (
+              <>
+                <div className="w-px bg-border/60 self-stretch hidden sm:block" />
+                <div>
+                  <p className="font-semibold text-lg bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+                    {formatCurrency(totalValue)}
+                  </p>
+                  <p className="text-muted-foreground text-xs">Total portfolio value</p>
+                </div>
+                {sellerListings.length > 1 && (
+                  <>
+                    <div className="w-px bg-border/60 self-stretch hidden sm:block" />
+                    <div>
+                      <p className="font-semibold text-lg">{formatCurrency(avgPrice)}</p>
+                      <p className="text-muted-foreground text-xs">Avg. listing price</p>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
 
       {sellerListings.length === 0 ? (
-        <p className="text-muted-foreground">This seller has no active listings.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sellerListings.map((listing) => (
-            <ListingCard
-              key={listing.id}
-              listing={listing}
-              sellerUsername={seller.username}
-            />
-          ))}
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
+            <LayoutGrid className="w-7 h-7 text-indigo-400 dark:text-indigo-500" />
+          </div>
+          <h3 className="font-semibold text-lg mb-2">No active listings</h3>
+          <p className="text-muted-foreground text-sm max-w-xs">
+            This seller doesn&apos;t have any active listings right now.
+          </p>
         </div>
+      ) : (
+        <>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">
+              {sellerListings.length} Active Listing{sellerListings.length !== 1 ? "s" : ""}
+            </span>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sellerListings.map((listing, i) => (
+              <ListingCard
+                key={listing.id}
+                listing={listing}
+                sellerUsername={seller.username}
+                index={i}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   )
