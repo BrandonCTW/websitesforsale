@@ -5,9 +5,15 @@ import { db } from "@/db"
 import { inquiries, listings } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { timeAgo } from "@/lib/slug"
-import { MessageCircle } from "lucide-react"
+import { MessageCircle, Mail, ArrowRight } from "lucide-react"
 
 export const dynamic = "force-dynamic"
+
+function isNewInquiry(createdAt: Date | string): boolean {
+  const created = new Date(createdAt)
+  const diffMs = Date.now() - created.getTime()
+  return diffMs / (1000 * 60 * 60) <= 48
+}
 
 export default async function InquiriesPage() {
   const session = await getSession()
@@ -106,6 +112,7 @@ export default async function InquiriesPage() {
               .slice(0, 2)
               .join("")
               .toUpperCase()
+            const isNew = isNewInquiry(inquiry.createdAt)
 
             return (
               <div
@@ -117,15 +124,30 @@ export default async function InquiriesPage() {
                 <div className="card-shine absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent pointer-events-none z-10" />
                 <div className="flex items-start gap-4 flex-wrap">
                   {/* Avatar */}
-                  <div className="shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white text-sm font-semibold shadow-sm transition-transform duration-200 group-hover:scale-110">
-                    {initials}
+                  <div className="relative shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white text-sm font-semibold shadow-sm transition-transform duration-200 group-hover:scale-110">
+                      {initials}
+                    </div>
+                    {isNew && (
+                      <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 border-2 border-card" />
+                      </span>
+                    )}
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-4 flex-wrap mb-2">
                       <div>
-                        <p className="font-semibold text-base leading-tight">{inquiry.buyerName}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="font-semibold text-base leading-tight">{inquiry.buyerName}</p>
+                          {isNew && (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-indigo-100 dark:bg-indigo-900/40 border border-indigo-200 dark:border-indigo-800/60 px-1.5 py-0.5 text-[9px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide">
+                              New
+                            </span>
+                          )}
+                        </div>
                         <a
                           href={`mailto:${inquiry.buyerEmail}`}
                           className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline"
@@ -144,15 +166,23 @@ export default async function InquiriesPage() {
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground whitespace-pre-wrap border-t pt-3 mb-3">
-                      {inquiry.message}
-                    </p>
+                    {/* Message bubble */}
+                    <div className="relative overflow-hidden rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-border/60 px-4 py-3 mb-3 mt-1">
+                      <div className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-indigo-400 to-indigo-500 opacity-60" />
+                      <div className="animate-shimmer absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-indigo-400/[0.04] to-transparent pointer-events-none" style={{ animationDelay: `${index * 0.9 + 0.5}s` }} />
+                      <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed relative pl-1">
+                        {inquiry.message}
+                      </p>
+                    </div>
 
                     <a
                       href={`mailto:${inquiry.buyerEmail}?subject=Re: ${encodeURIComponent(listing.title)}`}
-                      className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white text-xs font-medium px-3 py-1.5 shadow-sm transition-all"
+                      className="relative overflow-hidden inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white text-xs font-medium px-3 py-1.5 shadow-sm transition-all duration-200 hover:shadow-indigo-500/25 hover:shadow-md hover:-translate-y-px"
                     >
-                      Reply via email →
+                      <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                      <Mail className="h-3 w-3 relative z-10" />
+                      <span className="relative z-10">Reply via email</span>
+                      <ArrowRight className="h-3 w-3 relative z-10 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </a>
                   </div>
                 </div>
