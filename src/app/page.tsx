@@ -120,6 +120,22 @@ export default async function HomePage({
                 No commissions
               </span>
             </div>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link
+                href="#listings"
+                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+              >
+                <Search className="h-4 w-4" />
+                Browse Listings
+              </Link>
+              <Link
+                href="/dashboard/listings/new"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 hover:bg-white/15 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-white/30 hover:-translate-y-0.5"
+              >
+                <Sparkles className="h-4 w-4 text-indigo-300" />
+                List Your Site Free
+              </Link>
+            </div>
             <div className="mt-5 flex items-center justify-center gap-4 text-xs text-slate-400 flex-wrap">
               <span className="flex items-center gap-2">
                 <span className="relative flex h-1.5 w-1.5">
@@ -331,6 +347,7 @@ export default async function HomePage({
         })}
       </div>
 
+      <div id="listings" />
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-900/40 shadow-sm">
