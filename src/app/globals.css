@@ -281,6 +281,16 @@
   }
 }
 
+@keyframes cta-ring-pulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  35% { opacity: 0.65; }
+  60% { opacity: 0; transform: scale(1.22); }
+}
+
+.animate-cta-ring {
+  animation: cta-ring-pulse 3s ease-in-out infinite;
+}
+
 @property --featured-angle {
   syntax: '<angle>';
   initial-value: 0deg;

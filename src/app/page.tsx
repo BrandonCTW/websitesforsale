@@ -144,13 +144,17 @@ export default async function HomePage({
               </span>
             </div>
             <div className="animate-fade-in-up mt-6 flex flex-wrap justify-center gap-3" style={{ animationDelay: "0.40s" }}>
-              <Link
-                href="#listings"
-                className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
-              >
-                <Search className="h-4 w-4" />
-                Browse Listings
-              </Link>
+              <div className="relative inline-block">
+                <span className="animate-cta-ring absolute -inset-1 rounded-xl bg-gradient-to-r from-indigo-500 to-emerald-500 pointer-events-none" aria-hidden="true" />
+                <Link
+                  href="#listings"
+                  className="relative overflow-hidden inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all duration-200 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+                >
+                  <span className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" aria-hidden="true" />
+                  <Search className="h-4 w-4 relative z-10" />
+                  <span className="relative z-10">Browse Listings</span>
+                </Link>
+              </div>
               <Link
                 href="/dashboard/listings/new"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 hover:bg-white/15 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:border-white/30 hover:-translate-y-0.5"
