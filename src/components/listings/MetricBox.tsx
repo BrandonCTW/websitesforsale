@@ -9,13 +9,14 @@ function easeOutExpo(t: number): number {
 
 export type MetricColor = "indigo" | "emerald" | "teal" | "sky" | "amber" | "violet"
 
-const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; value: string; icon: string; sparkle: [string, string] }> = {
+const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; value: string; icon: string; sparkle: [string, string]; hoverShadow: string }> = {
   indigo: {
     border: "border-indigo-200 dark:border-indigo-800/60",
     bg: "bg-gradient-to-br from-indigo-50/70 to-emerald-50/50 dark:from-indigo-950/30 dark:to-emerald-950/20",
     value: "animate-price-gradient",
     icon: "bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400",
     sparkle: ["rgba(99,102,241,0.60)", "rgba(165,180,252,0.55)"],
+    hoverShadow: "hover:shadow-indigo-100/70 dark:hover:shadow-indigo-950/60 hover:border-indigo-300 dark:hover:border-indigo-700",
   },
   emerald: {
     border: "border-emerald-200 dark:border-emerald-800/60",
@@ -23,6 +24,7 @@ const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; val
     value: "animate-revenue-gradient",
     icon: "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400",
     sparkle: ["rgba(16,185,129,0.60)", "rgba(52,211,153,0.55)"],
+    hoverShadow: "hover:shadow-emerald-100/70 dark:hover:shadow-emerald-950/60 hover:border-emerald-300 dark:hover:border-emerald-700",
   },
   teal: {
     border: "border-teal-200 dark:border-teal-800/60",
@@ -30,6 +32,7 @@ const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; val
     value: "animate-teal-gradient",
     icon: "bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-400",
     sparkle: ["rgba(20,184,166,0.60)", "rgba(45,212,191,0.55)"],
+    hoverShadow: "hover:shadow-teal-100/70 dark:hover:shadow-teal-950/60 hover:border-teal-300 dark:hover:border-teal-700",
   },
   sky: {
     border: "border-sky-200 dark:border-sky-800/60",
@@ -37,6 +40,7 @@ const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; val
     value: "animate-traffic-gradient",
     icon: "bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400",
     sparkle: ["rgba(14,165,233,0.60)", "rgba(56,189,248,0.55)"],
+    hoverShadow: "hover:shadow-sky-100/70 dark:hover:shadow-sky-950/60 hover:border-sky-300 dark:hover:border-sky-700",
   },
   amber: {
     border: "border-amber-200 dark:border-amber-800/60",
@@ -44,6 +48,7 @@ const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; val
     value: "animate-age-gradient",
     icon: "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400",
     sparkle: ["rgba(245,158,11,0.60)", "rgba(251,191,36,0.55)"],
+    hoverShadow: "hover:shadow-amber-100/70 dark:hover:shadow-amber-950/60 hover:border-amber-300 dark:hover:border-amber-700",
   },
   violet: {
     border: "border-violet-200 dark:border-violet-800/60",
@@ -51,6 +56,7 @@ const METRIC_COLOR_STYLES: Record<MetricColor, { border: string; bg: string; val
     value: "animate-violet-gradient",
     icon: "bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400",
     sparkle: ["rgba(139,92,246,0.60)", "rgba(167,139,250,0.55)"],
+    hoverShadow: "hover:shadow-violet-100/70 dark:hover:shadow-violet-950/60 hover:border-violet-300 dark:hover:border-violet-700",
   },
 }
 
@@ -137,7 +143,7 @@ export function MetricBox({
   return (
     <div
       ref={ref}
-      className={`relative rounded-lg border p-4 animate-fade-in-up overflow-hidden ${styles.border} ${styles.bg}`}
+      className={`group relative rounded-lg border p-4 animate-fade-in-up overflow-hidden hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 ${styles.border} ${styles.bg} ${styles.hoverShadow}`}
       style={{ animationDelay: `${index * 80}ms` }}
     >
       {/* Shimmer sweep */}
@@ -147,7 +153,7 @@ export function MetricBox({
       <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ bottom: '18%', left: '8%', animationDuration: '2.6s', animationDelay: `${(spDelay + 1.3) % 2.7}s`, backgroundColor: styles.sparkle[1] }} />
       <div className="animate-sparkle absolute w-px h-px rounded-full pointer-events-none" style={{ top: '55%', right: '7%', animationDuration: '3.8s', animationDelay: `${(spDelay + 0.8) % 3.2}s`, backgroundColor: styles.sparkle[0] }} />
       {Icon && (
-        <div className={`relative w-7 h-7 rounded-md flex items-center justify-center mb-2.5 ${styles.icon}`}>
+        <div className={`relative w-7 h-7 rounded-md flex items-center justify-center mb-2.5 transition-transform duration-200 group-hover:scale-110 ${styles.icon}`}>
           <Icon className="h-3.5 w-3.5 relative z-10" />
         </div>
       )}
