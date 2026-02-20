@@ -733,3 +733,25 @@
 .animate-seller-card-glow {
   animation: seller-card-glow 5s ease-in-out infinite;
 }
+
+@keyframes upload-icon-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-upload-bounce {
+  animation: upload-icon-bounce 2.5s ease-in-out infinite;
+}
+
+@keyframes upload-zone-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0px rgba(99,102,241,0), 0 1px 3px rgba(0,0,0,0.04);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.10), 0 4px 20px rgba(99,102,241,0.08);
+  }
+}
+
+.animate-upload-zone-glow {
+  animation: upload-zone-glow 3s ease-in-out infinite;
+}
