@@ -86,6 +86,38 @@ function getDealTier(multiple: number) {
   return DEAL_TIERS.find((t) => multiple < t.maxMultiple) ?? DEAL_TIERS[DEAL_TIERS.length - 1]
 }
 
+const TECH_PILL_COLORS: Record<string, string> = {
+  "wordpress":     "bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800/60",
+  "react":         "bg-cyan-50 text-cyan-600 border-cyan-200 dark:bg-cyan-900/20 dark:text-cyan-400 dark:border-cyan-800/60",
+  "next.js":       "bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600",
+  "nextjs":        "bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600",
+  "node.js":       "bg-green-50 text-green-600 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800/60",
+  "nodejs":        "bg-green-50 text-green-600 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800/60",
+  "python":        "bg-yellow-50 text-yellow-600 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800/60",
+  "shopify":       "bg-teal-50 text-teal-600 border-teal-200 dark:bg-teal-900/20 dark:text-teal-400 dark:border-teal-800/60",
+  "woocommerce":   "bg-purple-50 text-purple-600 border-purple-200 dark:bg-purple-900/20 dark:text-purple-400 dark:border-purple-800/60",
+  "php":           "bg-violet-50 text-violet-600 border-violet-200 dark:bg-violet-900/20 dark:text-violet-400 dark:border-violet-800/60",
+  "laravel":       "bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-900/20 dark:text-rose-400 dark:border-rose-800/60",
+  "ruby on rails": "bg-red-50 text-red-600 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/60",
+  "rails":         "bg-red-50 text-red-600 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800/60",
+  "vue":           "bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/60",
+  "vue.js":        "bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/60",
+  "tailwind":      "bg-sky-50 text-sky-600 border-sky-200 dark:bg-sky-900/20 dark:text-sky-400 dark:border-sky-800/60",
+  "tailwindcss":   "bg-sky-50 text-sky-600 border-sky-200 dark:bg-sky-900/20 dark:text-sky-400 dark:border-sky-800/60",
+  "typescript":    "bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800/60",
+  "javascript":    "bg-yellow-50 text-yellow-600 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800/60",
+  "webflow":       "bg-indigo-50 text-indigo-600 border-indigo-200 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/60",
+  "aws":           "bg-amber-50 text-amber-600 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800/60",
+  "supabase":      "bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/60",
+  "django":        "bg-teal-50 text-teal-600 border-teal-200 dark:bg-teal-900/20 dark:text-teal-400 dark:border-teal-800/60",
+  "ghost":         "bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700",
+  "svelte":        "bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/20 dark:text-orange-400 dark:border-orange-800/60",
+  "sveltekit":     "bg-orange-50 text-orange-600 border-orange-200 dark:bg-orange-900/20 dark:text-orange-400 dark:border-orange-800/60",
+  "flutter":       "bg-sky-50 text-sky-600 border-sky-200 dark:bg-sky-900/20 dark:text-sky-400 dark:border-sky-800/60",
+}
+
+const TECH_PILL_DEFAULT = "bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-800/60 dark:text-slate-400 dark:border-slate-700"
+
 const CATEGORY_PLACEHOLDER: Record<string, { bg: string; radial: string; icon: string }> = {
   "content-site":       { bg: "from-sky-50 to-sky-100 dark:from-sky-950/40 dark:to-sky-900/30",            radial: "rgba(14,165,233,0.14)",  icon: "text-sky-400 dark:text-sky-700" },
   "saas":               { bg: "from-violet-50 to-violet-100 dark:from-violet-950/40 dark:to-violet-900/30", radial: "rgba(139,92,246,0.14)",  icon: "text-violet-400 dark:text-violet-700" },
@@ -247,6 +279,25 @@ export function ListingCard({
               <p className="font-semibold">{age}</p>
             </div>
           </div>
+
+          {listing.techStack && listing.techStack.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 pt-0.5">
+              {listing.techStack.slice(0, 3).map((t) => {
+                const pillStyle = TECH_PILL_COLORS[t.toLowerCase().trim()] ?? TECH_PILL_DEFAULT
+                return (
+                  <span key={t} className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium ${pillStyle}`}>
+                    <span className="w-1 h-1 rounded-full bg-current opacity-50 shrink-0" />
+                    {t}
+                  </span>
+                )
+              })}
+              {listing.techStack.length > 3 && (
+                <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium ${TECH_PILL_DEFAULT}`}>
+                  +{listing.techStack.length - 3}
+                </span>
+              )}
+            </div>
+          )}
 
           <div className="pt-2.5 border-t border-border/50 flex items-center gap-2">
             <div
