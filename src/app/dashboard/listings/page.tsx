@@ -79,38 +79,48 @@ export default async function DashboardListingsPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold">Your Listings</h1>
-          <p className="text-muted-foreground text-sm mt-1">Manage the websites you have for sale</p>
-        </div>
-        <Link href="/dashboard/listings/new">
-          <Button className="bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 shadow-sm">
-            + New listing
-          </Button>
-        </Link>
-      </div>
+      {/* Gradient hero header */}
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-8 mb-6">
+        {/* Top accent bar */}
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-indigo-400 to-emerald-500" />
+        {/* Radial gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.25)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
+        {/* Subtle orbs */}
+        <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
 
-      <div className="flex gap-4 mb-6 border-b pb-4 text-sm">
-        <Link href="/dashboard/listings" className="font-medium">Listings</Link>
-        <Link href="/dashboard/inquiries" className="text-muted-foreground hover:text-foreground">Inquiries</Link>
-        <Link href="/dashboard/settings" className="text-muted-foreground hover:text-foreground">Settings</Link>
-      </div>
-
-      {rows.length > 0 && (
-        <div className="flex gap-4 mb-6">
-          <div className="flex-1 rounded-xl border bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 p-4">
-            <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Active Listings</p>
-            <p className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">{activeCount}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">of {rows.length} total</p>
+        <div className="relative flex items-start justify-between gap-4 flex-wrap mb-5">
+          <div>
+            <h1 className="text-xl font-bold text-white">Your Listings</h1>
+            <p className="text-slate-400 text-sm mt-0.5">Manage the websites you have for sale</p>
           </div>
-          <div className="flex-1 rounded-xl border bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-950/30 dark:to-violet-950/30 p-4">
-            <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium mb-1">Total Inquiries</p>
-            <p className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{totalInquiries}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">across all listings</p>
+          <div className="flex items-center gap-2 flex-wrap">
+            {rows.length > 0 && (
+              <>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 px-3 py-1 text-xs font-semibold text-emerald-300">
+                  {activeCount} active
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/20 border border-indigo-500/30 px-3 py-1 text-xs font-semibold text-indigo-300">
+                  {totalInquiries} inquiries
+                </span>
+              </>
+            )}
+            <Link href="/dashboard/listings/new">
+              <Button className="bg-gradient-to-r from-indigo-500 to-emerald-500 hover:from-indigo-600 hover:to-emerald-600 border-0 text-white text-sm shadow-sm">
+                + New listing
+              </Button>
+            </Link>
           </div>
         </div>
-      )}
+
+        {/* Nav tabs */}
+        <div className="relative flex items-center gap-1 border-t border-white/10 pt-4">
+          <Link href="/dashboard/listings" className="px-3 py-1.5 rounded-lg bg-white/15 border border-white/15 text-white text-sm font-semibold transition-colors">Listings</Link>
+          <Link href="/dashboard/inquiries" className="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 text-sm font-medium transition-colors">Inquiries</Link>
+          <Link href="/dashboard/settings" className="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 text-sm font-medium transition-colors">Settings</Link>
+        </div>
+      </div>
 
       {rows.length === 0 ? (
         <div className="text-center py-24 rounded-2xl border border-dashed bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950/50 dark:to-slate-900/50">

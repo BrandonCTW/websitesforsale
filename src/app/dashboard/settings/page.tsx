@@ -37,17 +37,28 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-muted-foreground text-sm mt-1">
-          Manage your account preferences and security
-        </p>
-      </div>
+      {/* Gradient hero header */}
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-8 py-8 mb-6">
+        {/* Top accent bar */}
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-500 via-indigo-400 to-emerald-500" />
+        {/* Radial gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.25)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
+        {/* Subtle orbs */}
+        <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-8 -left-8 w-40 h-40 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
 
-      <div className="flex gap-4 mb-6 border-b pb-4 text-sm">
-        <Link href="/dashboard/listings" className="text-muted-foreground hover:text-foreground">Listings</Link>
-        <Link href="/dashboard/inquiries" className="text-muted-foreground hover:text-foreground">Inquiries</Link>
-        <Link href="/dashboard/settings" className="font-medium">Settings</Link>
+        <div className="relative mb-5">
+          <h1 className="text-xl font-bold text-white">Settings</h1>
+          <p className="text-slate-400 text-sm mt-0.5">Manage your account preferences and security</p>
+        </div>
+
+        {/* Nav tabs */}
+        <div className="relative flex items-center gap-1 border-t border-white/10 pt-4">
+          <Link href="/dashboard/listings" className="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 text-sm font-medium transition-colors">Listings</Link>
+          <Link href="/dashboard/inquiries" className="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 text-sm font-medium transition-colors">Inquiries</Link>
+          <Link href="/dashboard/settings" className="px-3 py-1.5 rounded-lg bg-white/15 border border-white/15 text-white text-sm font-semibold transition-colors">Settings</Link>
+        </div>
       </div>
 
       <div className="max-w-sm">
