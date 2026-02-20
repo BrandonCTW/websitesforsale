@@ -8,9 +8,42 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { formatCurrency } from "@/lib/slug"
 import { ListingActions } from "@/components/dashboard/ListingActions"
-import { Globe } from "lucide-react"
+import { Globe, FileText, Code2, ShoppingCart, Wrench, Mail, Users, Briefcase, LayoutGrid, TrendingUp, type LucideIcon } from "lucide-react"
 
 export const dynamic = "force-dynamic"
+
+const CATEGORY_LABELS: Record<string, string> = {
+  "content-site": "Content Site",
+  "saas": "SaaS",
+  "ecommerce": "eCommerce",
+  "tool-or-app": "Tool / App",
+  "newsletter": "Newsletter",
+  "community": "Community",
+  "service-business": "Service Business",
+  "other": "Other",
+}
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  "content-site": FileText,
+  "saas": Code2,
+  "ecommerce": ShoppingCart,
+  "tool-or-app": Wrench,
+  "newsletter": Mail,
+  "community": Users,
+  "service-business": Briefcase,
+  "other": LayoutGrid,
+}
+
+const CATEGORY_STYLES: Record<string, string> = {
+  "content-site": "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300",
+  "saas": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
+  "ecommerce": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
+  "tool-or-app": "bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
+  "newsletter": "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
+  "community": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
+  "service-business": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
+  "other": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
+}
 
 const STATUS_CONFIG: Record<string, {
   label: string
@@ -141,6 +174,12 @@ export default async function DashboardListingsPage() {
             const s = STATUS_CONFIG[listing.status] ?? STATUS_CONFIG.unpublished
             const inquiryCount = inquiryMap[listing.id] ?? 0
             const thumbnailUrl = imageMap[listing.id]
+            const catLabel = CATEGORY_LABELS[listing.category] ?? listing.category
+            const CatIcon = CATEGORY_ICONS[listing.category] ?? LayoutGrid
+            const catStyle = CATEGORY_STYLES[listing.category] ?? CATEGORY_STYLES["other"]
+            const revenueMultiple = listing.monthlyRevenue && listing.monthlyRevenue > 0
+              ? Math.round(listing.askingPrice / listing.monthlyRevenue)
+              : null
             return (
               <div
                 key={listing.id}
@@ -169,6 +208,11 @@ export default async function DashboardListingsPage() {
                         {listing.title}
                       </Link>
                       <Badge variant={s.variant} className="text-xs shrink-0">{s.label}</Badge>
+                      {/* Category badge */}
+                      <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium shrink-0 ${catStyle}`}>
+                        <CatIcon className="w-3 h-3" />
+                        {catLabel}
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-3 flex-wrap">
@@ -178,6 +222,21 @@ export default async function DashboardListingsPage() {
                           {formatCurrency(listing.askingPrice)}
                         </span>
                       </div>
+
+                      {listing.monthlyRevenue != null && listing.monthlyRevenue > 0 && (
+                        <div className="flex items-center gap-1.5 rounded-lg bg-background border px-3 py-1.5 shadow-sm">
+                          <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
+                          <span className="text-xs text-muted-foreground">Mo. Rev</span>
+                          <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                            {formatCurrency(listing.monthlyRevenue)}
+                          </span>
+                          {revenueMultiple !== null && (
+                            <span className="text-xs text-muted-foreground font-medium">
+                              · {revenueMultiple}x
+                            </span>
+                          )}
+                        </div>
+                      )}
 
                       <div className="flex items-center gap-1.5 rounded-lg bg-background border px-3 py-1.5 shadow-sm">
                         <span className="text-xs text-muted-foreground">Inquiries</span>
