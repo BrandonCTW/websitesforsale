@@ -120,6 +120,15 @@ export default async function HomePage({
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)]" />
           <div className="animate-orb-1 absolute -top-10 -right-10 w-72 h-72 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
           <div className="animate-orb-2 absolute -bottom-10 -left-10 w-64 h-64 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-indigo-300/80 blur-[0.5px] pointer-events-none" style={{ top: '18%', left: '8%', animationDuration: '3.2s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/70 pointer-events-none" style={{ top: '68%', left: '6%', animationDuration: '2.5s', animationDelay: '1.1s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-300/70 blur-[0.5px] pointer-events-none" style={{ top: '20%', right: '11%', animationDuration: '3.8s', animationDelay: '0.4s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-indigo-200/80 pointer-events-none" style={{ top: '58%', right: '9%', animationDuration: '2.8s', animationDelay: '1.8s' }} />
+          <div className="animate-sparkle absolute w-1.5 h-1.5 rounded-full bg-white/25 blur-sm pointer-events-none" style={{ top: '80%', left: '74%', animationDuration: '4.2s', animationDelay: '0.9s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-emerald-200/70 pointer-events-none" style={{ top: '44%', left: '54%', animationDuration: '3.0s', animationDelay: '2.2s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-violet-300/60 blur-[0.5px] pointer-events-none" style={{ top: '12%', left: '42%', animationDuration: '3.5s', animationDelay: '1.5s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/60 pointer-events-none" style={{ top: '30%', left: '88%', animationDuration: '2.6s', animationDelay: '2.8s' }} />
           <div className="relative">
             <h1 className="animate-fade-in-up text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
               Websites for sale.{" "}
