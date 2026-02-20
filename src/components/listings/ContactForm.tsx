@@ -43,14 +43,23 @@ export function ContactForm({
   if (status === "success") {
     return (
       <div className="relative max-w-lg rounded-2xl overflow-hidden border border-emerald-200 dark:border-emerald-800/50 shadow-sm">
-        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4">
-          <p className="font-semibold text-white flex items-center gap-2">
+        <div className="relative bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-4 overflow-hidden">
+          {/* Ambient orb blob */}
+          <div className="animate-orb-1 absolute -top-4 -right-4 w-20 h-20 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+          {/* Shimmer sweep */}
+          <div className="animate-shimmer absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+          {/* Sparkle particles */}
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-emerald-200/75 blur-[0.5px] pointer-events-none" style={{ top: '18%', right: '12%', animationDuration: '3.2s', animationDelay: '0s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/70 pointer-events-none" style={{ top: '72%', left: '6%', animationDuration: '2.6s', animationDelay: '1.3s' }} />
+          <div className="animate-sparkle absolute w-1 h-1 rounded-full bg-teal-200/65 blur-[0.5px] pointer-events-none" style={{ top: '20%', left: '40%', animationDuration: '3.7s', animationDelay: '0.7s' }} />
+          <div className="animate-sparkle absolute w-px h-px rounded-full bg-white/55 pointer-events-none" style={{ top: '60%', right: '28%', animationDuration: '2.9s', animationDelay: '2.0s' }} />
+          <p className="relative font-semibold text-white flex items-center gap-2">
             <CheckCircle className="h-4 w-4" />
             Message sent!
           </p>
         </div>
         <div className="bg-card px-6 py-5 flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-sm">✓</div>
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-sm shadow-emerald-200/50 dark:shadow-emerald-900/50">✓</div>
           <div>
             <p className="text-sm font-medium">Your message is on its way!</p>
             <p className="text-xs text-muted-foreground mt-0.5">
