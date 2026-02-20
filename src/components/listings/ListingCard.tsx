@@ -3,6 +3,12 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Listing } from "@/db/schema"
 import { formatCurrency, formatNumber } from "@/lib/slug"
 
+function isNewListing(createdAt: Date | string): boolean {
+  const created = new Date(createdAt)
+  const diffMs = Date.now() - created.getTime()
+  return diffMs / (1000 * 60 * 60 * 24) <= 7
+}
+
 const CATEGORY_LABELS: Record<string, string> = {
   "content-site": "Content Site",
   "saas": "SaaS",
@@ -44,6 +50,8 @@ export function ListingCard({
       ? (listing.askingPrice / listing.monthlyRevenue).toFixed(1)
       : null
 
+  const showNewBadge = isNewListing(listing.createdAt)
+
   return (
     <Link href={`/listings/${listing.slug}`}>
       <Card className="h-full hover:shadow-xl hover:shadow-indigo-100/60 dark:hover:shadow-indigo-950/50 transition-all duration-300 cursor-pointer group hover:border-indigo-200/70 dark:hover:border-indigo-800/50">
@@ -54,6 +62,11 @@ export function ListingCard({
               alt={listing.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
+            {showNewBadge && (
+              <span className="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-md">
+                New
+              </span>
+            )}
             {multiple && (
               <span className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-full bg-emerald-500/90 text-white backdrop-blur-sm shadow-sm">
                 {multiple}x rev
@@ -64,6 +77,11 @@ export function ListingCard({
           <div className="aspect-video rounded-t-lg bg-gradient-to-br from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.12)_0%,_transparent_70%)]" />
             <span className="text-4xl opacity-20 relative select-none">🌐</span>
+            {showNewBadge && (
+              <span className="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-md">
+                New
+              </span>
+            )}
             {multiple && (
               <span className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-full bg-emerald-500/90 text-white shadow-sm">
                 {multiple}x rev
