@@ -440,3 +440,17 @@
   pointer-events: none;
   z-index: 10;
 }
+
+@keyframes price-gradient-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-price-gradient {
+  background-image: linear-gradient(to right, #4f46e5, #059669, #4f46e5);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: price-gradient-flow 4s linear infinite;
+}

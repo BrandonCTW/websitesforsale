@@ -293,7 +293,7 @@ export function FeaturedListingCard({
 
               {/* Price */}
               <div>
-                <p className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+                <p className="text-2xl font-bold animate-price-gradient">
                   {formatCurrency(listing.askingPrice)}
                 </p>
                 {multiple && (
